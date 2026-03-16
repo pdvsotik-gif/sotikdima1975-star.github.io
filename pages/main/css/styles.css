@@ -287,3 +287,7 @@ nav[id] {
         rgba(255,255,255,0.9));
     color: #6a11cb;
 }
+#main-nav .nav-link {
+    min-width: 98px;
+    justify-content: center;
+}
