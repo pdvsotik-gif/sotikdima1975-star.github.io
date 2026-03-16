@@ -249,9 +249,15 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    if (window.innerWidth <= 720) {
+        mobilePanel.classList.add("open");
+    }
+
     window.addEventListener("resize", () => {
         if (window.innerWidth > 720) {
             mobilePanel.classList.remove("open");
+        } else {
+            mobilePanel.classList.add("open");
         }
     });
 });
