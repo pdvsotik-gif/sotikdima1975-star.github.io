@@ -1,0 +1,448 @@
+/* ============================================================
+   HYBRID HEADER — ЧИСТЫЙ ПРЕМИУМ
+   Работает поверх:
+   #main-header, .logo, #main-nav, .nav-link, .back-link
+   HTML / JS не трогаем
+   ============================================================ */
+
+/* БАЗА */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #e5e7f0;
+    padding-top: 80px;
+    background:
+        radial-gradient(circle at top, #f7f8ff 0, #e4e7f5 40%, #d3d6e6 100%);
+}
+
+/* ХЭДЕР — ТЁМНАЯ СТЕКЛЯННАЯ ПАНЕЛЬ */
+#main-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 72px;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+
+    background:
+        radial-gradient(circle at top left,
+            rgba(255, 255, 255, 0.16),
+            rgba(10, 12, 24, 0.96)),
+        linear-gradient(120deg,
+            rgba(10, 12, 24, 0.96),
+            rgba(10, 12, 24, 0.98));
+
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 14px 36px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+}
+
+/* Верхняя неоновая линия */
+#main-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 120%;
+    height: 3px;
+    background: linear-gradient(90deg,
+        #6a11cb,
+        #2575fc,
+        #20e3b2,
+        #ff6b6b,
+        #f9d423,
+        #6a11cb);
+    opacity: 0.9;
+}
+
+/* Нижний золотой акцент */
+#main-header::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    bottom: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+        rgba(255, 211, 107, 0.0),
+        rgba(255, 211, 107, 0.8),
+        rgba(255, 211, 107, 0.0));
+    box-shadow:
+        0 0 10px rgba(255, 211, 107, 0.7);
+    opacity: 0.9;
+}
+
+/* Внутренний контур */
+#main-header .inner-border {
+    position: absolute;
+    inset: 4px 6px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+}
+
+/* ЛОГОТИП — ЧИСТЫЙ МЕТАЛЛ + ЛЁГКИЙ ГЛОУ */
+.logo {
+    position: relative;
+    z-index: 2;
+
+    font-size: 1.18em;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    background: linear-gradient(120deg,
+        #fefefe 0%,
+        #e0e4ff 20%,
+        #6a11cb 45%,
+        #2575fc 70%,
+        #fefefe 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+
+    text-shadow:
+        0 0 10px rgba(111, 66, 193, 0.6),
+        0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+/* Подложка под логотипом */
+.logo::before {
+    content: "";
+    position: absolute;
+    inset: -6px -14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: radial-gradient(circle at top left,
+        rgba(255, 255, 255, 0.12),
+        transparent 70%);
+    opacity: 0.7;
+}
+
+/* МЕНЮ — ПЛОТНЫЕ КНОПКИ С АККУРАТНЫМ ОБЪЁМОМ */
+#main-nav,
+nav[id] {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Базовый стиль ссылок */
+.nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 18px;
+    border-radius: 999px;
+
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    text-decoration: none;
+
+    color: #d7dbff;
+
+    background: radial-gradient(circle at top,
+        rgba(255, 255, 255, 0.06),
+        rgba(10, 12, 24, 0.98));
+
+    border: 1px solid rgba(255, 255, 255, 0.06);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+        0 4px 10px rgba(0, 0, 0, 0.7);
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.16s ease,
+        letter-spacing 0.16s ease,
+        border-color 0.2s ease;
+}
+
+/* Внутренний глянец */
+.nav-link::before {
+    content: "";
+    position: absolute;
+    inset: 1px 1px auto 1px;
+    height: 40%;
+    border-radius: 999px 999px 40% 40%;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.3),
+        transparent);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Нижняя линия */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+        #6a11cb,
+        #2575fc,
+        #20e3b2);
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: width 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover */
+.nav-link:hover {
+    background: radial-gradient(circle at top,
+        rgba(111, 66, 193, 0.35),
+        rgba(10, 12, 24, 0.98));
+    color: #f5f6ff;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.9),
+        0 6px 16px rgba(111, 66, 193, 0.7);
+    border-color: rgba(111, 66, 193, 0.7);
+    letter-spacing: 0.18em;
+}
+
+.nav-link:hover::after {
+    width: 70%;
+    opacity: 1;
+}
+
+/* Активная */
+.nav-link.active {
+    background: linear-gradient(135deg,
+        #6a11cb 0%,
+        #2575fc 40%,
+        #20e3b2 80%);
+    color: #ffffff !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+        0 0 18px rgba(111, 66, 193, 0.9),
+        0 0 24px rgba(37, 117, 252, 0.8);
+
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-link.active::after {
+    width: 80%;
+    opacity: 1;
+}
+
+/* Золотой мягкий контур (по желанию — добавь класс gold-accent) */
+.nav-link.gold-accent {
+    border-color: rgba(255, 211, 107, 0.5);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+        0 0 10px rgba(255, 211, 107, 0.6);
+}
+
+/* "Назад" — тёплый, но не кричащий */
+.back-link {
+    color: #f5f6ff !important;
+    font-weight: 700 !important;
+    border-color: rgba(111, 66, 193, 0.8);
+    background: radial-gradient(circle at top,
+        rgba(111, 66, 193, 0.5),
+        rgba(10, 12, 24, 0.98));
+}
+
+/* РЕСПОНСИВ */
+@media (max-width: 960px) {
+    #main-header {
+        padding: 0 16px;
+        height: 68px;
+    }
+
+    .logo {
+        font-size: 1.05em;
+        letter-spacing: 0.14em;
+    }
+
+    .nav-link {
+        padding: 7px 14px;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+    }
+}
+
+@media (max-width: 720px) {
+    #main-header {
+        padding: 0 12px;
+    }
+
+    #main-nav,
+    nav[id] {
+        gap: 6px;
+    }
+
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+    }
+}
+/* ============================================================
+   ANIMATION PACK — оживление хедера и кнопок
+   Добавляется в самый низ файла
+   ============================================================ */
+
+/* === Плавный параллакс фона хедера === */
+@keyframes headerParallax {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 52%; }
+    100% { background-position: 0% 50%; }
+}
+
+#main-header {
+    animation: headerParallax 18s ease-in-out infinite;
+    background-size: 200% 200%;
+}
+
+/* === Движущийся диагональный блик === */
+@keyframes diagonalSweep {
+    0% { transform: translateX(40%) translateY(-20%); opacity: 0.15; }
+    50% { transform: translateX(-20%) translateY(10%); opacity: 0.35; }
+    100% { transform: translateX(40%) translateY(-20%); opacity: 0.15; }
+}
+
+.diagonal-glow {
+    animation: diagonalSweep 12s linear infinite;
+}
+
+/* === Пульсация внутреннего свечения === */
+@keyframes innerGlowPulse {
+    0% { opacity: 0.35; }
+    50% { opacity: 0.55; }
+    100% { opacity: 0.35; }
+}
+
+.inner-glow-bottom {
+    animation: innerGlowPulse 6s ease-in-out infinite;
+}
+
+/* === Лёгкое движение сетки === */
+@keyframes gridShift {
+    0% { background-position: 0 0; }
+    100% { background-position: 32px 32px; }
+}
+
+.grid-layer {
+    animation: gridShift 14s linear infinite;
+}
+
+/* === Блик, скользящий по логотипу === */
+@keyframes logoSweep {
+    0% { transform: translateX(-120%) skewX(-18deg); opacity: 0; }
+    20% { opacity: 0.7; }
+    50% { transform: translateX(20%) skewX(-18deg); opacity: 0.9; }
+    80% { opacity: 0; }
+    100% { transform: translateX(120%) skewX(-18deg); opacity: 0; }
+}
+
+.logo::after {
+    content: "";
+    position: absolute;
+    top: -30%;
+    bottom: -30%;
+    left: 0;
+    width: 40%;
+    background: linear-gradient(90deg,
+        rgba(255, 255, 255, 0.0),
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.0));
+    mix-blend-mode: screen;
+    filter: blur(2px);
+    pointer-events: none;
+    animation: logoSweep 4.2s linear infinite;
+}
+
+/* === Hover-анимация кнопок === */
+@keyframes buttonHoverGlow {
+    0% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
+    50% { box-shadow: 0 0 14px rgba(111,66,193,0.8); }
+    100% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
+}
+
+.nav-link:hover {
+    animation: buttonHoverGlow 1.6s ease-in-out infinite;
+}
+
+/* === Пульсация активной кнопки === */
+@keyframes activePulse {
+    0% { filter: brightness(1.0); }
+    50% { filter: brightness(1.15); }
+    100% { filter: brightness(1.0); }
+}
+
+.nav-link.active {
+    animation: activePulse 2.4s ease-in-out infinite;
+}
+
+/* === Золотая линия — “текущий свет” === */
+@keyframes goldFlow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+#main-header::after {
+    background-size: 200% 100%;
+    animation: goldFlow 4s linear infinite;
+}
+
+/* === Нажатие кнопки === */
+.nav-link:active {
+    transform: scale(0.96);
+    transition: transform 0.05s;
+}
+@keyframes headerDeepGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 48%; }
+    100% { background-position: 0% 50%; }
+}
+
+#main-header {
+    background: linear-gradient(135deg,
+        #0a0c18 0%,
+        #101322 25%,
+        #1a1e33 50%,
+        #101322 75%,
+        #0a0c18 100%);
+    background-size: 300% 300%;
+    animation: headerDeepGradient 22s ease-in-out infinite;
+}
