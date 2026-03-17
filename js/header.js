@@ -5,31 +5,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const links = header.querySelectorAll(".nav-link");
     const mobilePanel = document.getElementById("mobile-panel");
 
+    // Определяем текущую страницу
     const path = window.location.pathname;
     const currentPage = path.split("/").pop() || "index.html";
 
+    // Подсветка активной ссылки — через класс, а не инлайн-стили
     links.forEach(link => {
         if (link.getAttribute("href") === currentPage) {
-            link.style.background = "#6a11cb";
-            link.style.color = "white";
-            link.style.fontWeight = "600";
+            link.classList.add("active");
         }
     });
 
+    // Очистка дополнительных меню
     function cleanup() {
         header.querySelectorAll("nav[id]:not(#main-nav)").forEach(nav => nav.remove());
     }
 
+    // Стилизация навигации — убраны инлайны, оставляем CSS
     function styleNav(nav) {
-        nav.style.cssText = `
-            display: flex;
-            gap: 4px;
-            height: 100%;
-            align-items: center;
-            margin-right: 12px;
-        `;
+        nav.style.display = "flex";
+        nav.style.gap = "4px";
+        nav.style.height = "100%";
+        nav.style.alignItems = "center";
+        nav.style.marginRight = "12px";
     }
 
+    // Создание подменю "Игры"
     function createGamesNav() {
         cleanup();
         const gamesNav = document.createElement("nav");
@@ -45,49 +46,53 @@ document.addEventListener("DOMContentLoaded", function () {
         logo.textContent = "Игры • СайтСотика";
     }
 
+    // Подменю Forza
     function createForzaNav() {
         cleanup();
         const forzaNav = document.createElement("nav");
         forzaNav.id = "forza-nav";
         forzaNav.innerHTML = `
             <a href="#" class="nav-link back-link" data-back>← Назад к сериям</a>
-            <a href="games/forza/motorsport7.html" class="nav-link">Forza Motorsport 7</a>
-            <a href="games/forza/motorsport8.html" class="nav-link">Forza Motorsport 8</a>
+            <a href="../games/forza/motorsport7.html" class="nav-link">Forza Motorsport 7</a>
+            <a href="../games/forza/motorsport8.html" class="nav-link">Forza Motorsport 8</a>
         `;
         styleNav(forzaNav);
         header.appendChild(forzaNav);
         logo.textContent = "Forza Motorsport • СайтСотика";
     }
 
+    // Подменю Assetto Corsa
     function createAcNav() {
         cleanup();
         const acNav = document.createElement("nav");
         acNav.id = "ac-nav";
         acNav.innerHTML = `
             <a href="#" class="nav-link back-link" data-back>← Назад к сериям</a>
-            <a href="games/ac/carrera.html" class="nav-link">Assetto Corsa</a>
-            <a href="games/ac/competizione.html" class="nav-link">Assetto Corsa Competizione</a>
+            <a href="../games/ac/carrera.html" class="nav-link">Assetto Corsa</a>
+            <a href="../games/ac/competizione.html" class="nav-link">Assetto Corsa Competizione</a>
         `;
         styleNav(acNav);
         header.appendChild(acNav);
         logo.textContent = "Assetto Corsa • СайтСотика";
     }
 
+    // Подменю Project Cars
     function createPcNav() {
         cleanup();
         const pcNav = document.createElement("nav");
         pcNav.id = "pc-nav";
         pcNav.innerHTML = `
             <a href="#" class="nav-link back-link" data-back>← Назад к сериям</a>
-            <a href="games/pc/1.html" class="nav-link">Project Cars 1</a>
-            <a href="games/pc/2.html" class="nav-link">Project Cars 2</a>
-            <a href="games/pc/3.html" class="nav-link">Project Cars 3</a>
+            <a href="../games/pc/1.html" class="nav-link">Project Cars 1</a>
+            <a href="../games/pc/2.html" class="nav-link">Project Cars 2</a>
+            <a href="../games/pc/3.html" class="nav-link">Project Cars 3</a>
         `;
         styleNav(pcNav);
         header.appendChild(pcNav);
         logo.textContent = "Project Cars • СайтСотика";
     }
 
+    // Обработчик клика по "Игры"
     header.querySelector("[data-page='games']").addEventListener("click", function (e) {
         e.preventDefault();
         mainNav.style.display = "none";
@@ -95,6 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
         attachEventListeners();
     });
 
+    // Привязка обработчиков событий
     function attachEventListeners() {
         header.querySelectorAll("[data-back]").forEach(button => {
             button.addEventListener("click", function (e) {
@@ -125,41 +131,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    header.style.cssText = `
-        width: 100%;
-        height: 60px;
-        background: #f8f9fa;
-        border-bottom: 1px solid #dee2e6;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-        font-family: 'Segoe UI', sans-serif;
-        overflow: hidden;
-        padding: 0;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    `;
+    // УДАЛЕНЫ: инлайновые стили хедера — доверяем CSS
+    // header.style.cssText = `...` — теперь задаётся из header.css
 
-    logo.style.cssText = `
-        color: #6a11cb;
-        font-size: 1.1em;
-        font-weight: 700;
-        margin-left: 16px;
-        letter-spacing: 0.5px;
-        white-space: nowrap;
-        transition: all 0.3s ease;
-    `;
-
-    styleNav(mainNav);
-
+    // Анимация градиента при движении мыши — заменена на безопасную
     header.addEventListener("mousemove", (e) => {
         const x = e.clientX;
         const max = window.innerWidth;
         const hue = Math.floor((x / max) * 360);
+        // Только background, без других свойств
         header.style.background = `linear-gradient(to right, #f8f9fa, hsl(${hue}, 40%, 90%), #f8f9fa)`;
     });
 
@@ -169,6 +149,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     attachEventListeners();
 
+    // Мобильная кнопка меню
     const mobileBtn = document.createElement("button");
     mobileBtn.id = "mobile-menu-btn";
     mobileBtn.innerHTML = "☰";
@@ -191,14 +172,15 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
     header.appendChild(mobileBtn);
 
+    // Генерация мобильного меню
     function renderMainMobileMenu() {
         mobilePanel.innerHTML = `
-            <a href="index.html">Главная</a>
-            <a href="about.html">Обо мне</a>
+            <a href="../index.html">Главная</a>
+            <a href="../about/index.html">Обо мне</a>
             <a href="#" data-mobile="games">Игры</a>
-            <a href="stream.html">Стрим</a>
-            <a href="team.html">Команда</a>
-            <a href="partners.html">Партнеры</a>
+            <a href="../stream/index.html">Стрим</a>
+            <a href="../team/index.html">Команда</a>
+            <a href="../partners/index.html">Партнеры</a>
         `;
     }
     renderMainMobileMenu();
@@ -226,37 +208,41 @@ document.addEventListener("DOMContentLoaded", function () {
         if (target.dataset.series === "forza") {
             mobilePanel.innerHTML = `
                 <a href="#" data-mobile="back">← Назад</a>
-                <a href="games/forza/motorsport7.html">Forza Motorsport 7</a>
-                <a href="games/forza/motorsport8.html">Forza Motorsport 8</a>
+                <a href="../games/forza/motorsport7.html">Forza Motorsport 7</a>
+                <a href="../games/forza/motorsport8.html">Forza Motorsport 8</a>
             `;
         }
 
         if (target.dataset.series === "ac") {
             mobilePanel.innerHTML = `
                 <a href="#" data-mobile="back">← Назад</a>
-                <a href="games/ac/carrera.html">Assetto Corsa</a>
-                <a href="games/ac/competizione.html">Assetto Corsa Competizione</a>
+                <a href="../games/ac/carrera.html">Assetto Corsa</a>
+                <a href="../games/ac/competizione.html">Assetto Corsa Competizione</a>
             `;
         }
 
         if (target.dataset.series === "pc") {
             mobilePanel.innerHTML = `
                 <a href="#" data-mobile="back">← Назад</a>
-                <a href="games/pc/1.html">Project Cars 1</a>
-                <a href="games/pc/2.html">Project Cars 2</a>
-                <a href="games/pc/3.html">Project Cars 3</a>
+                <a href="../games/pc/1.html">Project Cars 1</a>
+                <a href="../games/pc/2.html">Project Cars 2</a>
+                <a href="../games/pc/3.html">Project Cars 3</a>
             `;
         }
     });
 
+    // Показ мобильного меню на малых экранах
     if (window.innerWidth <= 720) {
+        mobileBtn.style.display = "block";
         mobilePanel.classList.add("open");
     }
 
     window.addEventListener("resize", () => {
         if (window.innerWidth > 720) {
+            mobileBtn.style.display = "none";
             mobilePanel.classList.remove("open");
         } else {
+            mobileBtn.style.display = "block";
             mobilePanel.classList.add("open");
         }
     });

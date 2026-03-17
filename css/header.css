@@ -60,6 +60,8 @@ nav[id] {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-wrap: nowrap; /* 🔥 Запрещаем перенос меню на новую строку */
+    height: 100%;
 }
 
 .nav-link {
@@ -97,6 +99,9 @@ nav[id] {
         transform 0.16s ease,
         letter-spacing 0.16s ease,
         border-color 0.2s ease;
+
+    white-space: nowrap; /* Не даем тексту ссылок переноситься */
+    min-width: auto;
 }
 
 /* Глянец */
@@ -232,6 +237,7 @@ nav[id] {
         letter-spacing: 0.12em;
     }
 }
+
 /* === Мобильная логика: скрываем десктопное меню === */
 @media (max-width: 720px) {
     #main-nav {
@@ -287,7 +293,25 @@ nav[id] {
         rgba(255,255,255,0.9));
     color: #6a11cb;
 }
-#main-nav .nav-link {
-    min-width: 98px;
-    justify-content: center;
+
+/* 🔥 Фикс: гарантируем одну строку для хедера */
+#main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 60px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    overflow: visible;
+    white-space: nowrap;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+#main-header > * {
+    flex-shrink: 0;
 }
