@@ -4,26 +4,103 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>СайтСотика — Официальный сайт</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/welcome.css">
 </head>
 <body>
-<!-- === ХЭДЕР С ГОРИЗОНТАЛЬНЫМИ МЕНЮ: ВСЕ nav — flex === -->
-<header id="main-header">
-  <div class="logo">СайтСотика</div>
+  <!-- === ХЭДЕР С ГОРИЗОНТАЛЬНЫМИ МЕНЮ: ВСЕ nav — flex === -->
+  <header id="main-header">
+    <div class="logo">СайтСотика</div>
+    <nav id="main-nav">
+      <a href="index.html" class="nav-link">Главная</a>
+      <a href="about.html" class="nav-link">Обо мне</a>
+      <a href="#" class="nav-link" data-page="games">Игры</a>
+      <a href="stream.html" class="nav-link">Стрим</a>
+      <a href="team.html" class="nav-link">Команда</a>
+      <a href="partners.html" class="nav-link">Партнеры</a>
+    </nav>
+    <script src="js/header.js"></script>
+  </header>
+  <div id="mobile-panel"></div>
 
-  <!-- Основное меню -->
-  <nav id="main-nav">
-    <a href="index.html" class="nav-link">Главная</a>
-    <a href="about.html" class="nav-link">Обо мне</a>
-    <a href="#" class="nav-link" data-page="games">Игры</a>
-    <a href="stream.html" class="nav-link">Стрим</a>
-    <a href="team.html" class="nav-link">Команда</a>
-    <a href="partners.html" class="nav-link">Партнеры</a>
-  </nav>
+  <!-- === ПРИВЕТСТВЕННАЯ СЕКЦИЯ === -->
+  <main id="welcome-section">
+    <section class="wb-section">
+      <div class="wb-shell">
+        <div class="wb-container">
+          <div class="wb-photo-wrap">
+            <div class="wb-photo-inner">
+              <img src="/images/image1.png" alt="Vertical 9:16" class="wb-photo-img">
+            </div>
+          </div>
+          <div class="wb-content">
+            <div class="wb-spacer-16"></div>
+            <!-- Приветствие в одной строке, рамка подстраивается под длину текста -->
+            <div style="
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              border: 2px solid #ff6b6b;
+              border-radius: 12px;
+              padding: 20px;
+              background-color: #ffffff;
+              color: #333333;
+              font-family: 'Segoe UI', sans-serif;
+              font-size: 28px;
+              font-weight: bold;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              white-space: nowrap;
+              margin: 0 auto;
+            ">
+              Добро пожаловать на мой сайт — СайтСотика!
+            </div>
 
-  <script src="js/script.js"></script>
-</header>
-<div id="mobile-panel"></div>
+            <div class="wb-spacer-32"></div>
 
+            <!-- Текст под приветствием -->
+            <p style="
+              font-family: 'Segoe UI', sans-serif;
+              font-size: 18px;
+              color: #333;
+              text-align: left;
+              max-width: 600px;
+              line-height: 1.6;
+              margin: 0 auto;
+            ">
+              Я, Дмитрий Передний, стример гоночных игр с ограниченными возможностями. У меня нет пальцев на руках. Из-за этого я не могу получить права. А водить машину мне хотелось всегда. Правда, когда в реальной жизни я садился за руль, обязательно разбивал не свою машину. После второго разбитого автомобиля я зарекся садиться за руль в реальной жизни. Но мечта не прошла. И вдруг я увидел рекламу игры Forza Motorsport 7...
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === СЕКЦИЯ С ВИДЕО (АДАПТИВНАЯ) === -->
+    <section class="video-section" style="text-align: center; margin: 40px 0; padding: 0 20px;">
+      <!-- Заголовок над плеером -->
+      <div style="
+        font-family: 'Segoe UI', sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        color: #e63946;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        margin-bottom: 16px;
+        text-align: center;
+      ">
+        🎯 ВЗЯТО В ПОИСКЕ ВКОНТАКТЕ
+      </div>
+      <div style="position: relative; width: 100%; max-width: 1920px; height: 0; padding-bottom: 56.25%; margin: 0 auto;">
+        <!-- 16:9 = 56.25% (1080 / 1920 = 0.5625) -->
+        <iframe
+          src="https://vkvideo.ru/video_ext.php?oid=-50305947&id=456239183&hash=b5c7f1fd86e22ce1&hd=4&autoplay=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;"
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.2);"
+        ></iframe>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/welcome.js" defer></script>
 </body>
 </html>
