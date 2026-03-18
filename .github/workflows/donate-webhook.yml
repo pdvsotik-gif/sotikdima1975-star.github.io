@@ -1,0 +1,53 @@
+name: Обработка донатов
+
+on:
+  repository_dispatch:
+    types: [donate_event]
+
+jobs:
+  handle-donate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получение данных доната
+        run: |
+          echo "Получен донат: ${{ github.event.client_payload.message }}"
+          echo "Сумма: ${{ github.event.client_payload.amount }}"
+          
+      - name: Создание Issue с донатом
+        if: github.event.client_payload.amount
+        run: |
+          curl -X POST https://api.github.com/repos/${{ github.repository }}/issues \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          -d '{
+            "title": "💸 Новый донат: ${{ github.event.client_payload.amount }} ₽",
+            "body": "**Сообщение:** ${{ github.event.client_payload.message }}\n\n**Сумма:** ${{ github.event.client_payload.amount }} ₽\n\n**Дата:** $(date)\n\n**Отправитель:** ${{ github.event.client_payload.sender }}"
+          }'
+
+      - name: Обновление счётчика донатов
+        run: |
+          # Создаём файл с данными о донатах
+          echo "${{ github.event.client_payload.amount }},$(date),${{ github.event.client_payload.message }}" >> donations.csv
+          
+          # Обновляем общий счётчик
+          TOTAL=$(awk -F, '{sum+=$1} END {print sum}' donations.csv 2>/dev/null || echo 0)
+          
+          # Создаём JSON файл для сайта
+          cat > donations.json << EOF
+          {
+            "total": $TOTAL,
+            "last_donation": "${{ github.event.client_payload.amount }} ₽ от ${{ github.event.client_payload.sender }}",
+            "timestamp": "$(date -u)",
+            "donations": [
+              $(cat donations.csv | awk -F, '{print "{\"amount\":"$1",\"date\":\""$2"\",\"message\":\""$3"\"}"}' | paste -sd"," || echo)
+            ]
+          }
+          EOF
+          
+      - name: Коммит и пуш изменений
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add donations.json donations.csv
+          git commit -m "Обновление данных о донатах" || exit 0
+          git push
