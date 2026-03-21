@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование адаптивности - СайтСотика</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .breakpoint {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .breakpoint-card {
+            background: linear-gradient(135deg, #667eea20 0%, #764ba220 100%);
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .breakpoint-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .breakpoint-card h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .breakpoint-card p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .screen-info {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: monospace;
+        }
+
+        .screen-info div {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            color: #333;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .value {
+            color: #764ba2;
+        }
+
+        .test-section {
+            background: #fffacd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+
+        .test-section h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        .test-section ol {
+            margin-left: 20px;
+            color: #333;
+        }
+
+        .test-section li {
+            margin: 8px 0;
+        }
+
+        .device-simulator {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(to right, #333, #555);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            margin: 20px 0;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .device-simulator small {
+            display: block;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .responsive-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        .responsive-table th,
+        .responsive-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .responsive-table th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+
+        .responsive-table tr:hover {
+            background: #f5f5f5;
+        }
+
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .breakpoint {
+                grid-template-columns: 1fr;
+            }
+
+            .device-simulator {
+                height: 300px;
+                font-size: 16px;
+            }
+
+            .responsive-table {
+                font-size: 13px;
+            }
+
+            .responsive-table th,
+            .responsive-table td {
+                padding: 8px;
+            }
+        }
+
+        .footer {
+            background: #f5f5f5;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #ddd;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .status-ok {
+            background: #4caf50;
+            color: white;
+        }
+
+        .status-warning {
+            background: #ff9800;
+            color: white;
+        }
+
+        .status-info {
+            background: #2196f3;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 Тестирование адаптивности</h1>
+            <p>Полная проверка сайта СайтСотика на всех устройствах</p>
+        </div>
+
+        <div class="content">
+            <!-- Текущие размеры экрана -->
+            <div class="section">
+                <h2>📊 Текущие размеры экрана</h2>
+                <div class="screen-info">
+                    <div>
+                        <span class="label">Ширина окна:</span>
+                        <span class="value" id="screen-width">-</span> px
+                    </div>
+                    <div>
+                        <span class="label">Высота окна:</span>
+                        <span class="value" id="screen-height">-</span> px
+                    </div>
+                    <div>
+                        <span class="label">Ориентация:</span>
+                        <span class="value" id="orientation">-</span>
+                    </div>
+                    <div>
+                        <span class="label">Плотность пикселей:</span>
+                        <span class="value" id="device-pixel-ratio">-</span>
+                    </div>
+                    <div>
+                        <span class="label">User Agent:</span>
+                        <span class="value" id="user-agent" style="font-size: 12px;">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Точки останова -->
+            <div class="section">
+                <h2>🎯 Точки останова (Breakpoints)</h2>
+                <div class="breakpoint">
+                    <div class="breakpoint-card">
+                        <h3>📱 Маленький телефон</h3>
+                        <p><strong>320px - 479px</strong></p>
+                        <p>Смартфоны первого поколения, старые устройства</p>
+                    </div>
+                    <div class="breakpoint-card">
+                        <h3>📱 Большой телефон</h3>
+                        <p><strong>480px - 639px</strong></p>
+                        <p>iPhone, Galaxy S10+, последние телефоны</p>
+                    </div>
+                    <div class="breakpoint-card">
+                        <h3>📕 Маленький планшет</h3>
+                        <p><strong>640px - 767px</strong></p>
+                        <p>Старые планшеты, портретный режим</p>
+                    </div>
+                    <div class="breakpoint-card">
+                        <h3>📗 Средний планшет</h3>
+                        <p><strong>768px - 959px</strong></p>
+                        <p>iPad Air, Samsung Tab, портретный режим</p>
+                    </div>
+                    <div class="breakpoint-card">
+                        <h3>📘 Большой планшет</h3>
+                        <p><strong>960px - 1199px</strong></p>
+                        <p>Планшеты в горизонтальной ориентации</p>
+                    </div>
+                    <div class="breakpoint-card">
+                        <h3>🖥️ Десктоп</h3>
+                        <p><strong>1200px+</strong></p>
+                        <p>Мониторы, ноутбуки, телевизоры</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Симулятор устройств -->
+            <div class="section">
+                <h2>📱 Классы устройств</h2>
+                <div id="device-status" class="device-simulator">
+                    Определяю класс устройства...
+                    <small id="device-name">-</small>
+                </div>
+                <div class="button-group">
+                    <button class="btn btn-small" onclick="simulateSize(375, 667)">iPhone SE</button>
+                    <button class="btn btn-small" onclick="simulateSize(390, 844)">iPhone 12</button>
+                    <button class="btn btn-small" onclick="simulateSize(360, 800)">Galaxy S21</button>
+                    <button class="btn btn-small" onclick="simulateSize(768, 1024)">iPad Air</button>
+                    <button class="btn btn-small" onclick="simulateSize(1024, 768)">iPad Pro</button>
+                    <button class="btn btn-small" onclick="simulateSize(1920, 1080)">Full HD</button>
+                </div>
+            </div>
+
+            <!-- Тестирование ориентации -->
+            <div class="section">
+                <h2>🔄 Тестирование ориентации</h2>
+                <div class="test-section">
+                    <h4>✅ Что проверить:</h4>
+                    <ol>
+                        <li><strong>Портретная (Portrait):</strong> Меню должно переходить на мобильное меню при ≤ 640px</li>
+                        <li><strong>Альбомная (Landscape):</strong> На маленьких экранах должна быть компактная версия</li>
+                        <li><strong>Текст:</strong> Читаем ли на всех ориентациях без горизонтальной прокрутки</li>
+                        <li><strong>Кнопки:</strong> Удобны ли для нажатия пальцем (размер не менее 44x44px)</li>
+                        <li><strong>Видео:</strong> Видео-плеер должен масштабироваться адаптивно</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Мобильное меню -->
+            <div class="section">
+                <h2>☰ Мобильное меню</h2>
+                <div class="test-section">
+                    <h4>✅ Функционал меню:</h4>
+                    <table class="responsive-table">
+                        <tr>
+                            <th>Размер экрана</th>
+                            <th>Горизонтальное меню</th>
+                            <th>Кнопка ☰</th>
+                            <th>Боковое меню</th>
+                        </tr>
+                        <tr>
+                            <td>≤ 640px (мобайл)</td>
+                            <td>Скрыто</td>
+                            <td>Видна</td>
+                            <td>Слева направо</td>
+                        </tr>
+                        <tr>
+                            <td>641px - 1024px (планшет)</td>
+                            <td>Видно (адаптировано)</td>
+                            <td>Скрыта</td>
+                            <td>Скрыто</td>
+                        </tr>
+                        <tr>
+                            <td>≥ 1200px (десктоп)</td>
+                            <td>Видно (полно)</td>
+                            <td>Скрыта</td>
+                            <td>Скрыто</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CSS медиа-запросы -->
+            <div class="section">
+                <h2>📋 Используемые медиа-запросы</h2>
+                <div class="test-section">
+                    <h4>Основные файлы CSS:</h4>
+                    <ul style="margin-left: 20px; color: #333; line-height: 2;">
+                        <li><strong>/css/header.css</strong> — стили шапки с адаптивностью</li>
+                        <li><strong>/css/welcome.css</strong> — стили приветственной секции</li>
+                        <li><strong>/css/responsive.css</strong> — универсальные адаптивные стили</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Инструкция по тестированию -->
+            <div class="section">
+                <h2>🧪 Инструкция по тестированию</h2>
+                <div class="test-section">
+                    <h4>Способ 1: DevTools браузера</h4>
+                    <ol>
+                        <li>Откройте сайт в браузере</li>
+                        <li>Нажмите <strong>F12</strong> для открытия DevTools</li>
+                        <li>Нажмите иконку <strong>мобильного устройства</strong> (Ctrl+Shift+M)</li>
+                        <li>Выберите нужное устройство из списка</li>
+                        <li>Протестируйте все функции</li>
+                    </ol>
+                </div>
+
+                <div class="test-section">
+                    <h4>Способ 2: Кнопки на этой странице</h4>
+                    <ol>
+                        <li>Используйте кнопки выше, чтобы имитировать размеры устройств</li>
+                        <li>Откройте в соседней вкладке основной сайт</li>
+                        <li>Измените размер окна браузера на нужный размер</li>
+                        <li>Проверьте все компоненты</li>
+                    </ol>
+                </div>
+
+                <div class="test-section">
+                    <h4>Способ 3: Реальное устройство</h4>
+                    <ol>
+                        <li>Откройте сайт на смартфоне или планшете</li>
+                        <li>Поворачивайте устройство между портретом и альбомом</li>
+                        <li>Проверьте удобство использования</li>
+                        <li>Убедитесь, что нет горизонтальной прокрутки</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Чек-лист -->
+            <div class="section">
+                <h2>✅ Чек-лист для тестирования</h2>
+                <div style="display: grid; gap: 10px;">
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Меню адаптируется на мобайле (640px)
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Кнопка ☰ появляется на мобайле
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Боковое меню слайдит справа
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Текст читаем на всех устройствах
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Видео масштабируется (16:9)
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Кнопки удобны для пальца (44x44px)
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Нет горизонтальной прокрутки
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Альбомная ориентация работает корректно
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                        <input type="checkbox"> Safe Area работает на изогнутых экранах
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🚀 Тестирование адаптивности СайтСотика — 2024</p>
+            <p style="font-size: 12px; margin-top: 10px;">
+                <a href="/" style="color: #667eea; text-decoration: none;">← Вернуться на главную</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function updateScreenInfo() {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            const orientation = window.innerHeight > window.innerWidth ? 'Portrait' : 'Landscape';
+            const dpr = window.devicePixelRatio.toFixed(2);
+
+            document.getElementById('screen-width').textContent = width;
+            document.getElementById('screen-height').textContent = height;
+            document.getElementById('orientation').textContent = orientation;
+            document.getElementById('device-pixel-ratio').textContent = dpr;
+            document.getElementById('user-agent').textContent = navigator.userAgent.substring(0, 80) + '...';
+
+            // Определение класса устройства
+            let deviceName = '';
+            let status = '';
+
+            if (width <= 479) {
+                deviceName = '📱 Маленький телефон (320-479px)';
+                status = '🔴 Мобайл: горизонтальное меню скрыто, включено мобильное меню';
+            } else if (width <= 639) {
+                deviceName = '📱 Большой телефон (480-639px)';
+                status = '🔴 Мобайл: горизонтальное меню скрыто, включено мобильное меню';
+            } else if (width <= 767) {
+                deviceName = '📕 Маленький планжет (640-767px)';
+                status = '🟡 Планжет: переходный режим';
+            } else if (width <= 959) {
+                deviceName = '📗 Средний планжет (768-959px)';
+                status = '🟡 Планжет: адаптирован';
+            } else if (width <= 1199) {
+                deviceName = '📘 Большой планжет (960-1199px)';
+                status = '🟢 Планжет/Десктоп: меню видно';
+            } else {
+                deviceName = '🖥️ Десктоп (1200px+)';
+                status = '🟢 Полный режим: все элементы видны';
+            }
+
+            document.getElementById('device-status').textContent = status;
+            document.getElementById('device-name').textContent = deviceName;
+        }
+
+        function simulateSize(width, height) {
+            console.log(`Имитация размера: ${width}x${height}`);
+            alert(`Установите размер окна браузера на ${width}x${height}:\n\n1. Нажмите F12 (DevTools)\n2. Выберите мобильное устройство\n3. Выберите нужное устройство из списка`);
+        }
+
+        // Обновление при загрузке и при изменении размера
+        window.addEventListener('load', updateScreenInfo);
+        window.addEventListener('resize', updateScreenInfo);
+
+        // Первое обновление
+        updateScreenInfo();
+    </script>
+</body>
+</html>

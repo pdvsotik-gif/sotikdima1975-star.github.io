@@ -1,0 +1,350 @@
+/* ========================================
+   АДАПТИВНЫЙ ДИЗАЙН ДЛЯ ВСЕХ УСТРОЙСТВ
+   ======================================== */
+
+/* ТОЧКА РАЗДЕЛЕНИЯ МЕНЮ: 720px */
+
+/* =====================================
+   1. ТОЧКА РАЗДЕЛЕНИЯ МЕНЮ (720px)
+   ===================================== */
+
+/* Горизонтальное меню: только для экранов ≥ 721px */
+@media (max-width: 720px) {
+    #main-nav {
+        display: none !important;
+    }
+}
+
+@media (min-width: 721px) {
+    #mobile-menu-btn {
+        display: none !important;
+    }
+
+    #mobile-panel {
+        display: none !important;
+    }
+}
+
+/* =====================================
+   2. МОБИЛЬНОЕ МЕНЮ (универсальное)
+   ===================================== */
+
+#mobile-panel a {
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    padding: 14px 16px;
+    font-size: 15px;
+}
+
+@media (max-width: 720px) {
+    #mobile-panel {
+        width: 240px;
+    }
+
+    #mobile-panel a {
+        padding: 12px 14px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #mobile-panel {
+        width: 220px;
+        padding: 16px;
+    }
+
+    #mobile-panel a {
+        padding: 11px 12px;
+        font-size: 13px;
+    }
+}
+
+/* =====================================
+   2. ВИДЕО СЕКЦИЯ (адаптивна)
+   ===================================== */
+
+.video-section {
+    padding: 20px !important;
+}
+
+@media (max-width: 768px) {
+    .video-section {
+        margin: 30px 0 !important;
+        padding: 16px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-section {
+        margin: 20px 0 !important;
+        padding: 12px !important;
+    }
+}
+
+/* Заголовок видео */
+.video-section > div:first-child {
+    font-size: 22px !important;
+}
+
+@media (max-width: 768px) {
+    .video-section > div:first-child {
+        font-size: 20px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .video-section > div:first-child {
+        font-size: 18px !important;
+        margin-bottom: 12px !important;
+    }
+}
+
+/* =====================================
+   3. ПРИВЕТСТВЕННЫЙ ТЕКСТ И РАМКА
+   ===================================== */
+
+/* Десктоп (1200px+) */
+@media (min-width: 1200px) {
+    [style*="border: 2px solid #ff6b6b"] {
+        font-size: 28px !important;
+        padding: 20px !important;
+    }
+
+    [style*="font-size: 18px"][style*="color: #333"] {
+        font-size: 18px !important;
+        line-height: 1.6 !important;
+    }
+}
+
+/* Планшет горизонтальный (960px - 1199px) */
+@media (max-width: 1199px) and (min-width: 960px) {
+    [style*="border: 2px solid #ff6b6b"] {
+        font-size: 26px !important;
+        padding: 18px !important;
+    }
+
+    [style*="font-size: 18px"][style*="color: #333"] {
+        font-size: 17px !important;
+    }
+}
+
+/* Планшет вертикальный (768px - 959px) */
+@media (max-width: 959px) and (min-width: 768px) {
+    [style*="border: 2px solid #ff6b6b"] {
+        font-size: 24px !important;
+        padding: 16px !important;
+    }
+
+    [style*="font-size: 18px"][style*="color: #333"] {
+        font-size: 16px !important;
+    }
+}
+
+/* Смартфоны (до 720px) */
+@media (max-width: 720px) {
+    [style*="border: 2px solid #ff6b6b"] {
+        font-size: 20px !important;
+        padding: 14px !important;
+        white-space: normal !important;
+    }
+
+    [style*="font-size: 18px"][style*="color: #333"] {
+        font-size: 15px !important;
+    }
+}
+
+/* Большой телефон (480px - 639px) */
+@media (max-width: 639px) and (min-width: 480px) {
+    [style*="border: 2px solid #ff6b6b"] {
+        font-size: 18px !important;
+        padding: 12px !important;
+        white-space: normal !important;
+    }
+
+    [style*="font-size: 18px"][style*="color: #333"] {
+        font-size: 15px !important;
+    }
+}
+
+/* Маленький телефон (до 479px) */
+@media (max-width: 479px) {
+    [style*="border: 2px solid #ff6b6b"] {
+        font-size: 16px !important;
+        padding: 10px !important;
+        white-space: normal !important;
+    }
+
+    [style*="font-size: 18px"][style*="color: #333"] {
+        font-size: 14px !important;
+    }
+}
+
+/* =====================================
+   4. ОРГАНИЗАЦИЯ МАКЕТА
+   ===================================== */
+
+main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* =====================================
+   5. PORTRAIT VS LANDSCAPE
+   ===================================== */
+
+/* Альбомная ориентация - маленькие экраны */
+@media (orientation: landscape) and (max-height: 500px) {
+    body {
+        padding-top: 48px;
+    }
+
+    .video-section {
+        margin: 16px 0 !important;
+    }
+
+    .video-section > div:first-child {
+        font-size: 16px !important;
+        margin-bottom: 8px !important;
+    }
+
+    [style*="border: 2px solid #ff6b6b"] {
+        font-size: 16px !important;
+        padding: 8px !important;
+    }
+}
+
+/* Альбомная ориентация - средние экраны */
+@media (orientation: landscape) and (min-height: 500px) and (max-height: 800px) {
+    body {
+        padding-top: 50px;
+    }
+
+    .video-section {
+        margin: 20px 0 !important;
+    }
+}
+
+/* =====================================
+   6. ПЛАНШЕТЫ (768px - 1024px)
+   ===================================== */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .video-section {
+        max-width: 900px;
+        margin: 35px auto !important;
+    }
+}
+
+/* =====================================
+   7. ДЕСКТОПЫ (1200px+)
+   ===================================== */
+
+@media (min-width: 1200px) {
+    .video-section {
+        max-width: 1200px;
+        margin: 40px auto !important;
+    }
+}
+
+/* =====================================
+   8. УТИЛИТЫ ДЛЯ ЭКРАНОВ
+   ===================================== */
+
+/* Скрывать/показывать элементы по размеру */
+.hide-mobile {
+    display: block;
+}
+
+@media (max-width: 720px) {
+    .hide-mobile {
+        display: none !important;
+    }
+}
+
+.show-mobile {
+    display: none;
+}
+
+@media (max-width: 720px) {
+    .show-mobile {
+        display: block !important;
+    }
+}
+
+.hide-tablet {
+    display: block;
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .hide-tablet {
+        display: none !important;
+    }
+}
+
+.show-tablet {
+    display: none;
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .show-tablet {
+        display: block !important;
+    }
+}
+
+/* =====================================
+   9. TOUCH-FRIENDLY (сенсорные устройства)
+   ===================================== */
+
+@media (hover: none) and (pointer: coarse) {
+    button, a {
+        min-width: 48px;
+        min-height: 48px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #mobile-panel a {
+        min-height: 44px;
+    }
+
+    .nav-link {
+        min-height: 44px;
+    }
+}
+
+/* =====================================
+   10. ВЫСОКОПЛОТНЫЕ ЭКРАНЫ (retina)
+   ===================================== */
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* =====================================
+   11. БЕЗОПАСНЫЕ ОБЛАСТИ (notch, safe-inset)
+   ===================================== */
+
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(12px, env(safe-area-inset-left));
+        padding-right: max(12px, env(safe-area-inset-right));
+    }
+
+    #main-header {
+        padding-left: max(0, env(safe-area-inset-left));
+        padding-right: max(0, env(safe-area-inset-right));
+    }
+
+    #mobile-panel {
+        right: max(0, env(safe-area-inset-right));
+    }
+}
