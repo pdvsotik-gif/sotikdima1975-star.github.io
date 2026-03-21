@@ -224,7 +224,21 @@
          RESPONSIVE
          =========================== */
 
-@media (max-width: 1200px) {
+/* Большие экраны (1200px+) */
+@media (min-width: 1200px) {
+  .wb-content {
+    padding: 48px 56px;
+  }
+  .wb-title {
+    font-size: 44px;
+  }
+  .wb-text {
+    font-size: 19px;
+  }
+}
+
+/* Планшеты горизонтально (960px - 1199px) */
+@media (max-width: 1199px) and (min-width: 960px) {
   .wb-content {
     padding: 40px 40px;
   }
@@ -236,8 +250,23 @@
   }
 }
 
-@media (max-width: 960px) {
+/* Планшеты и большие смартфоны (720px - 959px) */
+@media (max-width: 959px) and (min-width: 720px) {
+  .wb-container {
+    flex-direction: column;
+  }
+
+  .wb-photo-wrap {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 400px;
+  }
+
   .wb-content {
+    width: 100%;
     padding: 32px 32px;
   }
   .wb-title {
@@ -248,7 +277,33 @@
   }
 }
 
-/* мобильный — только тут вертикаль */
+/* Смартфоны (до 720px) - только вертикальный макет */
+@media (max-width: 720px) {
+  .wb-container {
+    flex-direction: column;
+  }
+
+  .wb-photo-wrap {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    max-height: 300px;
+  }
+
+  .wb-content {
+    width: 100%;
+    padding: 24px 20px;
+  }
+  .wb-title {
+    font-size: 24px;
+  }
+  .wb-text {
+    font-size: 15px;
+  }
+}
+
 @media (max-width: 480px) {
   .wb-container {
     flex-direction: column;
@@ -260,15 +315,87 @@
     max-width: 100%;
     border-right: none;
     border-bottom: 1px solid var(--border);
+    max-height: 280px;
   }
 
   .wb-content {
     width: 100%;
-    padding: 24px 20px;
+    padding: 20px 16px;
   }
 
   .wb-title {
-    font-size: 26px;
+    font-size: 22px;
+  }
+
+  .wb-text {
+    font-size: 14px;
+  }
+}
+
+/* =====================================
+     ОРИЕНТАЦИЯ: АЛЬБОМНАЯ
+     ===================================== */
+
+/* Альбомная ориентация на телефонах (высота < 600px) */
+@media (orientation: landscape) and (max-height: 600px) {
+  .wb-section {
+    padding-top: 50px;
+    padding-bottom: 30px;
+  }
+
+  .wb-container {
+    flex-direction: row;
+  }
+
+  .wb-photo-wrap {
+    width: 35%;
+    min-width: 35%;
+    max-width: 35%;
+    border-right: 1px solid var(--border);
+    border-bottom: none;
+    max-height: none;
+  }
+
+  .wb-content {
+    width: 65%;
+    padding: 24px 28px;
+  }
+
+  .wb-title {
+    font-size: 20px;
+  }
+
+  .wb-text {
+    font-size: 13px;
+  }
+}
+
+/* Альбомная ориентация на планшетах (высота 600px - 900px) */
+@media (orientation: landscape) and (min-height: 600px) and (max-height: 900px) {
+  .wb-section {
+    padding-top: 60px;
+    padding-bottom: 40px;
+  }
+
+  .wb-container {
+    flex-direction: row;
+  }
+
+  .wb-photo-wrap {
+    width: 40%;
+    min-width: 40%;
+    max-width: 40%;
+    border-right: 1px solid var(--border);
+    border-bottom: none;
+  }
+
+  .wb-content {
+    width: 60%;
+    padding: 32px 36px;
+  }
+
+  .wb-title {
+    font-size: 28px;
   }
 
   .wb-text {

@@ -256,7 +256,7 @@
 
                 <!-- Вариант 2 -->
                 <div class="option" onclick="selectOption(this)">
-                    <img src="https://images.unsplash.com/photo-1629348150547-7b7a0e64c58d?auto=format&fit=crop&w=600&q=80" alt="Рабочая станция">
+                    <img src="images/workstation.jpg" alt="Рабочая станция" onerror="this.src='https://images.unsplash.com/photo-1629348150547-7b7a0e64c58d?auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
                     <h3>Рабочая станция</h3>
                     <p>Для монтажа и стримов</p>
                     <div class="price">Цель: 150 000 ₽</div>
@@ -264,38 +264,56 @@
 
                 <!-- Вариант 3 -->
                 <div class="option" onclick="selectOption(this)">
-                    <img src="https://images.unsplash.com/photo-1595178999039-92863120cf2a?auto=format&fit=crop&w=600&q=80" alt="Портативный ПК">
+                    <img src="images/portable-pc.jpg" alt="Портативный ПК" onerror="this.src='https://images.unsplash.com/photo-1595178999039-92863120cf2a?auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
                     <h3>Портативный ПК</h3>
                     <p>Мощный ноутбук для поездок</p>
                     <div class="price">Цель: 100 000 ₽</div>
                 </div>
             </div>
 
-            <!-- Виджет цели -->
-            <iframe
-                id="goalWidget"
-                class="goal-widget"
-                allowtransparency="true"
-                frameborder="0">
-            </iframe>
+            <!-- Кнопки поддержки -->
+            <div style="display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 30px auto;">
+                <a href="https://donate.stream/sotikdima" target="_blank" class="donate-btn">
+                    💬 Поддержать через donate.stream
+                </a>
+                <a href="https://yoomoney.ru/to/4100117753597226" target="_blank" class="donate-btn" style="background: linear-gradient(135deg, #50be96, #3aa883);">
+                    💳 Поддержать через YooMoney
+                </a>
+                <a href="https://www.sberbank.com/online/" target="_blank" class="donate-btn" style="background: linear-gradient(135deg, #00a651, #007a3d);">
+                    🟢 Поддержать через Сбербанк
+                </a>
+                <a href="https://www.tinkoff.ru/" target="_blank" class="donate-btn" style="background: linear-gradient(135deg, #000000, #333333);">
+                    ⚫ Поддержать через Тинькофф
+                </a>
+            </div>
 
-            <!-- Кнопка открытия донат-формы -->
-            <button class="donate-btn" id="openDonateBtn">
-                💰 Поддержать выбранную цель
-            </button>
+            <!-- Форма для ввода данных после доната -->
+            <div id="afterDonationForm" style="display: none; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 30px auto; max-width: 500px;">
+                <h2 style="color: #ff7a1a; margin-bottom: 20px; text-align: center;">Спасибо за поддержку!</h2>
+                <p style="text-align: center; color: #6c757d; margin-bottom: 20px;">Пожалуйста, заполните форму, чтобы мы могли добавить ваш донат в статистику.</p>
+                
+                <form id="donationForm" onsubmit="submitDonationData(event)">
+                    <div style="margin-bottom: 15px;">
+                        <label for="amount" style="display: block; margin-bottom: 5px; font-weight: 500;">Сумма доната (₽):</label>
+                        <input type="number" id="amount" name="amount" min="1" required style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Имя или никнейм:</label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Сообщение (необязательно):</label>
+                        <textarea id="message" name="message" rows="3" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;"></textarea>
+                    </div>
+                    <button type="submit" class="donate-btn" style="width: 100%;">
+                        Отправить данные
+                    </button>
+                </form>
+            </div>
         </section>
     </div>
 
-    <!-- Боковая панель с формой доната -->
-    <div class="sidebar" id="donateSidebar">
-        <button class="close-sidebar" id="closeDonateBtn">×</button>
-        <iframe
-            src="https://donate.stream/sotikdima"
-            class="donate-frame"
-            allowtransparency="true"
-            frameborder="0">
-        </iframe>
-    </div>
+    <!-- Убираем боковую панель - она больше не нужна -->
 
     <footer>
         &copy; 2025 СайтСотика — Ваша поддержка меняет всё
@@ -313,35 +331,73 @@
             element.classList.add('selected');
         }
 
-        // Открытие боковой панели
-        document.getElementById('openDonateBtn').addEventListener('click', () => {
-            document.getElementById('donateSidebar').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        });
-
-        // Закрытие боковой панели
-        document.getElementById('closeDonateBtn').addEventListener('click', () => {
-            document.getElementById('donateSidebar').classList.remove('open');
-            document.body.style.overflow = '';
-        });
-
-        // Закрытие по клику вне
-        document.getElementById('donateSidebar').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('donateSidebar')) {
-                document.getElementById('donateSidebar').classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Закрытие по Escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('donateSidebar').classList.contains('open')) {
-                document.getElementById('donateSidebar').classList.remove('open');
-                document.body.style.overflow = '';
-            }
-        });
+        // Показываем форму для ввода данных после нажатия на кнопку поддержки
+        // Форма появляется сразу после перехода по ссылке
+        function showDonationForm() {
+            document.getElementById('afterDonationForm').style.display = 'block';
+            
+            // Плавно скроллим к форме
+            document.getElementById('afterDonationForm').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Убираем кнопки поддержки
+            document.querySelector('.poll-section').querySelectorAll('a').forEach(btn => {
+                btn.style.display = 'none';
+            });
+        }
+        
+        // Обработчики для кнопок поддержки
+        document.addEventListener('DOMContentLoaded', function() {
+            //
+        
+        // Показываем форму для ввода данных
+        function showDonationForm() {
+            document.getElementById('afterDonationForm').style.display = 'block';
+            
+            // Плавно скроллим к форме
+            document.getElementById('afterDonationForm').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Убираем кнопки поддержки
+            document.querySelector('.poll-section').querySelectorAll('a').forEach(btn => {
+                btn.style.display = 'none';
+            });
+        }
+        
+        // Отправка данных о донате
+        function submitDonationData(event) {
+            event.preventDefault();
+            
+            const amount = document.getElementById('amount').value;
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            
+            // В реальной реализации отправляем данные на сервер
+            // fetch('/api/donations', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ amount, name, message })
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     alert('Данные о донате успешно сохранены!');
+            //     document.getElementById('afterDonationForm').style.display = 'none';
+            // })
+            // .catch(error => {
+            //     alert('Ошибка при сохранении данных. Попробуйте позже.');
+            //     console.error('Error:', error);
+            // });
+            
+            // Для демонстрации просто показываем alert
+            alert(`Спасибо, ${name}! Данные о вашем донате в размере ${amount} ₽ успешно отправлены.`);
+            
+            // Скрываем форму
+            document.getElementById('afterDonationForm').style.display = 'none';
+        }
     </script>
 
-    <!-- Удаляем скрипт, так как используем оригинальный виджет donate.stream -->
+    <!-- Убираем подключение конфигурации - она больше не нужна -->
 </body>
 </html>

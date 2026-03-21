@@ -1,4 +1,7 @@
-/* БАЗА */
+/* ===========================
+     БАЗОВЫЕ СТИЛИ
+     =========================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -13,20 +16,49 @@ html, body {
 body {
     font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     color: #e5e7f0;
-    padding-top: 80px;
-    background:
-        radial-gradient(circle at top, #f7f8ff 0, #e4e7f5 40%, #d3d6e6 100%);
+    background: radial-gradient(circle at top, #f7f8ff 0, #e4e7f5 40%, #d3d6e6 100%);
+    padding-top: 60px; /* БАЗОВАЯ высота хедера */
 }
 
-/* ЛОГОТИП — премиум, оставляем */
+/* ===========================
+     ГЛАВНЫЙ ХЭДЕР
+     (ВСЕГДА ОДНА СТРОКА: ЛОГОТИП СЛЕВА, МЕНЮ СПРАВА)
+     =========================== */
+
+#main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 0 20px;
+    box-sizing: border-box;
+    height: 60px;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+#main-header > * {
+    flex-shrink: 0;
+}
+
+/* ===========================
+     ЛОГОТИП (СЛЕВА)
+     =========================== */
+
 .logo {
     position: relative;
-    z-index: 2;
-    font-size: 1.18em;
     font-weight: 900;
-    letter-spacing: 0.16em;
     text-transform: uppercase;
     white-space: nowrap;
+    font-size: 0.95em;
+    letter-spacing: 0.12em;
     background: linear-gradient(120deg,
         #fefefe 0%,
         #e0e4ff 20%,
@@ -50,9 +82,13 @@ body {
         rgba(255, 255, 255, 0.12),
         transparent 70%);
     opacity: 0.7;
+    pointer-events: none;
 }
 
-/* МЕНЮ — премиум‑кнопки */
+/* ================================================
+     МЕНЮ — премиум‑кнопки (ГОРИЗОНТАЛЬНОЕ)
+     ================================================ */
+
 #main-nav,
 nav[id] {
     position: relative;
@@ -69,29 +105,22 @@ nav[id] {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     padding: 8px 18px;
     border-radius: 999px;
-
-    font-size: 0.78rem;
+    font-size: 0.62rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.1em;
     text-decoration: none;
-
     color: #d7dbff;
-
     background: radial-gradient(circle at top,
         rgba(255, 255, 255, 0.06),
         rgba(10, 12, 24, 0.98));
-
     border: 1px solid rgba(255, 255, 255, 0.06);
-
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.16),
         inset 0 -1px 0 rgba(0, 0, 0, 0.85),
         0 4px 10px rgba(0, 0, 0, 0.7);
-
     transition:
         background 0.2s ease,
         color 0.2s ease,
@@ -99,12 +128,11 @@ nav[id] {
         transform 0.16s ease,
         letter-spacing 0.16s ease,
         border-color 0.2s ease;
-
-    white-space: nowrap; /* Не даем тексту ссылок переноситься */
+    white-space: nowrap;
     min-width: auto;
 }
 
-/* Глянец */
+/* Глянец на кнопке */
 .nav-link::before {
     content: "";
     position: absolute;
@@ -118,7 +146,7 @@ nav[id] {
     pointer-events: none;
 }
 
-/* Нижняя линия */
+/* Нижняя подчеркивающая линия */
 .nav-link::after {
     content: "";
     position: absolute;
@@ -136,21 +164,20 @@ nav[id] {
     transition: width 0.2s ease, opacity 0.2s ease;
 }
 
-/* Hover */
+/* Hover состояние */
 .nav-link:hover {
     background: radial-gradient(circle at top,
         rgba(111, 66, 193, 0.35),
         rgba(10, 12, 24, 0.98));
     color: #f5f6ff;
-
     transform: translateY(-1px);
-
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.22),
         inset 0 -1px 0 rgba(0, 0, 0, 0.9),
         0 6px 16px rgba(111, 66, 193, 0.7);
     border-color: rgba(111, 66, 193, 0.7);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.12em;
+    animation: buttonHoverGlow 1.6s ease-in-out infinite;
 }
 
 .nav-link:hover::after {
@@ -158,21 +185,20 @@ nav[id] {
     opacity: 1;
 }
 
-/* Активная */
+/* Активное состояние */
 .nav-link.active {
     background: linear-gradient(135deg,
         #6a11cb 0%,
         #2575fc 40%,
         #20e3b2 80%);
     color: #ffffff !important;
-
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.3),
         inset 0 -1px 0 rgba(0, 0, 0, 0.85),
         0 0 18px rgba(111, 66, 193, 0.9),
         0 0 24px rgba(37, 117, 252, 0.8);
-
     border-color: rgba(255, 255, 255, 0.3);
+    animation: activePulse 2.4s ease-in-out infinite;
 }
 
 .nav-link.active::after {
@@ -180,7 +206,7 @@ nav[id] {
     opacity: 1;
 }
 
-/* Назад */
+/* "Назад" кнопка */
 .back-link {
     color: #f5f6ff !important;
     font-weight: 700 !important;
@@ -190,66 +216,50 @@ nav[id] {
         rgba(10, 12, 24, 0.98));
 }
 
-/* Анимации кнопок */
-@keyframes buttonHoverGlow {
-    0% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
-    50% { box-shadow: 0 0 14px rgba(111,66,193,0.8); }
-    100% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
+/* ================================================
+     МОБИЛЬНОЕ МЕНЮ: ГАМБУРГЕР + БОКОВАЯ ПАНЕЛЬ
+     ================================================ */
+
+#mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 3001;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s ease;
 }
 
-.nav-link:hover {
-    animation: buttonHoverGlow 1.6s ease-in-out infinite;
+.hamburger-line {
+    width: 24px;
+    height: 2.5px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
 }
 
-@keyframes activePulse {
-    0% { filter: brightness(1.0); }
-    50% { filter: brightness(1.15); }
-    100% { filter: brightness(1.0); }
+/* Анимация гамбургера при открытии */
+#mobile-menu-btn.open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
 }
 
-.nav-link.active {
-    animation: activePulse 2.4s ease-in-out infinite;
+#mobile-menu-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
 }
 
-/* РЕСПОНСИВ */
-@media (max-width: 960px) {
-    .logo {
-        font-size: 1.05em;
-        letter-spacing: 0.14em;
-    }
-
-    .nav-link {
-        padding: 7px 14px;
-        font-size: 0.72rem;
-        letter-spacing: 0.14em;
-    }
+#mobile-menu-btn.open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
 }
 
-@media (max-width: 720px) {
-    #main-nav,
-    nav[id] {
-        gap: 6px;
-    }
-
-    .nav-link {
-        padding: 6px 10px;
-        font-size: 0.68rem;
-        letter-spacing: 0.12em;
-    }
-}
-
-/* === Мобильная логика: скрываем десктопное меню === */
-@media (max-width: 720px) {
-    #main-nav {
-        display: none !important;
-    }
-
-    #mobile-menu-btn {
-        display: block !important;
-    }
-}
-
-/* === Боковое мобильное меню === */
 #mobile-panel {
     position: fixed;
     top: 60px;
@@ -264,12 +274,16 @@ nav[id] {
     flex-direction: column;
     gap: 14px;
     transform: translateX(100%);
-    transition: transform 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     z-index: 3000;
 }
 
 #mobile-panel.open {
     transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 #mobile-panel a {
@@ -281,10 +295,14 @@ nav[id] {
     color: #333;
     font-weight: 700;
     text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
     box-shadow:
         inset 0 1px 0 rgba(255,255,255,0.8),
         inset 0 -1px 0 rgba(0,0,0,0.1),
         0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
 }
 
 #mobile-panel a:hover {
@@ -292,26 +310,201 @@ nav[id] {
         rgba(111,66,193,0.25),
         rgba(255,255,255,0.9));
     color: #6a11cb;
+    transform: translateX(6px);
 }
 
-/* 🔥 Фикс: гарантируем одну строку для хедера */
-#main-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 60px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    overflow: visible;
-    white-space: nowrap;
-    background: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+/* ================================================
+     АНИМАЦИИ
+     ================================================ */
+
+@keyframes buttonHoverGlow {
+    0% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
+    50% { box-shadow: 0 0 14px rgba(111,66,193,0.8); }
+    100% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
 }
 
-#main-header > * {
-    flex-shrink: 0;
+@keyframes activePulse {
+    0% { filter: brightness(1.0); }
+    50% { filter: brightness(1.15); }
+    100% { filter: brightness(1.0); }
+}
+
+/* ================================================
+     ВИДИМОСТЬ МЕНЮ (ТОЧКА РАЗДЕЛЕНИЯ: 720px)
+     ================================================ */
+
+/* Класс для скрытия меню */
+.nav-hidden {
+    display: none !important;
+}
+
+/* Десктопы и планшеты (≥721px) - только горизонтальное меню */
+@media (min-width: 721px) {
+    #main-nav,
+    nav[id] {
+        display: flex !important;
+    }
+
+    #mobile-menu-btn {
+        display: none !important;
+    }
+
+    #mobile-panel {
+        display: none !important;
+    }
+}
+
+/* Мобильные устройства (≤720px) - только мобильное меню */
+@media (max-width: 720px) {
+    #main-nav {
+        display: none !important;
+    }
+
+    #mobile-menu-btn {
+        display: flex !important;
+    }
+
+    #mobile-panel {
+        display: flex !important;
+    }
+}
+
+/* ================================================
+     РАЗМЕРЫ И ОТСТУПЫ ДЛЯ РАЗНЫХ ЭКРАНОВ
+     ================================================ */
+
+/* Планшеты (721px - 1024px) */
+@media (min-width: 721px) and (max-width: 1024px) {
+    body {
+        padding-top: 70px;
+    }
+
+    #main-header {
+        height: 70px;
+    }
+
+    #mobile-panel {
+        top: 70px;
+        height: calc(100% - 70px);
+    }
+
+    .logo {
+        font-size: 1.05em;
+        letter-spacing: 0.14em;
+    }
+
+    .nav-link {
+        padding: 6px 12px;
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+    }
+}
+
+/* Большие планшеты и десктопы (1025px+) */
+@media (min-width: 1025px) {
+    body {
+        padding-top: 70px;
+    }
+
+    #main-header {
+        height: 70px;
+    }
+
+    #mobile-panel {
+        top: 70px;
+        height: calc(100% - 70px);
+    }
+
+    .logo {
+        font-size: 1.18em;
+        letter-spacing: 0.16em;
+    }
+
+    .nav-link {
+        padding: 8px 18px;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+    }
+}
+
+/* ================================================
+     АЛЬБОМНАЯ ОРИЕНТАЦИЯ (LANDSCAPE)
+     ================================================ */
+
+@media (orientation: landscape) and (max-height: 500px) {
+    body {
+        padding-top: 48px;
+    }
+
+    #main-header {
+        height: 48px;
+    }
+
+    #mobile-panel {
+        top: 48px;
+        height: calc(100% - 48px);
+    }
+
+    .logo {
+        font-size: 0.9em;
+        letter-spacing: 0.1em;
+    }
+
+    .nav-link {
+        padding: 4px 8px;
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+    }
+}
+
+@media (orientation: landscape) and (min-height: 501px) and (max-height: 1024px) {
+    body {
+        padding-top: 50px;
+    }
+
+    #main-header {
+        height: 50px;
+    }
+
+    #mobile-panel {
+        top: 50px;
+        height: calc(100% - 50px);
+    }
+
+    .logo {
+        font-size: 0.95em;
+        letter-spacing: 0.12em;
+    }
+
+    .nav-link {
+        padding: 5px 10px;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+    }
+}
+
+/* ================================================
+     ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 480px)
+     ================================================ */
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 56px;
+    }
+
+    #main-header {
+        height: 56px;
+        padding: 0 12px;
+    }
+
+    #mobile-panel {
+        top: 56px;
+        height: calc(100% - 56px);
+        width: 100%;
+    }
+
+    .logo {
+        font-size: 0.85em;
+        letter-spacing: 0.08em;
+    }
 }
