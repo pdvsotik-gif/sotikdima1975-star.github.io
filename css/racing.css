@@ -1,0 +1,70 @@
+/* Специфические стили для гоночной тематики */
+
+/* Эффекты для аватара гонщика */
+.avatar {
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 0 15px rgba(0, 122, 204, 0.3);
+}
+
+/* Стилизация карточек навыков в гоночном стиле */
+.skill-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  border: 2px solid var(--border-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-color);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.skill-card:hover::before {
+  transform: scaleX(1);
+}
+
+.skill-card h3 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+/* Анимация точек в таймлайне - гоночный стиль */
+.timeline-dot {
+  animation: pulse 2s infinite;
+  background: var(--primary-color);
+  box-shadow: 0 0 10px rgba(0, 122, 204, 0.5);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(0, 122, 204, 0.5);
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+    box-shadow: 0 0 20px rgba(0, 122, 204, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(0, 122, 204, 0.5);
+  }
+}
+
+/* Специфические стили для футера */
+footer {
+  border-top: 1px solid var(--border-color);
+  color: var(--secondary-color);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}

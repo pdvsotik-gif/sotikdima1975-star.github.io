@@ -104,12 +104,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function getMainMenuHTML() {
         return `
-            <a href="${abs('/index.html')}" class="nav-link">Главная</a>
-            <a href="${abs('/about/index.html')}" class="nav-link">Обо мне</a>
+            <a href="${abs('/pages/main/')}" class="nav-link">Главная</a>
+            <a href="${abs('/pages/about/')}" class="nav-link">Обо мне</a>
             <a href="#" class="nav-link" data-menu-action="open-games">Игры</a>
-            <a href="${abs('/stream/index.html')}" class="nav-link">Стрим</a>
-            <a href="${abs('/team/index.html')}" class="nav-link">Команда</a>
-            <a href="${abs('/partners/index.html')}" class="nav-link">Партнеры</a>
+            <a href="${abs('/pages/stream/')}" class="nav-link">Стрим</a>
+            <a href="${abs('/pages/team/')}" class="nav-link">Команда</a>
+            <a href="${abs('/pages/partners/')}" class="nav-link">Партнеры</a>
         `;
     }
 
@@ -305,12 +305,12 @@ document.addEventListener("DOMContentLoaded", function () {
             case MENU_STATES.MAIN:
             default:
                 html = `
-                    <a href="/index.html">Главная</a>
-                    <a href="/about/index.html">Обо мне</a>
+                    <a href="${abs('/pages/main/')}">Главная</a>
+                    <a href="${abs('/pages/about/')}">Обо мне</a>
                     <a href="#" data-mobile-action="open-games">Игры</a>
-                    <a href="/stream/index.html">Стрим</a>
-                    <a href="/team/index.html">Команда</a>
-                    <a href="/partners/index.html">Партнеры</a>
+                    <a href="${abs('/pages/stream/')}">Стрим</a>
+                    <a href="${abs('/pages/team/')}">Команда</a>
+                    <a href="${abs('/pages/partners/')}">Партнеры</a>
                 `;
         }
 
