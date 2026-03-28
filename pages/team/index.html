@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Команда — СайтСотика</title>
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/welcome.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    /* Дополнительные стили для страницы команды */
+    .team-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .team-intro h1 {
+      font-size: 48px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .team-intro p {
+      font-size: 18px;
+      color: #7f8c8d;
+      line-height: 1.7;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-member {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .member-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 48px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 8px 24px rgba(106, 17, 203, 0.3);
+    }
+
+    .member-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    .member-role {
+      font-size: 16px;
+      color: #6a11cb;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .member-description {
+      color: #7f8c8d;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .member-social {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      transition: transform 0.2s ease;
+    }
+
+    .social-link:hover {
+      transform: scale(1.1);
+    }
+
+    .join-team {
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      border-radius: 20px;
+      padding: 40px;
+      text-align: center;
+      margin-top: 60px;
+      color: white;
+    }
+
+    .join-team h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .join-team p {
+      font-size: 18px;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .join-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background: white;
+      color: #6a11cb;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+    }
+
+    .join-btn:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .team-intro h1 {
+        font-size: 36px;
+      }
+
+      .team-intro p {
+        font-size: 16px;
+      }
+
+      .team-member {
+        padding: 20px;
+      }
+
+      .join-team {
+        padding: 30px 20px;
+      }
+
+      .join-team h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="main-header">
+    <div class="logo">СайтСотика</div>
+    <nav id="main-nav">
+      <a href="/pages/main/" class="nav-link">Главная</a>
+      <a href="/pages/about/" class="nav-link">Обо мне</a>
+      <a href="#" class="nav-link" data-menu-action="open-games">Игры</a>
+      <a href="/pages/stream/" class="nav-link">Стрим</a>
+      <a href="/pages/team/" class="nav-link active">Команда</a>
+      <a href="/pages/partners/" class="nav-link">Партнеры</a>
+    </nav>
+    <script src="/js/header.js"></script>
+  </header>
+
+  <div id="mobile-panel"></div>
+
+  <section class="wb-section">
+    <div class="wb-shell">
+      <div class="team-intro">
+        <h1>Наша Команда</h1>
+        <p>Встречайте профессиональную команду, которая стоит за каждым стримом, каждым проектом и каждым достижением. Вместе мы создаем незабываемый контент для нашего сообщества.</p>
+      </div>
+
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-avatar">👑</div>
+          <h3 class="member-name">Сотик</h3>
+          <p class="member-role">Основатель & Стример</p>
+          <p class="member-description">Профессиональный геймер и стример с многолетним опытом. Специализируется на гоночных симуляторах и создании увлекательного контента.</p>
+          <div class="member-social">
+            <a href="#" class="social-link">📺</a>
+            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">📷</a>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-avatar">🎮</div>
+          <h3 class="member-name">Алексей</h3>
+          <p class="member-role">Геймдизайнер</p>
+          <p class="member-description">Талантливый геймдизайнер с опытом работы над крупными проектами. Отвечает за креативную часть наших игровых сессий.</p>
+          <div class="member-social">
+            <a href="#" class="social-link">💼</a>
+            <a href="#" class="social-link">🐦</a>
+            <a href="#" class="social-link">🎨</a>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-avatar">🎥</div>
+          <h3 class="member-name">Мария</h3>
+          <p class="member-role">Видеооператор</p>
+          <p class="member-description">Профессиональный видеооператор и монтажер. Создает потрясающие визуальные эффекты и качественный монтаж стримов.</p>
+          <div class="member-social">
+            <a href="#" class="social-link">🎬</a>
+            <a href="#" class="social-link">📸</a>
+            <a href="#" class="social-link">🎵</a>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-avatar">💻</div>
+          <h3 class="member-name">Дмитрий</h3>
+          <p class="member-role">Разработчик</p>
+          <p class="member-description">Full-stack разработчик, отвечающий за техническую часть проектов. Создает инструменты и автоматизацию для улучшения работы команды.</p>
+          <div class="member-social">
+            <a href="#" class="social-link">💻</a>
+            <a href="#" class="social-link">🐙</a>
+            <a href="#" class="social-link">🔧</a>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-avatar">🎤</div>
+          <h3 class="member-name">Елена</h3>
+          <p class="member-role">Менеджер сообщества</p>
+          <p class="member-description">Отвечает за взаимодействие с аудиторией и управление социальными сетями. Создает положительную атмосферу в сообществе.</p>
+          <div class="member-social">
+            <a href="#" class="social-link">💬</a>
+            <a href="#" class="social-link">📱</a>
+            <a href="#" class="social-link">❤️</a>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <div class="member-avatar">📊</div>
+          <h3 class="member-name">Иван</h3>
+          <p class="member-role">Аналитик</p>
+          <p class="member-description">Анализирует данные о просмотрах, вовлеченности и трендах. Помогает оптимизировать контент для лучшего взаимодействия с аудиторией.</p>
+          <div class="member-social">
+            <a href="#" class="social-link">📈</a>
+            <a href="#" class="social-link">📊</a>
+            <a href="#" class="social-link">🔍</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="join-team">
+        <h2>Хочешь присоединиться к команде?</h2>
+        <p>Мы всегда ищем талантливых и мотивированных людей, готовых развиваться вместе с нами. Если у тебя есть навыки в гейминге, разработке или контенте — пиши нам!</p>
+        <a href="/pages/partners/" class="join-btn">Связаться с нами</a>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

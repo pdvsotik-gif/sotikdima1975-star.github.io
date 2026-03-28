@@ -1,0 +1,115 @@
+/* Стили для навигации по вкладкам игры */
+.game-tabs {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: 16px;
+  padding: 10px;
+  width: fit-content;
+  margin: 0 auto 40px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  backdrop-filter: blur(10px);
+}
+
+.game-tab {
+  background: transparent;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.game-tab::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #007acc, #6a11cb);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+.game-tab:hover::before {
+  opacity: 0.05;
+}
+
+.game-tab:hover {
+  color: #007acc;
+  transform: translateY(-2px);
+}
+
+.game-tab.active {
+  background: linear-gradient(135deg, #007acc, #6a11cb);
+  color: white;
+  box-shadow: 0 8px 25px rgba(0, 122, 204, 0.3);
+  transform: translateY(-3px);
+}
+
+.game-tab.active::before {
+  opacity: 0;
+}
+
+.game-tab:not(.active):hover {
+  color: #007acc;
+}
+
+/* Анимация появления */
+.game-tab-content {
+  margin-top: 20px;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Стили для панелей содержимого */
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  .game-tabs {
+    flex-direction: column;
+    width: 90%;
+    padding: 15px;
+  }
+  
+  .game-tab {
+    margin: 5px 0;
+    padding: 12px 20px;
+    font-size: 1em;
+    text-align: center;
+  }
+  
+  .game-tab.active {
+    transform: translateY(-2px);
+  }
+}

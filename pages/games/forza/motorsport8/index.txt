@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forza Motorsport 8 — СайтСотика</title>
+  <meta name="description" content="Серия Forza Motorsport 8 — гайды, видео, новости и разбора трасс.">
+  <link rel="canonical" href="/pages/games/forza/motorsport8/">
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/game.css">
+
+  <style>
+    /* Строка для фиксирования футера и базовая цветовая схема */
+    html,body{height:100%}
+    body{display:flex;flex-direction:column;min-height:100vh;margin:0;font-family:Arial,Helvetica,sans-serif;color:#222;background:#fff}
+    main{flex:1}
+    .game-hero{color:#fff;text-align:center;padding:140px 20px 100px;margin-bottom:60px;background-size:cover;background-position:center}
+    .game-overview, .game-settings, .game-techniques, .game-strategy{color:#222}
+    .card{background:#fff;border-radius:12px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,0.06)}
+    .placeholder{width:100%;height:220px;object-fit:cover;border-radius:12px;border:8px solid #f3f3f3;background:#fafafa}
+    footer{background:#f8f9fa;color:#666;border-top:1px solid #eee;padding:40px 20px}
+  </style>
+</head>
+<body>
+  <header id="main-header">
+    <div class="logo">СайтСотика</div>
+    <nav id="main-nav">
+      <a href="/pages/main/" class="nav-link">Главная</a>
+      <a href="/pages/about/" class="nav-link">Обо мне</a>
+      <a href="#" class="nav-link active" data-menu-action="open-games">Игры</a>
+      <a href="/pages/stream/" class="nav-link">Стрим</a>
+      <a href="/pages/team/" class="nav-link">Команда</a>
+      <a href="/pages/partners/" class="nav-link">Партнеры</a>
+    </nav>
+    <script src="/js/header.js"></script>
+  </header>
+  <div id="mobile-panel"></div>
+
+  <main>
+    <!-- === НАВИГАЦИЯ ПО РАЗДЕЛАМ ИГРЫ === -->
+    <div class="game-tabs">
+      <button class="game-tab active" data-tab="guides">Гайды</button>
+      <button class="game-tab" data-tab="videos">Видео</button>
+      <button class="game-tab" data-tab="news">Новости</button>
+      <button class="game-tab" data-tab="tracks">Трассы</button>
+    </div>
+
+    <!-- === СОДЕРЖИМОЕ ВКЛАДОК === -->
+    <div class="game-tab-content" id="game-tab-content">
+      <div id="guides" class="tab-pane active">
+        <section class="game-hero" style="background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('/images/games/forza/hero.jpg') center/cover no-repeat;">
+          <div style="max-width:1200px;margin:0 auto;">
+            <h1 style="font-size:3.6em;margin-bottom:12px;text-shadow:2px 2px 6px rgba(0,0,0,0.9);">Forza Motorsport 8 — Гайды и разборы</h1>
+            <p style="font-size:1.3em;max-width:900px;margin:0 auto;text-shadow:1px 1px 4px rgba(0,0,0,0.8);">Подробные руководства по симулятору гонок: настройки автомобилей, стратегии, разбор трасс и советы по прогрессии.</p>
+          </div>
+        </section>
+
+        <section class="guide-section">
+
+          <style>
+            /* Полная изоляция */
+            .guide-section,
+            .guide-section * {
+              all: unset;
+              display: revert;
+              box-sizing: border-box;
+              font-family: Arial, sans-serif;
+            }
+
+            .guide-section {
+              width: 100%;
+              padding: 60px 20px;
+              background: #f8f9fa;
+              display: block;
+            }
+
+            .guide-section .card {
+              width: 100%;
+              max-width: 900px;
+              margin: 0 auto;
+              background: #fff;
+              padding: 20px;
+              border-radius: 12px;
+              box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+              display: block;
+            }
+
+            .guide-section h2 {
+              text-align: center;
+              color: #007acc;
+              font-size: 2.4em;
+              margin-bottom: 30px;
+              display: block;
+            }
+
+            .guide-section .image-container {
+              width: 100%;
+              display: block;
+              overflow: hidden;
+              border-radius: 10px;
+              background: #000;
+              min-height: 200px;
+            }
+
+            .guide-section .image-container img {
+              width: 100%;
+              height: auto;
+              display: block;
+            }
+
+            .guide-section .description {
+              margin-top: 20px;
+              color: #444;
+              font-size: 1.1em;
+              line-height: 1.6;
+              display: block;
+            }
+          </style>
+
+          <div class="card">
+
+            <h2>Популярные гайды</h2>
+
+            <div class="image-container">
+              <img src="images/games/forza/iTurn0image1.png" alt="">
+            </div>
+
+            <div class="description">
+              Оптимальные настройки подвески, аэродинамики и тормозов для стабильных кругов.
+            </div>
+
+          </div>
+
+        </section>
+
+
+
+
+        <div style="flex:1;min-width:280px;" class="card">
+                <div class="section-header">
+                  <h3 style="color:#007acc;margin-top:12px;">Разбор трассы: оптимальная линия</h3>
+                  <div class="rating">★★★★★</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Track+Analysis" alt="Разбор трассы" class="placeholder">
+                </div>
+                <div class="description">
+                  <p style="color:#444;">Пошаговый анализ трасс с точками торможения, apex и стратегиями обгонов. Советы по прохождению сложных поворотов и прямых участков.</p>
+                </div>
+                <div class="key-points">
+                  <h4>Ключевые точки:</h4>
+                  <ul>
+                    <li>Поворот 1: торможение на 100m</li>
+                    <li>Apex: внутренний радиус</li>
+                    <li>Выход: полный газ</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h4>Полезные советы:</h4>
+                  <p>Изучайте трассу перед гонкой.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Высокая</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-02</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Трасса</span>
+                  <span class="tag">Линия</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 20</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 55</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:280px;" class="card">
+                <div class="section-header">
+                  <h3 style="color:#007acc;margin-top:12px;">Стратегии гонки: пит-стопы и шины</h3>
+                  <div class="rating">★★★★★</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Racing+Strategies" alt="Стратегии" class="placeholder">
+                </div>
+                <div class="description">
+                  <p style="color:#444;">Руководство по управлению износом шин, выбору стратегии и тактике в длинных гонках. Как правильно планировать пит-стопы для победы.</p>
+                </div>
+                <div class="key-points">
+                  <h4>Ключевые стратегии:</h4>
+                  <ul>
+                    <li>Пит-стоп на 20 круге</li>
+                    <li>Выбор шин: мягкие для старта</li>
+                    <li>Управление топливом</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h4>Полезные советы:</h4>
+                  <p>Мониторьте износ в реальном времени.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Средняя</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-03</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Стратегия</span>
+                  <span class="tag">Шины</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 18</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 48</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:280px;" class="card">
+                <div class="section-header">
+                  <h3 style="color:#007acc;margin-top:12px;">Апгрейды автомобилей: что улучшить первым</h3>
+                  <div class="rating">★★★★☆</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Car+Upgrades" alt="Апгрейды" class="placeholder">
+                </div>
+                <div class="description">
+                  <p style="color:#444;">Приоритетные улучшения для двигателей, трансмиссии и шасси. Как сбалансировать производительность для разных классов гонок.</p>
+                </div>
+                <div class="key-points">
+                  <h4>Приоритеты:</h4>
+                  <ul>
+                    <li>Двигатель: турбо для мощности</li>
+                    <li>Трансмиссия: дифференциал</li>
+                    <li>Шасси: подвеска</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h4>Полезные советы:</h4>
+                  <p>Улучшайте постепенно для баланса.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Низкая</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-04</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Апгрейды</span>
+                  <span class="tag">Баланс</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 12</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 35</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:280px;" class="card">
+                <div class="section-header">
+                  <h3 style="color:#007acc;margin-top:12px;">Тактика в динамической погоде</h3>
+                  <div class="rating">★★★★★</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Weather+Tactics" alt="Погода" class="placeholder">
+                </div>
+                <div class="description">
+                  <p style="color:#444;">Адаптация к дождю, снегу и изменяющимся условиям. Настройки шин и аэродинамики для различных погодных сценариев.</p>
+                </div>
+                <div class="key-points">
+                  <h4>Погодные сценарии:</h4>
+                  <ul>
+                    <li>Дождь: дождевые шины</li>
+                    <li>Снег: зимние настройки</li>
+                    <li>Изменения: мониторинг</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h4>Полезные советы:</h4>
+                  <p>Адаптируйтесь быстро к изменениям.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Высокая</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-05</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Погода</span>
+                  <span class="tag">Тактика</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 25</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 60</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:280px;" class="card">
+                <div class="section-header">
+                  <h3 style="color:#007acc;margin-top:12px;">Советы по мультиплееру: обгоны и защита</h3>
+                  <div class="rating">★★★★★</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Multiplayer+Tips" alt="Мультиплеер" class="placeholder">
+                </div>
+                <div class="description">
+                  <p style="color:#444;">Стратегии безопасных обгонов, защиты позиции и работы в плотной группе. Психология онлайн-гонок.</p>
+                </div>
+                <div class="key-points">
+                  <h4>Обгоны:</h4>
+                  <ul>
+                    <li>Внешний-внутренний</li>
+                    <li>DRS зоны</li>
+                    <li>Блокировка соперников</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h4>Полезные советы:</h4>
+                  <p>Будьте агрессивны, но fair.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Средняя</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-06</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Мультиплеер</span>
+                  <span class="tag">Обгоны</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 30</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 70</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:280px;" class="card">
+                <img src="https://via.placeholder.com/400x300?text=Career+Progression" alt="Карьера" class="placeholder">
+                <h3 style="color:#007acc;margin-top:12px;">Прогрессия в карьере: от новичка к чемпиону</h3>
+                <p style="color:#444;">План развития навыков, выбор автомобилей и событий для быстрого продвижения в карьерном режиме.</p>
+              </div>
+              <div style="flex:1;min-width:280px;" class="card">
+                <img src="https://via.placeholder.com/400x300?text=Damage+Model" alt="Повреждения" class="placeholder">
+                <h3 style="color:#007acc;margin-top:12px;">Модель повреждений и ремонт</h3>
+                <p style="color:#444;">Как минимизировать ущерб, управлять повреждениями и использовать ремонт для стратегического преимущества.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="sub-section-header">
+            <h3 style="margin-top:0;color:#007acc;">Гайд 1: Настройка подвески для других условий</h3>
+          </div>
+          <div class="image-container">
+            <img src="https://via.placeholder.com/400x250?text=Suspension+Setup" class="placeholder" alt="Подвеска">
+          </div>
+          <div class="description">
+            <p>Объяснение влияния изменений в подвеске на управляемость и скорость на разных типах трасс.</p>
+          </div>
+          <div class="key-points">
+            <h4>Ключевые моменты:</h4>
+            <div><ul><li>Жёсткость</li><li>Уровень демпфирования</li><li>Распределение веса</li></ul></div>
+          </div>
+          <div class="tips">
+            <p>Тестируйте изменения на 2-3 кругах перед гонкой.</p>
+          </div>
+          <div class="difficulty">
+            <span>Сложность: Средняя</span>
+          </div>
+          <div class="author">
+            <span>Автор: Сотик</span>
+          </div>
+          <div class="date">
+            <span>Дата: 2024-10-07</span>
+          </div>
+          <div class="tags">
+            <span class="tag">Подвеска</span>
+            <span class="tag">Тюнинг</span>
+          </div>
+          <div class="read-more">
+            <a href="#">Читать далее</a>
+          </div>
+          <div class="interactions">
+            <div>Комментарии: 28</div>
+            <div>Лайки: 65</div>
+          </div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="sub-section-header">
+            <h3 style="margin-top:0;color:#007acc;">Гайд 2: Эффективная работа с тормозами на трассе</h3>
+          </div>
+          <div class="image-container">
+            <img src="https://via.placeholder.com/400x250?text=Brakes+Guide" class="placeholder" alt="Тормоза">
+          </div>
+          <div class="description">
+            <p>Как выбирать тормозную балансировку и выжимать максимум из системы торможения без блокировок.</p>
+          </div>
+          <div class="key-points">
+            <h4>Ключевые моменты:</h4>
+            <div><ul><li>Bias</li><li>ABS</li><li>Температурные окна</li></ul></div>
+          </div>
+          <div class="tips">
+            <p>Следите за температурой тормозных колодок.</p>
+          </div>
+          <div class="difficulty">
+            <span>Сложность: Средняя</span>
+          </div>
+          <div class="author">
+            <span>Автор: Сотик</span>
+          </div>
+          <div class="date">
+            <span>Дата: 2024-10-08</span>
+          </div>
+          <div class="tags">
+            <span class="tag">Тормоза</span>
+            <span class="tag">Настройки</span>
+          </div>
+          <div class="read-more">
+            <a href="#">Читать далее</a>
+          </div>
+          <div class="interactions">
+            <div>Комментарии: 22</div>
+            <div>Лайки: 58</div>
+          </div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="sub-section-header">
+            <h3 style="margin-top:0;color:#007acc;">Гайд 3: Тактика квалификации</h3>
+          </div>
+          <div class="image-container">
+            <img src="https://via.placeholder.com/400x250?text=Quali+Tactics" class="placeholder" alt="Квалификация">
+          </div>
+          <div class="description">
+            <p>План на сессию квалификации: тёплый круг, оптимальная траектория, минимизация ошибок.</p>
+          </div>
+          <div class="key-points">
+            <h4>Ключевые моменты:</h4>
+            <div><ul><li>Позиционирование на трассе</li><li>Тайминг</li><li>Психологическая подготовка</li></ul></div>
+          </div>
+          <div class="tips">
+            <p>Не везите слишком много топлива в квалификации.</p>
+          </div>
+          <div class="difficulty">
+            <span>Сложность: Средняя</span>
+          </div>
+          <div class="author">
+            <span>Автор: Сотик</span>
+          </div>
+          <div class="date">
+            <span>Дата: 2024-10-09</span>
+          </div>
+          <div class="tags">
+            <span class="tag">Квалификация</span>
+            <span class="tag">Тактика</span>
+          </div>
+          <div class="read-more">
+            <a href="#">Читать далее</a>
+          </div>
+          <div class="interactions">
+            <div>Комментарии: 30</div>
+            <div>Лайки: 75</div>
+          </div>
+        </section>
+
+      </div>
+
+      <div id="videos" class="tab-pane">
+        <section style="padding:80px 20px;background-color:white;">
+          <div style="max-width:1200px;margin:0 auto;color:#222;">
+            <h2 style="text-align:center;color:#007acc;margin-bottom:40px;font-size:2.4em;">Видео и стримы</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+              <div class="card">
+                <div class="video-header">
+                  <h4 style="margin-top:12px">Лучшие заезды недели</h4>
+                  <div class="duration">Длительность: 15 мин</div>
+                </div>
+                <div class="thumbnail">
+                  <img src="https://via.placeholder.com/400x300?text=Weekly+Races" class="placeholder" alt="Видео 1">
+                </div>
+                <div class="description">
+                  <p class="meta">Разбор ошибок и удачные приёмы в гонках Forza Motorsport 8.</p>
+                </div>
+                <div class="views">
+                  <span>Просмотры: 1500</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 120</span>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 45</span>
+                </div>
+                <div class="upload-date">
+                  <span>Загружено: 2024-10-01</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Заезды</span>
+                  <span class="tag">Разбор</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="play-button">
+                  <button>Смотреть</button>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+                <div class="download">
+                  <button>Скачать</button>
+                </div>
+              </div>
+              <div class="card">
+                <div class="video-header">
+                  <h4 style="margin-top:12px">Тюнинг: базовые настройки</h4>
+                  <div class="duration">Длительность: 20 мин</div>
+                </div>
+                <div class="thumbnail">
+                  <img src="https://via.placeholder.com/400x300?text=Tuning+Basics" class="placeholder" alt="Видео 2">
+                </div>
+                <div class="description">
+                  <p class="meta">Видеоуроки по базовой настройке машин для новичков.</p>
+                </div>
+                <div class="views">
+                  <span>Просмотры: 2000</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 180</span>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 60</span>
+                </div>
+                <div class="upload-date">
+                  <span>Загружено: 2024-10-02</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Тюнинг</span>
+                  <span class="tag">Настройки</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="play-button">
+                  <button>Смотреть</button>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+                <div class="download">
+                  <button>Скачать</button>
+                </div>
+              </div>
+              <div class="card">
+                <div class="video-header">
+                  <h4 style="margin-top:12px">Продвинутый тюнинг: аэродинамика</h4>
+                  <div class="duration">Длительность: 25 мин</div>
+                </div>
+                <div class="thumbnail">
+                  <img src="https://via.placeholder.com/400x300?text=Advanced+Tuning" class="placeholder" alt="Видео 3">
+                </div>
+                <div class="description">
+                  <p class="meta">Детальный разбор настроек антикрыльев и прижимной силы.</p>
+                </div>
+                <div class="views">
+                  <span>Просмотры: 1800</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 150</span>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 50</span>
+                </div>
+                <div class="upload-date">
+                  <span>Загружено: 2024-10-03</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Аэродинамика</span>
+                  <span class="tag">Тюнинг</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="play-button">
+                  <button>Смотреть</button>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+                <div class="download">
+                  <button>Скачать</button>
+                </div>
+              </div>
+              <div class="card">
+                <div class="video-header">
+                  <h4 style="margin-top:12px">Прохождение трассы: Monza</h4>
+                  <div class="duration">Длительность: 18 мин</div>
+                </div>
+                <div class="thumbnail">
+                  <img src="https://via.placeholder.com/400x300?text=Track+Walkthrough" class="placeholder" alt="Видео 4">
+                </div>
+                <div class="description">
+                  <p class="meta">Видео-гид по оптимальной линии на легендарной трассе.</p>
+                </div>
+                <div class="views">
+                  <span>Просмотры: 2200</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 200</span>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 70</span>
+                </div>
+                <div class="upload-date">
+                  <span>Загружено: 2024-10-04</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Трасса</span>
+                  <span class="tag">Monza</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="play-button">
+                  <button>Смотреть</button>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+                <div class="download">
+                  <button>Скачать</button>
+                </div>
+              </div>
+              <div class="card">
+                <div class="video-header">
+                  <h4 style="margin-top:12px">Гонки в дождь: техника и тактика</h4>
+                  <div class="duration">Длительность: 22 мин</div>
+                </div>
+                <div class="thumbnail">
+                  <img src="https://via.placeholder.com/400x300?text=Weather+Racing" class="placeholder" alt="Видео 5">
+                </div>
+                <div class="description">
+                  <p class="meta">Специализированные советы по управлению в мокрых условиях.</p>
+                </div>
+                <div class="views">
+                  <span>Просмотры: 1900</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 160</span>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 55</span>
+                </div>
+                <div class="upload-date">
+                  <span>Загружено: 2024-10-05</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Дождь</span>
+                  <span class="tag">Тактика</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="play-button">
+                  <button>Смотреть</button>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+                <div class="download">
+                  <button>Скачать</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="sub-section-header"><h3 style="margin-top:0;color:#007acc;">Видео-секция 1: Основы управления</h3></div>
+        <div class="image-container"><img src="/images/games/forza/control_basics.jpg" class="placeholder" alt="Управление"></div>
+        <div class="description"><p>Построение навыков на симуляторе, контроль заноса и ускорение.</p></div>
+        <div class="points">
+          <div><strong>Разгон:</strong> Используйте полный газ плавно, избегая пробуксовки.</div>
+          <div><strong>Торможение:</strong> Начинайте тормозить заранее, используя технику trail braking.</div>
+          <div><strong>Траектория:</strong> Следуйте по оптимальной линии: вход, apex и выход.</div>
+        </div>
+        <div class="tips"><p>Тренируйтесь на одном треке, повышая стабильность. Используйте симулятор для отработки техник.</p></div>
+        <div class="difficulty"><span>Сложность: Низкая</span></div>
+        <div class="author"><span>Автор: Сотик</span></div>
+        <div class="date"><span>Дата: 2024-10-11</span></div>
+        <div class="tags"><span class="tag">Видео</span><span class="tag">Управление</span></div>
+        <div class="read-more"><a href="#">Читать далее</a></div>
+        <div class="comments"><span>Комментарии: 10</span></div>
+        <div class="likes"><span>Лайки: 20</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="sub-section-header"><h3 style="margin-top:0;color:#007acc;">Видео-секция 2: Гоночная линия</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Racing+Line" class="placeholder" alt="Гоночная линия"></div>
+        <div class="description"><p>Разбор идеальной линии, как экономить шины и время на круге.</p></div>
+        <div class="points"><div>Вход</div><div>Apex</div><div>Выход</div></div>
+        <div class="tips"><p>Работайте над скоростью на выходе из поворота.</p></div>
+        <div class="difficulty"><span>Сложность: Средняя</span></div>
+        <div class="author"><span>Автор: Сотик</span></div>
+        <div class="date"><span>Дата: 2024-10-12</span></div>
+        <div class="tags"><span class="tag">Видео</span><span class="tag">Трекинг</span></div>
+        <div class="read-more"><a href="#">Читать далее</a></div>
+        <div class="comments"><span>Комментарии: 13</span></div>
+        <div class="likes"><span>Лайки: 26</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="sub-section-header"><h3 style="margin-top:0;color:#007acc;">Видео-секция 3: Пит-стопы и стратегия</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Pit+Strategy" class="placeholder" alt="Пит-стопы"></div>
+        <div class="description"><p>Как построить стратегию пит-стопов на длинной дистанции.</p></div>
+        <div class="points"><div>Шины</div><div>Топливо</div><div>Тайминг</div></div>
+        <div class="tips"><p>Сравнивайте варианты расхода для разных трасс.</p></div>
+        <div class="difficulty"><span>Сложность: Высокая</span></div>
+        <div class="author"><span>Автор: Сотик</span></div>
+        <div class="date"><span>Дата: 2024-10-13</span></div>
+        <div class="tags"><span class="tag">Стратегия</span><span class="tag">Видео</span></div>
+        <div class="read-more"><a href="#">Читать далее</a></div>
+        <div class="comments"><span>Комментарии: 18</span></div>
+        <div class="likes"><span>Лайки: 36</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="sub-section-header"><h3 style="margin-top:0;color:#007acc;">Видео-секция 4: Мультиплеер</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Multiplayer+Video" class="placeholder" alt="Мультиплеер"></div>
+        <div class="description"><p>Тактика и этика в онлайне, борьба за позицию и защита лидера.</p></div>
+        <div class="points"><div>Агрессия</div><div>Защита</div><div>Поборка</div></div>
+        <div class="tips"><p>Осторожно используй обгоны в плотной группе.</p></div>
+        <div class="difficulty"><span>Сложность: Средняя</span></div>
+        <div class="author"><span>Автор: Сотик</span></div>
+        <div class="date"><span>Дата: 2024-10-14</span></div>
+        <div class="tags"><span class="tag">Мультиплеер</span><span class="tag">Видео</span></div>
+        <div class="read-more"><a href="#">Читать далее</a></div>
+        <div class="comments"><span>Комментарии: 16</span></div>
+        <div class="likes"><span>Лайки: 34</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="sub-section-header"><h3 style="margin-top:0;color:#007acc;">Видео-секция 5: Регулярные стримы</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Live+Streams" class="placeholder" alt="Стримы"></div>
+        <div class="description"><p>Расписание еженедельных стримов и сюжеты каждого эфира.</p></div>
+        <div class="points"><div>Граффити</div><div>Пит-стопы</div><div>Погода</div></div>
+        <div class="tips"><p>Подписывайтесь чтобы не пропустить событие.</p></div>
+        <div class="difficulty"><span>Сложность: Низкая</span></div>
+        <div class="author"><span>Автор: Сотик</span></div>
+        <div class="date"><span>Дата: 2024-10-15</span></div>
+        <div class="tags"><span class="tag">Стрим</span><span class="tag">Видео</span></div>
+        <div class="read-more"><a href="#">Читать далее</a></div>
+        <div class="comments"><span>Комментарии: 20</span></div>
+        <div class="likes"><span>Лайки: 40</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <div id="news" class="tab-pane">
+        <section style="padding:80px 20px;background-color:#f8f9fa;">
+          <div style="max-width:1200px;margin:0 auto;color:#222;">
+            <h2 style="text-align:center;color:#007acc;margin-bottom:40px;font-size:2.4em;">Новости и события</h2>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;">
+              <article class="card">
+                <div class="news-header">
+                  <h4>Анонс соревновательной лиги</h4>
+                  <div class="category">Соревнования</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=League+Announcement" class="placeholder" alt="Новости">
+                </div>
+                <div class="summary">
+                  <p class="meta">Регистрация и расписание сезона Forza Motorsport 8 Championship.</p>
+                </div>
+                <div class="full-text">
+                  <p>Подробности о новом сезоне лиги...</p>
+                </div>
+                <div class="author">
+                  <span>Автор: Администрация</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-01</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Лига</span>
+                  <span class="tag">Соревнования</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать полностью</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 25</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 40</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </article>
+              <article class="card">
+                <div class="news-header">
+                  <h4>Патч 1.1 — изменения</h4>
+                  <div class="category">Обновления</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Patch+1.1" class="placeholder" alt="Патч">
+                </div>
+                <div class="summary">
+                  <p class="meta">Баланс машин, новые трассы и исправления багов в обновлении.</p>
+                </div>
+                <div class="full-text">
+                  <p>Список изменений в патче...</p>
+                </div>
+                <div class="author">
+                  <span>Автор: Разработчики</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-02</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Патч</span>
+                  <span class="tag">Баланс</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать полностью</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 30</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 50</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </article>
+              <article class="card">
+                <div class="news-header">
+                  <h4>Новые автомобили в DLC</h4>
+                  <div class="category">Контент</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=New+Cars" class="placeholder" alt="Новые авто">
+                </div>
+                <div class="summary">
+                  <p class="meta">Анонс пакета с классическими суперкарами 90-х.</p>
+                </div>
+                <div class="full-text">
+                  <p>Список новых автомобилей...</p>
+                </div>
+                <div class="author">
+                  <span>Автор: Команда</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-03</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">DLC</span>
+                  <span class="tag">Автомобили</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать полностью</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 35</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 60</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </article>
+              <article class="card">
+                <div class="news-header">
+                  <h4>Результаты чемпионата сезона</h4>
+                  <div class="category">Результаты</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Championship+Results" class="placeholder" alt="Результаты">
+                </div>
+                <div class="summary">
+                  <p class="meta">Победители и лучшие моменты завершившегося сезона.</p>
+                </div>
+                <div class="full-text">
+                  <p>Подробные результаты...</p>
+                </div>
+                <div class="author">
+                  <span>Автор: Судьи</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-04</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Чемпионат</span>
+                  <span class="tag">Результаты</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать полностью</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 40</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 70</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </article>
+              <article class="card">
+                <div class="news-header">
+                  <h4>Интервью с разработчиками</h4>
+                  <div class="category">Интервью</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Developer+Interview" class="placeholder" alt="Интервью">
+                </div>
+                <div class="summary">
+                  <p class="meta">Turn 10 делятся планами на будущее игры.</p>
+                </div>
+                <div class="full-text">
+                  <p>Цитаты из интервью...</p>
+                </div>
+                <div class="author">
+                  <span>Автор: Журналист</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-05</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Интервью</span>
+                  <span class="tag">Будущее</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать полностью</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 45</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 80</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </article>
+              <article class="card">
+                <div class="news-header">
+                  <h4>Коммьюнити-ивент: фанатские гонки</h4>
+                  <div class="category">События</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Community+Event" class="placeholder" alt="Событие">
+                </div>
+                <div class="summary">
+                  <p class="meta">Организация пользовательских соревнований.</p>
+                </div>
+                <div class="full-text">
+                  <p>Детали о событии...</p>
+                </div>
+                <div class="author">
+                  <span>Автор: Организатор</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-06</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Коммьюнити</span>
+                  <span class="tag">Гонки</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Читать полностью</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 50</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 85</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="news-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Новость 1: События кастомных заездов</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Custom+Races" class="placeholder" alt="Кастомные заезды"></div>
+        <div class="summary"><p>Еженедельные пользовательские гонки продолжают привлекать сотни участников.</p></div>
+        <div class="full-text"><p>Организаторы поделились лучшими практиками...</p></div>
+        <div class="author"><span>Автор: Редакция</span></div>
+        <div class="date"><span>Дата: 2024-10-11</span></div>
+        <div class="tags"><span class="tag">Сообщество</span><span class="tag">Событие</span></div>
+        <div class="read-more"><a href="#">Читать полностью</a></div>
+        <div class="comments"><span>Комментарии: 15</span></div>
+        <div class="likes"><span>Лайки: 35</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="news-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Новость 2: Обновление баланса прототипов</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Prototype+Balance" class="placeholder" alt="Прототипы"></div>
+        <div class="summary"><p>Балансировка LMP1 и GT3 после запроса сообщества.</p></div>
+        <div class="full-text"><p>Технические детали и правки...</p></div>
+        <div class="author"><span>Автор: Разработчики</span></div>
+        <div class="date"><span>Дата: 2024-10-12</span></div>
+        <div class="tags"><span class="tag">Баланс</span><span class="tag">Автомобили</span></div>
+        <div class="read-more"><a href="#">Читать полностью</a></div>
+        <div class="comments"><span>Комментарии: 20</span></div>
+        <div class="likes"><span>Лайки: 45</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="news-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Новость 3: Партнёрская кампания Turn 10</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Turn+10+Campaign" class="placeholder" alt="Партнёрская кампания"></div>
+        <div class="summary"><p>Анонс акции с эксклюзивными наградами в игре.</p></div>
+        <div class="full-text"><p>Условия участия и призы...</p></div>
+        <div class="author"><span>Автор: PR</span></div>
+        <div class="date"><span>Дата: 2024-10-13</span></div>
+        <div class="tags"><span class="tag">Акция</span><span class="tag">Партнёрство</span></div>
+        <div class="read-more"><a href="#">Читать полностью</a></div>
+        <div class="comments"><span>Комментарии: 25</span></div>
+        <div class="likes"><span>Лайки: 50</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+        <div class="news-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Новость 4: Технический анализ трассы Le Mans</h3></div>
+        <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Le+Mans+Analysis" class="placeholder" alt="Le Mans"></div>
+        <div class="summary"><p>Профессиональный разбор особенностей секций трассы.</p></div>
+        <div class="full-text"><p>Рекомендации по шинам, пит-стопам и стратегии... </p></div>
+        <div class="author"><span>Автор: Аналитик</span></div>
+        <div class="date"><span>Дата: 2024-10-14</span></div>
+        <div class="tags"><span class="tag">Трасса</span><span class="tag">Анализ</span></div>
+        <div class="read-more"><a href="#">Читать полностью</a></div>
+        <div class="comments"><span>Комментарии: 18</span></div>
+        <div class="likes"><span>Лайки: 40</span></div>
+        <div class="share"><button>Поделиться</button></div>
+      </section>
+
+      <div id="tracks" class="tab-pane">
+        <section style="padding:80px 20px;background-color:white;">
+          <div style="max-width:1200px;margin:0 auto;color:#222;">
+            <h2 style="text-align:center;color:#007acc;margin-bottom:40px;font-size:2.4em;">Трассы</h2>
+            <div style="display:flex;flex-wrap:wrap;gap:20px;">
+              <div style="flex:1;min-width:300px;" class="card">
+                <div class="track-header">
+                  <h4>Трасса A — советы по прохождению</h4>
+                  <div class="length">Длина: 5.2 км</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Track+A" class="placeholder" alt="Трасса A">
+                </div>
+                <div class="description">
+                  <p>Точки торможения и оптимальные линии для быстрого круга.</p>
+                </div>
+                <div class="key-points">
+                  <h5>Ключевые повороты:</h5>
+                  <ul>
+                    <li>Поворот 1: Тормозить на 100m</li>
+                    <li>Поворот 3: Внутренняя линия</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h5>Советы:</h5>
+                  <p>Используйте DRS на прямой.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Средняя</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-01</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Трасса</span>
+                  <span class="tag">Советы</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 15</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 30</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:300px;" class="card">
+                <div class="track-header">
+                  <h4>Трасса B — особенности</h4>
+                  <div class="length">Длина: 4.8 км</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Track+B" class="placeholder" alt="Трасса B">
+                </div>
+                <div class="description">
+                  <p>Рекомендации по шинам и аэродинамике для этой трассы.</p>
+                </div>
+                <div class="key-points">
+                  <h5>Особенности:</h5>
+                  <ul>
+                    <li>Шины: Мягкие для сцепления</li>
+                    <li>Аэро: Низкий downforce</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h5>Советы:</h5>
+                  <p>Следите за погодой.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Высокая</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-02</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Трасса</span>
+                  <span class="tag">Шины</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 20</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 35</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:300px;" class="card">
+                <div class="track-header">
+                  <h4>Le Mans — легендарная 24-часовая</h4>
+                  <div class="length">Длина: 13.6 км</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Le+Mans" class="placeholder" alt="Le Mans">
+                </div>
+                <div class="description">
+                  <p>Стратегии для длинных гонок и управление износом.</p>
+                </div>
+                <div class="key-points">
+                  <h5>Ключевые стратегии:</h5>
+                  <ul>
+                    <li>Пит-стопы каждые 2 часа</li>
+                    <li>Управление топливом</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h5>Советы:</h5>
+                  <p>Командная работа.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Высокая</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-03</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Le Mans</span>
+                  <span class="tag">Эндюранс</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 25</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 40</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:300px;" class="card">
+                <div class="track-header">
+                  <h4>Monza — высокоскоростная трасса</h4>
+                  <div class="length">Длина: 5.8 км</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Monza" class="placeholder" alt="Monza">
+                </div>
+                <div class="description">
+                  <p>Оптимальная линия и точки торможения на итальянской трассе.</p>
+                </div>
+                <div class="key-points">
+                  <h5>Ключевые точки:</h5>
+                  <ul>
+                    <li>Торможение перед Parabolica</li>
+                    <li>Высокая скорость на прямых</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h5>Советы:</h5>
+                  <p>DRS на главной прямой.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Средняя</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-04</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Monza</span>
+                  <span class="tag">Скорость</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 18</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 32</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:300px;" class="card">
+                <div class="track-header">
+                  <h4>Nürburgring Nordschleife</h4>
+                  <div class="length">Длина: 20.8 км</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Nürburgring" class="placeholder" alt="Nürburgring">
+                </div>
+                <div class="description">
+                  <p>Разбор сложных поворотов и тактика в дождь.</p>
+                </div>
+                <div class="key-points">
+                  <h5>Сложные повороты:</h5>
+                  <ul>
+                    <li>Karussell: Тормозить рано</li>
+                    <li>Дождь: Снижать скорость</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h5>Советы:</h5>
+                  <p>Тренируйтесь в сухую погоду.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Очень высокая</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-05</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Nürburgring</span>
+                  <span class="tag">Дождь</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 30</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 50</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+              <div style="flex:1;min-width:300px;" class="card">
+                <div class="track-header">
+                  <h4>Silverstone — британский трек</h4>
+                  <div class="length">Длина: 5.9 км</div>
+                </div>
+                <div class="image-container">
+                  <img src="https://via.placeholder.com/400x300?text=Silverstone" class="placeholder" alt="Silverstone">
+                </div>
+                <div class="description">
+                  <p>Советы по прохождению и настройки для погоды.</p>
+                </div>
+                <div class="key-points">
+                  <h5>Ключевые секции:</h5>
+                  <ul>
+                    <li>Hamilton Straight: DRS</li>
+                    <li>Погода: Адаптируйтесь</li>
+                  </ul>
+                </div>
+                <div class="tips">
+                  <h5>Советы:</h5>
+                  <p>Настройки для ветра.</p>
+                </div>
+                <div class="difficulty">
+                  <span>Сложность: Средняя</span>
+                </div>
+                <div class="author">
+                  <span>Автор: Сотик</span>
+                </div>
+                <div class="date">
+                  <span>Дата: 2024-10-06</span>
+                </div>
+                <div class="tags">
+                  <span class="tag">Silverstone</span>
+                  <span class="tag">Погода</span>
+                </div>
+                <div class="read-more">
+                  <a href="#">Подробнее</a>
+                </div>
+                <div class="comments">
+                  <span>Комментарии: 22</span>
+                </div>
+                <div class="likes">
+                  <span>Лайки: 38</span>
+                </div>
+                <div class="share">
+                  <button>Поделиться</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="track-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Трасса 1: Техас – высокая скорость</h3></div>
+          <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Texas" class="placeholder" alt="Техас"></div>
+          <div class="description"><p>Переход от прямых к медленным поворотам требует точной настройки аэродинамики.</p></div>
+          <div class="key-points"><div>Выход на прямую</div><div>Баланс</div><div>Шины</div></div>
+          <div class="tips"><p>Используйте низкий downforce для прямых.</p></div>
+          <div class="difficulty"><span>Сложность: Средняя</span></div>
+          <div class="author"><span>Автор: Сотик</span></div>
+          <div class="date"><span>Дата: 2024-10-07</span></div>
+          <div class="tags"><span class="tag">Texas</span><span class="tag">Скорость</span></div>
+          <div class="read-more"><a href="#">Подробнее</a></div>
+          <div class="comments"><span>Комментарии: 20</span></div>
+          <div class="likes"><span>Лайки: 45</span></div>
+          <div class="share"><button>Поделиться</button></div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="track-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Трасса 2: Спа – перепады высот</h3></div>
+          <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Spa" class="placeholder" alt="Спа"></div>
+          <div class="description"><p>Как управляться с Ricaard и Eau Rouge, сохраняя скорость.</p></div>
+          <div class="key-points"><div>Ricaard</div><div>Eau Rouge</div><div>Погода</div></div>
+          <div class="tips"><p>Контроль газа важен на подъёмах.</p></div>
+          <div class="difficulty"><span>Сложность: Высокая</span></div>
+          <div class="author"><span>Автор: Сотик</span></div>
+          <div class="date"><span>Дата: 2024-10-08</span></div>
+          <div class="tags"><span class="tag">Spa</span><span class="tag">Высоты</span></div>
+          <div class="read-more"><a href="#">Подробнее</a></div>
+          <div class="comments"><span>Комментарии: 17</span></div>
+          <div class="likes"><span>Лайки: 40</span></div>
+          <div class="share"><button>Поделиться</button></div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="track-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Трасса 3: Сузука – техника поворотов</h3></div>
+          <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Suzuka" class="placeholder" alt="Сузука"></div>
+          <div class="description"><p>Тонкая работа сfp4 и с средними поворотами.</p></div>
+          <div class="key-points"><div>130R</div><div>Degner</div><div>Пит-стоп</div></div>
+          <div class="tips"><p>Сохраняйте стабильность на кривых.</p></div>
+          <div class="difficulty"><span>Сложность: Высокая</span></div>
+          <div class="author"><span>Автор: Сотик</span></div>
+          <div class="date"><span>Дата: 2024-10-09</span></div>
+          <div class="tags"><span class="tag">Suzuka</span><span class="tag">Техника</span></div>
+          <div class="read-more"><a href="#">Подробнее</a></div>
+          <div class="comments"><span>Комментарии: 22</span></div>
+          <div class="likes"><span>Лайки: 48</span></div>
+          <div class="share"><button>Поделиться</button></div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="track-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Трасса 4: Имола – управление сцеплением</h3></div>
+          <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Imola" class="placeholder" alt="Имола"></div>
+          <div class="description"><p>Важно выбрать правильное сцепление для охлаждения шин.</p></div>
+          <div class="key-points"><div>Tamburello</div><div>Tosa</div><div>Poggio</div></div>
+          <div class="tips"><p>Не перегревайте шины в начале круга.</p></div>
+          <div class="difficulty"><span>Сложность: Средняя</span></div>
+          <div class="author"><span>Автор: Сотик</span></div>
+          <div class="date"><span>Дата: 2024-10-10</span></div>
+          <div class="tags"><span class="tag">Imola</span><span class="tag">Сцепление</span></div>
+          <div class="read-more"><a href="#">Подробнее</a></div>
+          <div class="comments"><span>Комментарии: 14</span></div>
+          <div class="likes"><span>Лайки: 38</span></div>
+          <div class="share"><button>Поделиться</button></div>
+        </section>
+
+        <section style="padding:40px 20px;background-color:#ffffff;border:1px solid #e0e0e0;margin:20px 0;">
+          <div class="track-sub-section-header"><h3 style="margin-top:0;color:#007acc;">Трасса 5: Hockenheim – баланс мощность/управление</h3></div>
+          <div class="image-container"><img src="https://via.placeholder.com/400x250?text=Hockenheim" class="placeholder" alt="Хоккенхайм"></div>
+          <div class="description"><p>Комбинация скоростных участков и техничных поворотов требует гибких настроек.</p></div>
+          <div class="key-points"><div>1ая прямая</div><div>Медленные развороты</div><div>Резина</div></div>
+          <div class="tips"><p>Адаптируйте настройки после каждого круга.</p></div>
+          <div class="difficulty"><span>Сложность: Средняя</span></div>
+          <div class="author"><span>Автор: Сотик</span></div>
+          <div class="date"><span>Дата: 2024-10-11</span></div>
+          <div class="tags"><span class="tag">Hockenheim</span><span class="tag">Баланс</span></div>
+          <div class="read-more"><a href="#">Подробнее</a></div>
+          <div class="comments"><span>Комментарии: 18</span></div>
+          <div class="likes"><span>Лайки: 42</span></div>
+          <div class="share"><button>Поделиться</button></div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align: center; padding: 40px 20px; background-color: #f8f9fa; color: #666; border-top: 1px solid #eee;">
+    <p>&copy; 2026 СайтСотика. Все права защищены.</p>
+  </footer>
+
+  <script>
+    // Плавная прокрутка для навигации
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

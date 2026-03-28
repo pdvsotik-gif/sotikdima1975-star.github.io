@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="100%" height="100%" fill="#eaf2ff"/>
+  <g fill="#023" font-family="Arial, Helvetica, sans-serif">
+    <rect x="40" y="40" width="1120" height="720" rx="12" fill="#fff" stroke="#dbeaff"/>
+    <text x="50%" y="46%" text-anchor="middle" fill="#023" font-size="36">События и лиги</text>
+    <text x="50%" y="56%" text-anchor="middle" fill="#556" font-size="16">Заглушка для анонсов и расписания</text>
+  </g>
+</svg>

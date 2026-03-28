@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>СайтСотика — Обложка</title>
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/welcome.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/game.css">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      cursor: none;
+    }
+
+    /* === СИСТЕМА АНИМАЦИЙ LANDONORRIS === */
+
+    /* 1) Премиальный параллакс-фон */
+    .ln-parallax {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      perspective: 1200px;
+    }
+
+    .ln-parallax .layer {
+      position: absolute;
+      width: 120%;
+      height: 120%;
+      top: -10%;
+      left: -10%;
+      background-size: cover;
+      background-position: center;
+      will-change: transform, opacity;
+      transition: transform 0.1s linear, opacity 0.6s ease-out;
+    }
+
+    /* фон задаём из JS, тут только базовые эффекты */
+    .layer-back  { filter: brightness(0.3) contrast(1.3); }
+    .layer-mid   { background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="rgba(230,57,70,0.3)" stroke-width="0.5" stroke-dasharray="2,2"/></svg>'); mix-blend-mode: screen; opacity: .6; }
+    .layer-front { background: linear-gradient(45deg, transparent, rgba(230,57,70,0.1), transparent); opacity: .4; }
+
+    /* Анимация движения фона */
+    @keyframes driveAnimation {
+      0% { background-position: 0% center; }
+      100% { background-position: 100% center; }
+    }
+
+    .drive-layer {
+      animation: driveAnimation 8s linear infinite;
+    }
+
+    /* 2) Глитч-эффект для заголовка */
+    .ln-title {
+      font-size: 8vw;
+      font-weight: 900;
+      color: #e63946;
+      position: relative;
+      overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      animation: ln-glitch 1.8s ease-out forwards;
+      text-shadow: 0 0 10px rgba(230, 57, 70, 0.7);
+    }
+
+    @keyframes ln-glitch {
+      0%   { opacity: 0; transform: translateY(40px) scale(1.2); filter: blur(20px); }
+      40%  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+      60%  { transform: translateX(-2px); }
+      62%  { transform: translateX(2px); }
+      64%  { transform: translateX(0); }
+      100% { opacity: 1; }
+    }
+
+    /* 3) Частицы-реакция на мышь */
+    #ln-particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* 4) Системный контейнер */
+    .ln-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 100;
+    }
+
+    .ln-subtitle {
+      font-size: 1.5em;
+      margin-bottom: 40px;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out 0.5s forwards;
+      color: #fff;
+    }
+
+    .ln-instruction {
+      font-size: 1em;
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out 0.8s forwards;
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 5) Кастомный курсор */
+    .ln-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #e63946;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1000;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.2s, height 0.2s;
+    }
+
+    .ln-cursor-follower {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      background: rgba(230, 57, 70, 0.2);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s, height 0.3s;
+    }
+
+    /* 6) Спидометр */
+    .ln-speed-meter {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #e63946;
+      border-radius: 50%;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .ln-speed-needle {
+      position: absolute;
+      bottom: 50%;
+      left: 50%;
+      width: 2px;
+      height: 40px;
+      background: #ff0000;
+      transform-origin: bottom center;
+      transform: rotate(-90deg);
+    }
+
+    .ln-speed-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #e63946;
+    }
+
+    /* 7) Анимация автомобиля */
+    .ln-car-animation {
+      position: fixed;
+      bottom: -200px;
+      left: -50%;
+      width: 100%;
+      height: 200px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ln-car {
+      position: absolute;
+      width: 800px;
+      height: 200px;
+      background: url('/images/lamborghini.jpg') no-repeat;
+      background-position: center;
+      background-size: 800px 200px;
+      filter: brightness(1.1) contrast(1.1);
+    }
+
+    @keyframes ln-carDrive {
+      0% { transform: translateX(-50%) translateY(-50px); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateX(150%) translateY(-100px); opacity: 0; }
+    }
+
+    .ln-car-drive {
+      animation: ln-carDrive 4s ease-in-out infinite;
+    }
+
+    /* 8) Выхлопные газы */
+    .ln-exhaust {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #ff9900;
+      border-radius: 50%;
+      filter: blur(2px);
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <script src="/js/header.js" defer></script>
+  <script src="/js/welcome.js" defer></script>
+
+  <div id="mobile-panel"></div>
+
+<div class="ln-parallax" id="ln-hero">
+  <div class="layer layer-back drive-layer" id="ln-hero-back"></div>
+  <div class="layer layer-mid"></div>
+  <div class="layer layer-front"></div>
+</div>
+
+<canvas id="ln-particles"></canvas>
+
+<div class="ln-container" onclick="window.location.href='pages/main/'">
+  <div class="ln-title">СайтСотика</div>
+  <div class="ln-subtitle">Forza Motorsport • Обложка</div>
+  <div class="ln-instruction">Нажмите для входа</div>
+</div>
+
+<div class="ln-cursor"></div>
+<div class="ln-cursor-follower"></div>
+
+<div class="ln-speed-meter">
+  <div class="ln-speed-needle" id="ln-speed-needle"></div>
+  <div class="ln-speed-text" id="ln-speed-text">0</div>
+</div>
+
+<div class="ln-car-animation">
+  <div class="ln-car ln-car-drive">
+    <div class="ln-exhaust" id="ln-exhaust"></div>
+  </div>
+</div>
+
+<script>
+  /* Анимация движения фона */
+  const back = document.getElementById("ln-hero-back");
+  back.style.backgroundImage = "url('/images/drive/drive_000.jpg')";
+  back.style.backgroundSize = "cover";
+  back.style.backgroundRepeat = "repeat-x";
+
+  /* параллакс */
+  document.addEventListener("mousemove", e => {
+    const x = (e.clientX / innerWidth - 0.5) * 20;
+    const y = (e.clientY / innerHeight - 0.5) * 20;
+
+    document.querySelector(".layer-back").style.transform =
+      `translate(${x}px, ${y}px) scale(1.1)`;
+    document.querySelector(".layer-mid").style.transform =
+      `translate(${x*2}px, ${y*2}px) scale(1.05)`;
+    document.querySelector(".layer-front").style.transform =
+      `translate(${x*4}px, ${y*4}px) scale(1.02)`;
+  });
+
+  /* курсор */
+  const cursor = document.querySelector(".ln-cursor");
+  const follower = document.querySelector(".ln-cursor-follower");
+
+  document.addEventListener("mousemove", e => {
+    cursor.style.left = follower.style.left = e.clientX + "px";
+    cursor.style.top = follower.style.top = e.clientY + "px";
+  });
+
+  /* частицы */
+  const canvas = document.getElementById("ln-particles");
+  const ctx = canvas.getContext("2d");
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+
+  let particles = [];
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      s: Math.random() * 2 + 0.5
+    });
+  }
+
+  function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "rgba(230,57,70,0.5)";
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.s, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    requestAnimationFrame(drawParticles);
+  }
+  drawParticles();
+
+  /* спидометр */
+  let speed = 0;
+  setInterval(() => {
+    speed = (speed + Math.random() * 12) % 320;
+    document.getElementById("ln-speed-text").textContent = Math.floor(speed);
+    document.getElementById("ln-speed-needle").style.transform =
+      `rotate(${speed - 90}deg)`;
+  }, 120);
+
+  /* выхлоп */
+  setInterval(() => {
+    const puff = document.createElement("div");
+    puff.className = "ln-exhaust";
+    puff.style.left = "120px";
+    puff.style.bottom = "20px";
+    puff.style.opacity = 1;
+    document.querySelector(".ln-car").appendChild(puff);
+
+    let y = 0;
+    const anim = setInterval(() => {
+      y += 2;
+      puff.style.transform = `translateY(${y}px) scale(${1 + y/40})`;
+      puff.style.opacity -= 0.03;
+      if (puff.style.opacity <= 0) {
+        clearInterval(anim);
+        puff.remove();
+      }
+    }, 16);
+  }, 120);
+</script>
+
+</body>
+</html>

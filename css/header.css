@@ -1,0 +1,510 @@
+/* ===========================
+     БАЗОВЫЕ СТИЛИ
+     =========================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #e5e7f0;
+    background: radial-gradient(circle at top, #f7f8ff 0, #e4e7f5 40%, #d3d6e6 100%);
+    padding-top: 60px; /* БАЗОВАЯ высота хедера */
+}
+
+/* ===========================
+     ГЛАВНЫЙ ХЭДЕР
+     (ВСЕГДА ОДНА СТРОКА: ЛОГОТИП СЛЕВА, МЕНЮ СПРАВА)
+     =========================== */
+
+#main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 0 20px;
+    box-sizing: border-box;
+    height: 60px;
+    white-space: nowrap;
+    overflow: visible;
+}
+
+#main-header > * {
+    flex-shrink: 0;
+}
+
+/* ===========================
+     ЛОГОТИП (СЛЕВА)
+     =========================== */
+
+.logo {
+    position: relative;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-size: 0.95em;
+    letter-spacing: 0.12em;
+    background: linear-gradient(120deg,
+        #fefefe 0%,
+        #e0e4ff 20%,
+        #6a11cb 45%,
+        #2575fc 70%,
+        #fefefe 100%);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow:
+        0 0 10px rgba(111, 66, 193, 0.6),
+        0 0 4px rgba(0, 0, 0, 0.9);
+}
+
+.logo::before {
+    content: "";
+    position: absolute;
+    inset: -6px -14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: radial-gradient(circle at top left,
+        rgba(255, 255, 255, 0.12),
+        transparent 70%);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* ================================================
+     МЕНЮ — премиум‑кнопки (ГОРИЗОНТАЛЬНОЕ)
+     ================================================ */
+
+#main-nav,
+nav[id] {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap; /* 🔥 Запрещаем перенос меню на новую строку */
+    height: 100%;
+}
+
+.nav-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    color: #d7dbff;
+    background: radial-gradient(circle at top,
+        rgba(255, 255, 255, 0.06),
+        rgba(10, 12, 24, 0.98));
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+        0 4px 10px rgba(0, 0, 0, 0.7);
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.16s ease,
+        letter-spacing 0.16s ease,
+        border-color 0.2s ease;
+    white-space: nowrap;
+    min-width: auto;
+}
+
+/* Глянец на кнопке */
+.nav-link::before {
+    content: "";
+    position: absolute;
+    inset: 1px 1px auto 1px;
+    height: 40%;
+    border-radius: 999px 999px 40% 40%;
+    background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.3),
+        transparent);
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Нижняя подчеркивающая линия */
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 3px;
+    width: 0;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+        #6a11cb,
+        #2575fc,
+        #20e3b2);
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: width 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover состояние */
+.nav-link:hover {
+    background: radial-gradient(circle at top,
+        rgba(111, 66, 193, 0.35),
+        rgba(10, 12, 24, 0.98));
+    color: #f5f6ff;
+    transform: translateY(-1px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.9),
+        0 6px 16px rgba(111, 66, 193, 0.7);
+    border-color: rgba(111, 66, 193, 0.7);
+    letter-spacing: 0.12em;
+    animation: buttonHoverGlow 1.6s ease-in-out infinite;
+}
+
+.nav-link:hover::after {
+    width: 70%;
+    opacity: 1;
+}
+
+/* Активное состояние */
+.nav-link.active {
+    background: linear-gradient(135deg,
+        #6a11cb 0%,
+        #2575fc 40%,
+        #20e3b2 80%);
+    color: #ffffff !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.85),
+        0 0 18px rgba(111, 66, 193, 0.9),
+        0 0 24px rgba(37, 117, 252, 0.8);
+    border-color: rgba(255, 255, 255, 0.3);
+    animation: activePulse 2.4s ease-in-out infinite;
+}
+
+.nav-link.active::after {
+    width: 80%;
+    opacity: 1;
+}
+
+/* "Назад" кнопка */
+.back-link {
+    color: #f5f6ff !important;
+    font-weight: 700 !important;
+    border-color: rgba(111, 66, 193, 0.8);
+    background: radial-gradient(circle at top,
+        rgba(111, 66, 193, 0.5),
+        rgba(10, 12, 24, 0.98));
+}
+
+/* ================================================
+     МОБИЛЬНОЕ МЕНЮ: ГАМБУРГЕР + БОКОВАЯ ПАНЕЛЬ
+     ================================================ */
+
+#mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 3001;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 2.5px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+}
+
+/* Анимация гамбургера при открытии */
+#mobile-menu-btn.open .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(10px, 10px);
+}
+
+#mobile-menu-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-10px);
+}
+
+#mobile-menu-btn.open .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+#mobile-panel {
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 260px;
+    height: calc(100% - 60px);
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    box-shadow: -6px 0 20px rgba(0,0,0,0.25);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transform: translateX(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 3000;
+}
+
+#mobile-panel.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#mobile-panel a {
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: radial-gradient(circle at top,
+        rgba(255,255,255,0.6),
+        rgba(230,230,255,0.9));
+    color: #333;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        inset 0 -1px 0 rgba(0,0,0,0.1),
+        0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+
+#mobile-panel a:hover {
+    background: radial-gradient(circle at top,
+        rgba(111,66,193,0.25),
+        rgba(255,255,255,0.9));
+    color: #6a11cb;
+    transform: translateX(6px);
+}
+
+/* ================================================
+     АНИМАЦИИ
+     ================================================ */
+
+@keyframes buttonHoverGlow {
+    0% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
+    50% { box-shadow: 0 0 14px rgba(111,66,193,0.8); }
+    100% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
+}
+
+@keyframes activePulse {
+    0% { filter: brightness(1.0); }
+    50% { filter: brightness(1.15); }
+    100% { filter: brightness(1.0); }
+}
+
+/* ================================================
+     ВИДИМОСТЬ МЕНЮ (ТОЧКА РАЗДЕЛЕНИЯ: 720px)
+     ================================================ */
+
+/* Класс для скрытия меню */
+.nav-hidden {
+    display: none !important;
+}
+
+/* Десктопы и планшеты (≥721px) - только горизонтальное меню */
+@media (min-width: 721px) {
+    #main-nav,
+    nav[id] {
+        display: flex !important;
+    }
+
+    #mobile-menu-btn {
+        display: none !important;
+    }
+
+    #mobile-panel {
+        display: none !important;
+    }
+}
+
+/* Мобильные устройства (≤720px) - только мобильное меню */
+@media (max-width: 720px) {
+    #main-nav {
+        display: none !important;
+    }
+
+    #mobile-menu-btn {
+        display: flex !important;
+    }
+
+    #mobile-panel {
+        display: flex !important;
+    }
+}
+
+/* ================================================
+     РАЗМЕРЫ И ОТСТУПЫ ДЛЯ РАЗНЫХ ЭКРАНОВ
+     ================================================ */
+
+/* Планшеты (721px - 1024px) */
+@media (min-width: 721px) and (max-width: 1024px) {
+    body {
+        padding-top: 70px;
+    }
+
+    #main-header {
+        height: 70px;
+    }
+
+    #mobile-panel {
+        top: 70px;
+        height: calc(100% - 70px);
+    }
+
+    .logo {
+        font-size: 1.05em;
+        letter-spacing: 0.14em;
+    }
+
+    .nav-link {
+        padding: 6px 12px;
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+    }
+}
+
+/* Большие планшеты и десктопы (1025px+) */
+@media (min-width: 1025px) {
+    body {
+        padding-top: 70px;
+    }
+
+    #main-header {
+        height: 70px;
+    }
+
+    #mobile-panel {
+        top: 70px;
+        height: calc(100% - 70px);
+    }
+
+    .logo {
+        font-size: 1.18em;
+        letter-spacing: 0.16em;
+    }
+
+    .nav-link {
+        padding: 8px 18px;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+    }
+}
+
+/* ================================================
+     АЛЬБОМНАЯ ОРИЕНТАЦИЯ (LANDSCAPE)
+     ================================================ */
+
+@media (orientation: landscape) and (max-height: 500px) {
+    body {
+        padding-top: 48px;
+    }
+
+    #main-header {
+        height: 48px;
+    }
+
+    #mobile-panel {
+        top: 48px;
+        height: calc(100% - 48px);
+    }
+
+    .logo {
+        font-size: 0.9em;
+        letter-spacing: 0.1em;
+    }
+
+    .nav-link {
+        padding: 4px 8px;
+        font-size: 0.6rem;
+        letter-spacing: 0.08em;
+    }
+}
+
+@media (orientation: landscape) and (min-height: 501px) and (max-height: 1024px) {
+    body {
+        padding-top: 50px;
+    }
+
+    #main-header {
+        height: 50px;
+    }
+
+    #mobile-panel {
+        top: 50px;
+        height: calc(100% - 50px);
+    }
+
+    .logo {
+        font-size: 0.95em;
+        letter-spacing: 0.12em;
+    }
+
+    .nav-link {
+        padding: 5px 10px;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+    }
+}
+
+/* ================================================
+     ОЧЕНЬ МАЛЕНЬКИЕ ЭКРАНЫ (до 480px)
+     ================================================ */
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 56px;
+    }
+
+    #main-header {
+        height: 56px;
+        padding: 0 12px;
+    }
+
+    #mobile-panel {
+        top: 56px;
+        height: calc(100% - 56px);
+        width: 100%;
+    }
+
+    .logo {
+        font-size: 0.85em;
+        letter-spacing: 0.08em;
+    }
+}

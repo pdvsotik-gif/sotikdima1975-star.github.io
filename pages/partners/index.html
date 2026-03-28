@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Партнеры — СайтСотика</title>
+  <link rel="stylesheet" href="/css/header.css">
+  <link rel="stylesheet" href="/css/welcome.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <style>
+    /* Дополнительные стили для страницы партнеров */
+    .partners-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .partner-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .partner-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .partner-logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 36px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .partner-name {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .partner-description {
+      color: #7f8c8d;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .partner-link {
+      display: inline-block;
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+    }
+
+    .partner-link:hover {
+      transform: scale(1.05);
+    }
+
+    .partners-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+    }
+
+    .partners-intro h1 {
+      font-size: 48px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    .partners-intro p {
+      font-size: 18px;
+      color: #7f8c8d;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 768px) {
+      .partners-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .partners-intro h1 {
+        font-size: 36px;
+      }
+
+      .partners-intro p {
+        font-size: 16px;
+      }
+
+      .partner-card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header id="main-header">
+    <div class="logo">СайтСотика</div>
+    <nav id="main-nav">
+      <a href="/pages/main/" class="nav-link">Главная</a>
+      <a href="/pages/about/" class="nav-link">Обо мне</a>
+      <a href="#" class="nav-link" data-menu-action="open-games">Игры</a>
+      <a href="/pages/stream/" class="nav-link">Стрим</a>
+      <a href="/pages/team/" class="nav-link">Команда</a>
+      <a href="/pages/partners/" class="nav-link active">Партнеры</a>
+    </nav>
+    <script src="/js/header.js"></script>
+  </header>
+
+  <div id="mobile-panel"></div>
+
+  <section class="wb-section">
+    <div class="wb-shell">
+      <div class="partners-intro">
+        <h1>Наши Партнеры</h1>
+        <p>Мы гордимся сотрудничеством с ведущими компаниями в индустрии. Вместе мы создаем незабываемые впечатления для наших зрителей и игроков.</p>
+      </div>
+
+      <div class="partners-grid">
+        <div class="partner-card">
+          <div class="partner-logo">🎮</div>
+          <h3 class="partner-name">GameDev Studio</h3>
+          <p class="partner-description">Ведущая студия разработки игр, с которой мы сотрудничаем над эксклюзивным контентом и игровыми проектами.</p>
+          <a href="#" class="partner-link">Узнать больше</a>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">🎯</div>
+          <h3 class="partner-name">Esports Pro</h3>
+          <p class="partner-description">Профессиональная киберспортивная организация, поддерживающая развитие competitive gaming сообщества.</p>
+          <a href="#" class="partner-link">Узнать больше</a>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">🎧</div>
+          <h3 class="partner-name">AudioTech</h3>
+          <p class="partner-description">Инновационная компания в области аудиотехнологий, предоставляющая высококачественное оборудование для стримов.</p>
+          <a href="#" class="partner-link">Узнать больше</a>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">💻</div>
+          <h3 class="partner-name">TechCorp</h3>
+          <p class="partner-description">Технологическая корпорация, специализирующаяся на аппаратном обеспечении для геймеров и стримеров.</p>
+          <a href="#" class="partner-link">Узнать больше</a>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">🌐</div>
+          <h3 class="partner-name">WebSolutions</h3>
+          <p class="partner-description">Эксперты в веб-разработке, помогающие создавать современные и функциональные онлайн-платформы.</p>
+          <a href="#" class="partner-link">Узнать больше</a>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-logo">📱</div>
+          <h3 class="partner-name">MobileDev</h3>
+          <p class="partner-description">Команда разработчиков мобильных приложений, создающих инновационные решения для геймерского сообщества.</p>
+          <a href="#" class="partner-link">Узнать больше</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

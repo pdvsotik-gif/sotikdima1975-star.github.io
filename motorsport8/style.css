@@ -1,0 +1,526 @@
+/* Combined and simplified CSS for Motorsport 8 PDF */
+/* Compatible with WeasyPrint - removed gradients, flex, grid, shadows */
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+body {
+    padding-top: 60px;
+}
+
+/* Header */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+    padding: 0 20px;
+    height: 60px;
+    display: table;
+    table-layout: fixed;
+}
+
+.logo {
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #333;
+}
+
+#main-nav {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 8px 18px;
+    margin-left: 8px;
+    text-decoration: none;
+    color: #666;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: #fff;
+}
+
+.nav-link.active {
+    background: #007acc;
+    color: #fff;
+    border-color: #007acc;
+}
+
+/* Mobile menu */
+#mobile-menu-btn {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    width: 44px;
+    height: 44px;
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 3px;
+    background: #333;
+    margin: 4px 0;
+    border-radius: 2px;
+}
+
+#mobile-panel {
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 0;
+    width: 260px;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+#mobile-panel.open {
+    display: block;
+}
+
+#mobile-panel a {
+    display: block;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    text-decoration: none;
+    color: #333;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+
+/* Game tabs */
+.game-tabs {
+    text-align: center;
+    margin: 30px 0;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 16px;
+    padding: 10px;
+    display: inline-block;
+}
+
+.game-tab {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #495057;
+    cursor: pointer;
+    border-radius: 12px;
+    background: transparent;
+    border: none;
+    text-transform: uppercase;
+}
+
+.game-tab.active {
+    background: #007acc;
+    color: white;
+}
+
+.game-tab-content {
+    margin-top: 20px;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Game hero */
+.game-hero {
+    background: #007acc;
+    color: white;
+    text-align: center;
+    padding: 100px 20px 60px;
+    margin-bottom: 40px;
+}
+
+.game-hero h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.game-hero p {
+    font-size: 18px;
+    max-width: 900px;
+    margin: 0 auto 30px;
+}
+
+/* Car settings section */
+.car-settings-section {
+    padding: 40px 20px;
+    background: #0b0c10;
+    color: #f5f5f5;
+}
+
+.car-settings-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.car-settings-header {
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+.car-settings-title-block h2 {
+    margin-bottom: 8px;
+    font-size: 24px;
+    color: #00b4ff;
+}
+
+.car-settings-title-block p {
+    margin: 0;
+    font-size: 16px;
+    color: #b5b5b5;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.car-settings-meta {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #8a8a8a;
+}
+
+.car-settings-meta span {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.car-settings-meta strong {
+    color: #ffffff;
+}
+
+.car-settings-layout {
+    margin-top: 40px;
+}
+
+.car-settings-panel {
+    background: #11131a;
+    border-radius: 14px;
+    padding: 18px;
+    border: 1px solid #00b4ff;
+    margin-bottom: 20px;
+}
+
+.car-settings-tabs {
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.car-settings-tab {
+    display: inline-block;
+    padding: 8px 14px;
+    margin: 0 4px;
+    border-radius: 20px;
+    border: 1px solid #555;
+    background: #222;
+    color: #c7c7c7;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.car-settings-tab.active {
+    background: #00b4ff;
+    border-color: #00b4ff;
+    color: #000;
+}
+
+.car-settings-content {
+    position: relative;
+    min-height: 220px;
+}
+
+.car-settings-pane {
+    display: none;
+}
+
+.car-settings-pane.active {
+    display: block;
+}
+
+.car-settings-params {
+    display: table;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.car-settings-param {
+    display: table-cell;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: #333;
+    border: 1px solid #555;
+    vertical-align: top;
+}
+
+.car-settings-param-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #8f9bb5;
+    margin-bottom: 4px;
+}
+
+.car-settings-param-value {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.car-settings-param-note {
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+.car-settings-image-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    background: #1b2335;
+    border: 1px solid #00b4ff;
+    min-height: 220px;
+    text-align: center;
+    padding: 20px;
+}
+
+.car-settings-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+.car-settings-image-label {
+    margin-top: 10px;
+    padding: 6px 10px;
+    border-radius: 20px;
+    background: #000;
+    color: #e5e5e5;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.car-settings-image-label strong {
+    color: #00e0ff;
+}
+
+.car-settings-side {
+    margin-top: 20px;
+}
+
+.car-settings-side-block {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: #222;
+    border: 1px solid #555;
+    font-size: 14px;
+    color: #c7c7c7;
+    margin-bottom: 14px;
+}
+
+.car-settings-side-block h3 {
+    margin-bottom: 6px;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: #9fb4ff;
+}
+
+.car-settings-side-block ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.car-settings-side-block li {
+    margin-bottom: 4px;
+}
+
+.car-settings-footer-note {
+    margin-top: 18px;
+    font-size: 12px;
+    color: #7f7f7f;
+}
+
+.car-settings-footer-note span {
+    color: #00b4ff;
+}
+
+/* Videos section */
+.videos-section {
+    padding: 40px 20px;
+    background: #f8f9fa;
+}
+
+.videos-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+}
+
+.videos-card h2 {
+    text-align: center;
+    color: #007acc;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.videos-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+}
+
+/* News section */
+.news-section {
+    padding: 40px 20px;
+    background: #ffffff;
+}
+
+.news-card {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.news-card h2 {
+    text-align: center;
+    color: #007acc;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.news-list {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #444;
+    padding-left: 20px;
+}
+
+.news-list li {
+    margin-bottom: 12px;
+}
+
+/* Tracks section */
+.tracks-section {
+    padding: 40px 20px;
+    background: #eef2f5;
+}
+
+.tracks-card {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tracks-card h2 {
+    text-align: center;
+    color: #007acc;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+.tracks-grid {
+    display: table;
+    width: 100%;
+}
+
+.track-item {
+    display: table-cell;
+    width: 33%;
+    padding: 10px;
+    vertical-align: top;
+}
+
+.track-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.track-item-content {
+    padding: 14px;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.track-item h3 {
+    margin-bottom: 6px;
+    font-size: 18px;
+    color: #333;
+}
+
+.track-item p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Footer */
+footer {
+    background: #f8f9fa;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .game-tabs {
+        display: block;
+    }
+    .game-tab {
+        display: block;
+        margin: 5px 0;
+    }
+    .car-settings-params {
+        display: block;
+    }
+    .car-settings-param {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .tracks-grid {
+        display: block;
+    }
+    .track-item {
+        display: block;
+        width: auto;
+        margin-bottom: 20px;
+    }
+}

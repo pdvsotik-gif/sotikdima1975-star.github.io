@@ -1,0 +1,10 @@
+{
+  "environment": "development",
+  "api_endpoint": "http://localhost:3000",
+  "github_pages": {
+    "url": "https://sotikdima1975-star.github.io",
+    "branch": "main"
+  },
+  "sync_interval": 300,
+  "cache_ttl": 3600
+}

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поддержать — СайтСотика</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f8f9fa;
+            color: #212529;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #ffffff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .back-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #ff7a1a;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #fff3eb;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #ff7a1a;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #ff7a1a;
+        }
+
+        .poll-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .poll-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .option {
+            flex: 1;
+            min-width: 250px;
+            background: #f1f3f5;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            border-color: #ff7a1a;
+            transform: translateY(-5px);
+        }
+
+        .option.selected {
+            border-color: #ff7a1a;
+            background: #fff3eb;
+            box-shadow: 0 8px 25px rgba(255, 122, 26, 0.15);
+        }
+
+        .option img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .option .price {
+            font-weight: 700;
+            color: #ff7a1a;
+            font-size: 18px;
+        }
+
+        .goal-widget {
+            margin-top: 20px;
+            border: none;
+            border-radius: 12px;
+            width: 100%;
+            height: 400px;
+            background: #f1f3f5;
+        }
+
+        .donate-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #ff7a1a, #e05f00);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(255, 122, 26, 0.3);
+            text-align: center;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .donate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255, 122, 26, 0.4);
+        }
+
+        /* Боковая панель */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -420px;
+            width: 420px;
+            height: 100%;
+            background: #ffffff;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+            border-left: 1px solid #e0e0e0;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .close-sidebar {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff7a1a;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .close-sidebar:hover {
+            background: #e05f00;
+        }
+
+        .donate-frame {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6c757d;
+            font-size: 14px;
+            background: #ffffff;
+            margin-top: 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .options {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .header-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="/" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Назад
+        </a>
+        <div class="header-title">Поддержать проект</div>
+        <div style="width: 60px;"></div>
+    </header>
+
+    <div class="container">
+        <h1>Выберите цель доната</h1>
+        <p style="text-align: center; color: #6c757d; margin-bottom: 30px;">
+            Проголосуйте за один из вариантов — мы купим именно этот компьютер, если цель будет достигнута!
+        </p>
+
+        <section class="poll-section">
+            <div class="poll-title">🎮 Выберите, какой компьютер вы хотите, чтобы я собрал</div>
+
+            <div class="options">
+                <!-- Вариант 1 -->
+                <div class="option" onclick="selectOption(this)">
+                    <img src="https://images.unsplash.com/photo-1587202372616-b43abea06c2a?auto=format&fit=crop&w=600&q=80" alt="Игровой ПК">
+                    <h3>Игровой ПК</h3>
+                    <p>RTX 4070, i7, 32 ГБ ОЗУ</p>
+                    <div class="price">Цель: 120 000 ₽</div>
+                </div>
+
+                <!-- Вариант 2 -->
+                <div class="option" onclick="selectOption(this)">
+                    <img src="images/workstation.jpg" alt="Рабочая станция" onerror="this.src='https://images.unsplash.com/photo-1629348150547-7b7a0e64c58d?auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
+                    <h3>Рабочая станция</h3>
+                    <p>Для монтажа и стримов</p>
+                    <div class="price">Цель: 150 000 ₽</div>
+                </div>
+
+                <!-- Вариант 3 -->
+                <div class="option" onclick="selectOption(this)">
+                    <img src="images/portable-pc.jpg" alt="Портативный ПК" onerror="this.src='https://images.unsplash.com/photo-1595178999039-92863120cf2a?auto=format&fit=crop&w=600&q=80'; this.onerror=null;">
+                    <h3>Портативный ПК</h3>
+                    <p>Мощный ноутбук для поездок</p>
+                    <div class="price">Цель: 100 000 ₽</div>
+                </div>
+            </div>
+
+            <!-- Кнопки поддержки -->
+            <div style="display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 30px auto;">
+                <a href="https://donate.stream/sotikdima" target="_blank" class="donate-btn">
+                    💬 Поддержать через donate.stream
+                </a>
+                <a href="https://yoomoney.ru/to/4100117753597226" target="_blank" class="donate-btn" style="background: linear-gradient(135deg, #50be96, #3aa883);">
+                    💳 Поддержать через YooMoney
+                </a>
+                <a href="https://www.sberbank.com/online/" target="_blank" class="donate-btn" style="background: linear-gradient(135deg, #00a651, #007a3d);">
+                    🟢 Поддержать через Сбербанк
+                </a>
+                <a href="https://www.tinkoff.ru/" target="_blank" class="donate-btn" style="background: linear-gradient(135deg, #000000, #333333);">
+                    ⚫ Поддержать через Тинькофф
+                </a>
+            </div>
+
+            <!-- Форма для ввода данных после доната -->
+            <div id="afterDonationForm" style="display: none; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 30px auto; max-width: 500px;">
+                <h2 style="color: #ff7a1a; margin-bottom: 20px; text-align: center;">Спасибо за поддержку!</h2>
+                <p style="text-align: center; color: #6c757d; margin-bottom: 20px;">Пожалуйста, заполните форму, чтобы мы могли добавить ваш донат в статистику.</p>
+                
+                <form id="donationForm" onsubmit="submitDonationData(event)">
+                    <div style="margin-bottom: 15px;">
+                        <label for="amount" style="display: block; margin-bottom: 5px; font-weight: 500;">Сумма доната (₽):</label>
+                        <input type="number" id="amount" name="amount" min="1" required style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label for="name" style="display: block; margin-bottom: 5px; font-weight: 500;">Имя или никнейм:</label>
+                        <input type="text" id="name" name="name" required style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label for="message" style="display: block; margin-bottom: 5px; font-weight: 500;">Сообщение (необязательно):</label>
+                        <textarea id="message" name="message" rows="3" style="width: 100%; padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 16px;"></textarea>
+                    </div>
+                    <button type="submit" class="donate-btn" style="width: 100%;">
+                        Отправить данные
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Убираем боковую панель - она больше не нужна -->
+
+    <footer>
+        &copy; 2025 СайтСотика — Ваша поддержка меняет всё
+        <div style="margin-top: 10px; font-size: 12px; color: #adb5bd;">
+            Все средства идут на развитие проекта
+        </div>
+    </footer>
+
+    <script>
+        // Выбор опции
+        function selectOption(element) {
+            document.querySelectorAll('.option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        // Показываем форму для ввода данных после нажатия на кнопку поддержки
+        // Форма появляется сразу после перехода по ссылке
+        function showDonationForm() {
+            document.getElementById('afterDonationForm').style.display = 'block';
+            
+            // Плавно скроллим к форме
+            document.getElementById('afterDonationForm').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Убираем кнопки поддержки
+            document.querySelector('.poll-section').querySelectorAll('a').forEach(btn => {
+                btn.style.display = 'none';
+            });
+        }
+        
+        // Обработчики для кнопок поддержки
+        document.addEventListener('DOMContentLoaded', function() {
+            //
+        
+        // Показываем форму для ввода данных
+        function showDonationForm() {
+            document.getElementById('afterDonationForm').style.display = 'block';
+            
+            // Плавно скроллим к форме
+            document.getElementById('afterDonationForm').scrollIntoView({
+                behavior: 'smooth'
+            });
+            
+            // Убираем кнопки поддержки
+            document.querySelector('.poll-section').querySelectorAll('a').forEach(btn => {
+                btn.style.display = 'none';
+            });
+        }
+        
+        // Отправка данных о донате
+        function submitDonationData(event) {
+            event.preventDefault();
+            
+            const amount = document.getElementById('amount').value;
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            
+            // В реальной реализации отправляем данные на сервер
+            // fetch('/api/donations', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ amount, name, message })
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     alert('Данные о донате успешно сохранены!');
+            //     document.getElementById('afterDonationForm').style.display = 'none';
+            // })
+            // .catch(error => {
+            //     alert('Ошибка при сохранении данных. Попробуйте позже.');
+            //     console.error('Error:', error);
+            // });
+            
+            // Для демонстрации просто показываем alert
+            alert(`Спасибо, ${name}! Данные о вашем донате в размере ${amount} ₽ успешно отправлены.`);
+            
+            // Скрываем форму
+            document.getElementById('afterDonationForm').style.display = 'none';
+        }
+    </script>
+
+    <!-- Убираем подключение конфигурации - она больше не нужна -->
+</body>
+</html>

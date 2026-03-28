@@ -1,0 +1,352 @@
+/* Стили для страницы "Обо мне" */
+
+/* Основные цвета для светлого шаблона с темными элементами */
+:root {
+  --primary-color: #007acc;
+  --secondary-color: #666666;
+  --text-color: #333333;
+  --background-color: #ffffff;
+  --border-color: #dddddd;
+  --hover-color: #f5f5f5;
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--background-color);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Секция героя */
+.about-hero {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/about/hero.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 120px 20px;
+  margin-bottom: 60px;
+}
+
+.about-hero h1 {
+  font-size: 3.5em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.about-hero p {
+  font-size: 1.5em;
+  max-width: 800px;
+  margin: 0 auto;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+/* Секция био */
+.about-bio {
+  padding: 80px 20px;
+  background-color: #f8f9fa;
+}
+
+.about-bio h2 {
+  color: #007acc;
+  margin-bottom: 20px;
+  font-size: 2.2em;
+}
+
+.about-bio img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.about-bio .card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* Секция навыков */
+.about-skills {
+  padding: 80px 20px;
+  background-color: white;
+}
+
+.about-skills h2 {
+  text-align: center;
+  color: #007acc;
+  margin-bottom: 50px;
+  font-size: 2.5em;
+  position: relative;
+}
+
+.about-skills h2::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: #007acc;
+  border-radius: 2px;
+}
+
+.skill-item {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skill-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: #007acc;
+}
+
+.skill-item h3 {
+  color: #007acc;
+  margin: 20px 0 15px 0;
+  font-size: 1.5em;
+}
+
+.skill-item p {
+  color: #666;
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+.skill-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+/* Секция игр */
+.about-games {
+  padding: 80px 20px;
+  background-color: #f8f9fa;
+}
+
+.about-games h2 {
+  text-align: center;
+  color: #007acc;
+  margin-bottom: 50px;
+  font-size: 2.5em;
+}
+
+.game-item {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.game-item:hover {
+  transform: translateY(-10px);
+}
+
+.game-item .title {
+  height: 150px;
+  background: #007acc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.game-item p {
+  color: #666;
+  font-size: 1.1em;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Секция пути */
+.about-journey {
+  padding: 80px 20px;
+  background-color: white;
+}
+
+.about-journey h2 {
+  text-align: center;
+  color: #007acc;
+  margin-bottom: 50px;
+  font-size: 2.5em;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: #007acc;
+  transform: translateX(-50%);
+}
+
+.timeline-point {
+  width: 20px;
+  height: 20px;
+  background: #007acc;
+  border: 4px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 2;
+}
+
+.timeline-content {
+  background: #007acc;
+  color: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  display: inline-block;
+  max-width: 350px;
+}
+
+.timeline-content h3 {
+  margin: 0 0 15px 0;
+  font-size: 1.4em;
+}
+
+.timeline-content p {
+  margin: 0;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+/* Секция сообщества */
+.about-community {
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #007acc 0%, #6a11cb 100%);
+  color: white;
+}
+
+.about-community h2 {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+}
+
+.about-community p {
+  font-size: 1.3em;
+  margin-bottom: 50px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.community-item {
+  flex: 1;
+  min-width: 250px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+}
+
+.community-item h3 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+}
+
+.community-item p {
+  font-size: 1.1em;
+  line-height: 1.7;
+}
+
+.community-button {
+  background: white;
+  color: #007acc;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.community-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .about-hero h1 {
+    font-size: 2.5em;
+  }
+  
+  .about-hero p {
+    font-size: 1.2em;
+  }
+  
+  .about-bio {
+    padding: 60px 20px;
+  }
+  
+  .about-bio h2 {
+    font-size: 2em;
+  }
+  
+  .about-skills,
+  .about-games,
+  .about-journey,
+  .about-community {
+    padding: 60px 20px;
+  }
+  
+  .about-skills h2,
+  .about-games h2,
+  .about-journey h2,
+  .about-community h2 {
+    font-size: 2em;
+  }
+  
+  .timeline-line {
+    left: 20px;
+  }
+  
+  .timeline-point {
+    position: absolute;
+    left: 20px;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 480px) {
+  .about-hero {
+    padding: 80px 20px;
+  }
+  
+  .about-hero h1 {
+    font-size: 2em;
+  }
+  
+  .about-hero p {
+    font-size: 1.1em;
+  }
+  
+  .skill-item,
+  .game-item {
+    padding: 20px;
+  }
+  
+  .skill-item h3,
+  .game-item .title {
+    font-size: 1.3em;
+  }
+}

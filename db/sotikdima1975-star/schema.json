@@ -1,0 +1,40 @@
+{
+  "version": "1.0.0",
+  "database": "sotikdima1975-star",
+  "created": "2026-03-23",
+  "type": "json",
+  "compatible": ["github-pages", "local-server", "nodejs", "browser"],
+  "tables": {
+    "users": {
+      "fields": {
+        "id": "string",
+        "username": "string",
+        "email": "string",
+        "created_at": "timestamp",
+        "updated_at": "timestamp"
+      },
+      "primary_key": "id"
+    },
+    "donations": {
+      "fields": {
+        "id": "string",
+        "user_id": "string",
+        "amount": "number",
+        "currency": "string",
+        "status": "string",
+        "created_at": "timestamp"
+      },
+      "primary_key": "id"
+    },
+    "logs": {
+      "fields": {
+        "id": "string",
+        "type": "string",
+        "message": "string",
+        "data": "object",
+        "timestamp": "timestamp"
+      },
+      "primary_key": "id"
+    }
+  }
+}

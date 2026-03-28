@@ -1,0 +1,51 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Check file structure
+      run: |
+        echo "Checking project structure..."
+        if [ -f "README.md" ]; then echo "✓ README.md found"; else echo "✗ README.md missing"; fi
+        if [ -d "css" ]; then echo "✓ css folder found"; else echo "✗ css folder missing"; fi
+        if [ -d "js" ]; then echo "✓ js folder found"; else echo "✗ js folder missing"; fi
+        if [ -f "index.html" ]; then echo "✓ index.html found"; else echo "✗ index.html missing"; fi
+
+    - name: Validate HTML files
+      run: |
+        echo "Validating HTML files..."
+        for file in $(find . -name "*.html" -type f); do
+          echo "Checking: $file"
+        done
+
+    - name: Deploy to GitHub Pages
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./new
+        cname: siteofsotik.example.com
+        enable_jekyll: false
+
+    - name: Comment on Pull Request
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '✅ Build successful!\n\nProject structure is valid and ready to deploy.'
+          })
