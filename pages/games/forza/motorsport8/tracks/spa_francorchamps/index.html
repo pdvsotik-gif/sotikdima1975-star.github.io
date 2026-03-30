@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="ru" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Трасса Circuit de Spa-Francorchamps — страница трассы в Forza Motorsport 8 на официальном сайте стримера Дмитрия Переднего (СайтСотика)">
+    <title>Circuit de Spa-Francorchamps — Forza Motorsport 8 — СайтСотика</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <script src="/sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/header.css">
+    <style>
+        /* ===== CONTENT STYLES (без header стилей - они в header.css) ===== */
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0c4a6e 70%, #164e63 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(37,99,235,0.15) 0%, transparent 60%), 
+                        radial-gradient(ellipse at 70% 30%, rgba(6,182,212,0.1) 0%, transparent 50%);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, #f8fafc, transparent);
+        }
+
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: #e2e8f0;
+            font-size: 0.82rem;
+        }
+
+        /* ===== TABS ===== */
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #64748b;
+            transition: all 0.3s ease;
+            border-radius: 8px 8px 0 0;
+            white-space: nowrap;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: #2563eb;
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .tab-btn.active {
+            color: #2563eb;
+            background: #fff;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #2563eb;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .tabs-content {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0 0 12px 12px;
+            padding: 24px;
+            min-height: 400px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Sub-tabs */
+        .sub-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .sub-tab-btn {
+            padding: 8px 16px;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #64748b;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+        }
+
+        .sub-tab-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        .sub-tab-btn.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+
+        .sub-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .sub-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards and components */
+        .feature-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+            border: 1px solid #f1f5f9;
+            transition: all 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .track-slider {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 8px;
+        }
+
+        .track-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .track-card {
+            min-width: 280px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: 12px;
+            padding: 20px;
+            color: #fff;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .track-card:hover {
+            transform: scale(1.02);
+        }
+
+        .car-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .car-table th {
+            background: #f8fafc;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #334155;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .car-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        .car-table tr:hover td {
+            background: #f0f7ff;
+        }
+
+        .mode-card {
+            background: linear-gradient(135deg, #eff6ff, #fff);
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .mode-card:hover {
+            border-color: #93c5fd;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.1);
+        }
+
+        .update-item {
+            border-left: 3px solid #22c55e;
+            padding: 16px 20px;
+            background: #f0fdf4;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 12px;
+        }
+
+        .scroll-indicator {
+            width: 60px;
+            height: 4px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .scroll-indicator.active {
+            background: #2563eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tab-btn {
+                padding: 10px 14px;
+                font-size: 0.78rem;
+            }
+            .tabs-content {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 56px;
+            }
+            #main-header {
+                height: 56px;
+                padding: 0 12px;
+            }
+            .tab-btn {
+                padding: 8px 10px;
+                font-size: 0.72rem;
+            }
+            .tabs-content {
+                padding: 12px;
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] overflow-auto">
+
+<!-- HEADER -->
+<header id="main-header">
+    <div class="logo">СайтСотика</div>
+    <nav id="main-nav">
+        <a href="/pages/main/" class="nav-link">Главная</a>
+        <a href="/pages/about/" class="nav-link">Обо мне</a>
+        <a href="#" class="nav-link" data-menu-action="open-games">Игры</a>
+        <a href="/pages/stream/" class="nav-link">Стрим</a>
+        <a href="/pages/team/" class="nav-link">Команда</a>
+        <a href="/pages/partners/" class="nav-link">Партнеры</a>
+    </nav>
+    <div id="mobile-panel"></div>
+</header>
+
+<main class="w-full">
+    <!-- HERO SECTION -->
+    <section class="hero-bg py-24 px-4 relative">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-block mb-4 px-4 py-1.5 bg-[#2563eb] text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                Forza Motorsport 8
+            </div>
+            <h1 class="text-white font-black text-4xl md:text-5xl leading-tight mb-4">Circuit de Spa-Francorchamps</h1>
+            <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light">
+                Легендарная трасса в Бельгии — королева автоспорта с непредсказуемой погодой и техничными поворотами.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <div class="stat-pill">
+                    <span>📍</span> Спа, Бельгия
+                </div>
+                <div class="stat-pill">
+                    <span>🏁</span> 7.0 км
+                </div>
+                <div class="stat-pill">
+                    <span>🔄</span> 19 поворотов
+                </div>
+                <div class="stat-pill">
+                    <span>🏆</span> Формула 1, GT
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TABS SECTION -->
+    <section class="max-w-6xl mx-auto px-4 -mt-8 relative z-20 pb-16">
+        <!-- Tab Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="overview">
+                <span>ℹ️</span> Обзор
+            </button>
+            <button class="tab-btn" data-tab="layout">
+                <span>🗺️</span> Схема и повороты
+            </button>
+            <button class="tab-btn" data-tab="history">
+                <span>📜</span> История
+            </button>
+            <button class="tab-btn" data-tab="records">
+                <span>⏱️</span> Рекорды
+            </button>
+        </div>
+
+        <!-- Tab Content -->
+        <div class="tabs-content">
+            <!-- OVERVIEW -->
+            <div id="overview" class="tab-content active">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">Circuit de Spa-Francorchamps</h2>
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            <strong>Circuit de Spa-Francorchamps</strong> — одна из самых известных и уважаемых трасс в мире автоспорта. 
+                            Расположена в Арденнах, Бельгия, и используется с 1921 года.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            В Forza Motorsport 8 трасса была лазерно отсканирована с высочайшей точностью, включая все неровности и изменения уровня.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            Особенностью трассы является её погода — часто меняется от солнца до дождя за один круг, что делает гонки крайне сложными и непредсказуемыми.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#2563eb] mb-2">7.0 км</div>
+                            <div class="text-sm text-slate-500">Длина трассы</div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#2563eb] mb-2">19</div>
+                            <div class="text-sm text-slate-500">Поворотов</div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#22c55e] mb-2">1921</div>
+                            <div class="text-sm text-slate-500">Год основания</div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#22c55e] mb-2">22</div>
+                            <div class="text-sm text-slate-500">ГП Ф1 проведено</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-slate-700 mb-4">Особенности трассы в Forza Motorsport 8</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🌦️ Переменная погода</h4>
+                        <p class="text-sm text-slate-500">Динамическая система погоды может изменяться за один круг — от сухо до дождя.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">⛰️ Перепад высот</h4>
+                        <p class="text-sm text-slate-500">Трасса имеет перепад высот более 100 метров, что влияет на аэродинамику.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🏁 Единственный поворот налево</h4>
+                        <p class="text-sm text-slate-500">Поворот La Source — единственный левый поворот на всей трассе.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🎯 Точность сканирования</h4>
+                        <p class="text-sm text-slate-500">Трасса отсканирована с точностью до миллиметра для максимального реализма.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🏎️ Прямая 2 км</h4>
+                        <p class="text-sm text-slate-500">Одна из самых длинных прямых в календаре Формулы 1.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🔥 Место легенд</h4>
+                        <p class="text-sm text-slate-500">Здесь проходили решающие гонки чемпионатов Ф1 и 24 часа Спа.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAYOUT -->
+            <div id="layout" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">Схема и повороты</h2>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <img src="/images/tracks/spa_francorchamps_map.jpg" alt="Схема трассы Circuit de Spa-Francorchamps" class="w-full max-w-3xl mx-auto rounded-lg border">
+                </div>
+
+                <div class="mt-8 grid md:grid-cols-2 gap-6">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 1-5: Начало круга</h3>
+                        <p class="text-slate-600 mb-3">После старта — короткая прямая, затем резкий левый поворот (Т1), переходящий в правый (Т2) и серию поворотов через холм. Ключевой участок для выхода из строя.</p>
+                        <div class="text-sm text-slate-500">🚗 Рекомендуемый автомобиль: Любое купе или седан</div>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 6-10: Середина круга</h3>
+                        <p class="text-slate-600 mb-3">Спуск с холма, затем подъём и серия поворотов через лес. Сложный участок для торможения. После Т7 — длинная прямая.</p>
+                        <div class="text-sm text-slate-500">🔧 Совет: Используйте тормоза перед спуском</div>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 11-19: Финал круга</h3>
+                        <p class="text-slate-600 mb-3">Длинная прямая, затем резкий левый поворот (Т9) и серия поворотов к финишу. Опасный участок для столкновений в конце гонки.</p>
+                        <div class="text-sm text-slate-500">⏱️ Рекорд круга: 1:46.286 (F1, 2023)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HISTORY -->
+            <div id="history" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">История трассы</h2>
+                <div class="space-y-6">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">1921: Основание</h3>
+                        <p class="text-slate-600">Трасса была построена в 1921 году. Первый этап выиграл Жорж Ваншпей.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">1980-2023: Эра Формулы 1</h3>
+                        <p class="text-slate-600">Spa стала постоянной частью календаря Формулы 1. Здесь проходили решающие гонки чемпионатов, включая титулы Проста, Шумахера и Хэмилтона.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">2020-2023: Пандемия и обновления</h3>
+                        <p class="text-slate-600">Из-за пандемии гонки проводились без зрителей. В 2022 году трасса прошла масштабную реконструкцию покрытия.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">2024: Будущее</h3>
+                        <p class="text-slate-600">Трасса продолжает развиваться. Планируется добавление новых зон для фанатов и улучшение инфраструктуры.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECORDS -->
+            <div id="records" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">Рекорды трассы</h2>
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="car-table">
+                        <thead>
+                            <tr>
+                                <th>Категория</th>
+                                <th>Время</th>
+                                <th>Автомобиль</th>
+                                <th>Год</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Формула 1</td>
+                                <td>1:46.286</td>
+                                <td>Mercedes W14</td>
+                                <td>2023</td>
+                            </tr>
+                            <tr>
+                                <td>GT3</td>
+                                <td>2:18.410</td>
+                                <td>Audi R8 LMS GT3</td>
+                                <td>2023</td>
+                            </tr>
+                            <tr>
+                                <td>Гиперкар</td>
+                                <td>2:14.220</td>
+                                <td>Lamborghini SC63</td>
+                                <td>2024</td>
+                            </tr>
+                            <tr>
+                                <td>Серийный</td>
+                                <td>2:45.670</td>
+                                <td>Porsche 911 GT3 RS</td>
+                                <td>2023</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-6">
+                    <h3 class="text-lg font-bold text-slate-700 mb-3">Рекорд в Forza Motorsport 8</h3>
+                    <p class="text-slate-600 mb-3">Первый рекорд круга в игре был установлен 11 октября 2023 года игроком из Бельгии с временем <strong>1:47.143</strong> на Mercedes-AMG GT3.</p>
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        <span class="px-3 py-1 bg-blue-200 rounded-full text-xs font-medium text-slate-700">Community Record</span>
+                        <span class="px-3 py-1 bg-blue-200 rounded-full text-xs font-medium text-slate-700">Mercedes-AMG GT3</span>
+                        <span class="px-3 py-1 bg-blue-200 rounded-full text-xs font-medium text-slate-700">11.10.2023</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-[#0f172a] text-slate-400 py-8 px-4 text-center text-sm border-t border-slate-800">
+    <p>© 2024 <strong class="text-white">СайтСотика</strong> — Неофициальная страница</p>
+    <p class="mt-1 text-xs text-slate-500">Forza Motorsport является торговой маркой Microsoft Corporation / Xbox Game Studios</p>
+</footer>
+
+<script>
+    // ===== TABS SYSTEM =====
+    function initTabs() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+
+                // Hide all tabs
+                tabContents.forEach(tab => tab.classList.remove('active'));
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Show active tab
+                document.getElementById(tabId).classList.add('active');
+                this.classList.add('active');
+            });
+        });
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function() {
+        initTabs();
+    });
+</script>
+
+<!-- HEADER NAVIGATION SCRIPT -->
+<script src="/js/header.js"></script>
+</body>
+</html>
