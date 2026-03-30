@@ -1,1409 +1,792 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="ru" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Forza Motorsport — страница игры на официальном сайте стримера Дмитрия Переднего (СайтСотика)">
-    <meta name="theme-color" content="#6a11cb">
-    <title>Forza Motorsport — СайтСотика</title>
-
-    <!-- ВАЖНО: пути оставлены как есть -->
+    <meta name="description" content="Forza Motorsport 8 — страница игры на официальном сайте стримера Дмитрия Переднего (СайтСотика)">
+    <title>Forza Motorsport 8 — СайтСотика</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css">
-    <link rel="stylesheet" href="/css/welcome.css">
-    <link rel="stylesheet" href="/css/responsive.css">
-    <link rel="stylesheet" href="/css/game.css">
+    <style>
+        /* ===== CONTENT STYLES (без header стилей - они в header.css) ===== */
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0c4a6e 70%, #164e63 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 30% 50%, rgba(37,99,235,0.15) 0%, transparent 60%), 
+                        radial-gradient(ellipse at 70% 30%, rgba(6,182,212,0.1) 0%, transparent 50%);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(to top, #f8fafc, transparent);
+        }
+
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 8px 16px;
+            border-radius: 50px;
+            color: #e2e8f0;
+            font-size: 0.82rem;
+        }
+
+        /* ===== TABS ===== */
+        .tabs-nav {
+            display: flex;
+            flex-wrap: wrap;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-bottom: none;
+            border-radius: 12px 12px 0 0;
+            gap: 0;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #64748b;
+            transition: all 0.3s ease;
+            border-radius: 8px 8px 0 0;
+            white-space: nowrap;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tab-btn:hover {
+            color: #2563eb;
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .tab-btn.active {
+            color: #2563eb;
+            background: #fff;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.06);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #2563eb;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .tabs-content {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 0 0 12px 12px;
+            padding: 24px;
+            min-height: 400px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Sub-tabs */
+        .sub-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .sub-tab-btn {
+            padding: 8px 16px;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: #64748b;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+        }
+
+        .sub-tab-btn:hover {
+            border-color: #2563eb;
+            color: #2563eb;
+        }
+
+        .sub-tab-btn.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+
+        .sub-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .sub-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards and components */
+        .feature-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+            border: 1px solid #f1f5f9;
+            transition: all 0.25s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        .track-slider {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 8px;
+        }
+
+        .track-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .track-card {
+            min-width: 280px;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-radius: 12px;
+            padding: 20px;
+            color: #fff;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .track-card:hover {
+            transform: scale(1.02);
+        }
+
+        .car-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .car-table th {
+            background: #f8fafc;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #334155;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .car-table td {
+            padding: 10px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        .car-table tr:hover td {
+            background: #f0f7ff;
+        }
+
+        .mode-card {
+            background: linear-gradient(135deg, #eff6ff, #fff);
+            border: 1px solid #dbeafe;
+            border-radius: 12px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .mode-card:hover {
+            border-color: #93c5fd;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.1);
+        }
+
+        .update-item {
+            border-left: 3px solid #22c55e;
+            padding: 16px 20px;
+            background: #f0fdf4;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 12px;
+        }
+
+        .scroll-indicator {
+            width: 60px;
+            height: 4px;
+            border-radius: 4px;
+            background: #e2e8f0;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .scroll-indicator.active {
+            background: #2563eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tab-btn {
+                padding: 10px 14px;
+                font-size: 0.78rem;
+            }
+            .tabs-content {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 56px;
+            }
+            #main-header {
+                height: 56px;
+                padding: 0 12px;
+            }
+            .tab-btn {
+                padding: 8px 10px;
+                font-size: 0.72rem;
+            }
+            .tabs-content {
+                padding: 12px;
+                min-height: 300px;
+            }
+        }
+    </style>
 </head>
-<body>
-<!-- === ХЭДЕР: НЕ ТРОГАЮ, КАК ТЫ СДЕЛАЛ === -->
+<body class="bg-[#f8fafc] overflow-auto">
+
+<!-- HEADER -->
 <header id="main-header">
     <div class="logo">СайтСотика</div>
-
     <nav id="main-nav">
         <a href="/pages/main/" class="nav-link">Главная</a>
         <a href="/pages/about/" class="nav-link">Обо мне</a>
-        <a href="#" class="nav-link" data-page="games">Игры</a>
+        <a href="#" class="nav-link" data-menu-action="open-games">Игры</a>
         <a href="/pages/stream/" class="nav-link">Стрим</a>
         <a href="/pages/team/" class="nav-link">Команда</a>
         <a href="/pages/partners/" class="nav-link">Партнеры</a>
     </nav>
-
-    <script src="/js/header.js"></script>
+    <div id="mobile-panel"></div>
 </header>
-<div id="mobile-panel"></div>
 
-<!-- === ГЛАВНЫЙ КОНТЕНТ СТРАНИЦЫ ИГРЫ FORZA MOTORSPORT === -->
-<main id="game-page">
-
-    <!-- ГЛАВНАЯ СЕКЦИЯ ОБ ИГРЕ (AAA, ВКЛАДКИ, РЕАЛЬНАЯ ИНФА) -->
-    <section class="fm8-main-section">
-        <style>
-            .fm8-main-section{
-              padding:80px 20px 90px;
-              background:#ffffff;
-              color:#0f172a;
-              font-family:'Segoe UI',system-ui;
-              border-bottom:1px solid #e2e8f0;
-            }
-            .fm8-main-inner{
-              max-width:1320px;
-              margin:0 auto;
-            }
-            .fm8-main-heading{
-              display:flex;
-              flex-wrap:wrap;
-              align-items:start;
-              justify-content:space-between;
-              gap:28px;
-              margin-bottom:32px;
-            }
-            
-            .fm8-main-title-wrapper{
-              flex:1;
-              min-width:300px;
-            }
-            
-            .fm8-main-image-wrapper{
-              flex-shrink:0;
-              width:600px;
-              max-width:100%;
-              border-radius:12px;
-              overflow:hidden;
-            }
-            
-            @media (max-width: 1100px) {
-              .fm8-main-image-wrapper {
-                width:400px;
-              }
-            }
-            
-            @media (max-width: 768px) {
-              .fm8-main-heading {
-                flex-direction:column;
-                align-items:flex-start;
-              }
-              
-              .fm8-main-image-wrapper {
-                width:100%;
-                margin-top:16px;
-              }
-            }
-            
-            @media (max-width: 480px) {
-              .fm8-main-image-wrapper {
-                width:100%;
-                height:auto;
-              }
-              
-              .fm8-main-image-wrapper img {
-                width:100%;
-                height:auto;
-              }
-            }
-            .fm8-main-title{
-              font-size:2.9rem;
-              font-weight:900;
-              text-transform:uppercase;
-              letter-spacing:0.08em;
-              margin:0;
-              color:#0f172a;
-            }
-            .fm8-main-subtitle{
-              margin:0;
-              max-width:620px;
-              font-size:1.05rem;
-              line-height:1.8;
-              color:#475569;
-            }
-            .fm8-main-meta{
-              display:flex;
-              flex-wrap:wrap;
-              gap:10px;
-              margin-bottom:26px;
-            }
-            .fm8-main-meta-item{
-              padding:8px 14px;
-              border-radius:999px;
-              border:1px solid #cbd5e1;
-              background:#f8fafc;
-              font-size:0.8rem;
-              text-transform:uppercase;
-              letter-spacing:0.08em;
-              color:#0f172a;
-            }
-            .fm8-main-tabs{
-              display:flex;
-              flex-wrap:wrap;
-              gap:8px;
-              margin-bottom:26px;
-            }
-            .fm8-main-tab{
-              padding:9px 18px;
-              border-radius:999px;
-              border:1px solid #cbd5e1;
-              background:#f8fafc;
-              font-size:0.8rem;
-              text-transform:uppercase;
-              letter-spacing:0.08em;
-              cursor:pointer;
-              color:#0f172a;
-              transition:all .18s ease;
-              white-space:nowrap;
-            }
-            .fm8-main-tab.active{
-              background:linear-gradient(135deg,#2563eb,#22c55e);
-              border-color:transparent;
-              color:#ffffff;
-              box-shadow:0 10px 30px rgba(15,23,42,0.25);
-              transform:translateY(-1px);
-            }
-            .fm8-main-content{margin-top:10px;}
-            .fm8-main-pane{display:none;}
-            .fm8-main-pane.active{display:block;}
-
-            .fm8-pane-grid{
-              display:grid;
-              grid-template-columns:minmax(0,1.5fr) minmax(0,1.1fr);
-              gap:26px;
-              align-items:flex-start;
-            }
-            .fm8-pane-block{
-              background:#f8fafc;
-              border-radius:18px;
-              border:1px solid #e2e8f0;
-              padding:22px 24px;
-              margin-bottom:18px;
-              box-shadow:0 16px 40px rgba(15,23,42,0.08);
-            }
-            .fm8-pane-block h3{
-              margin:0 0 10px;
-              font-size:1.25rem;
-              color:#0f172a;
-            }
-            .fm8-pane-block p{
-              margin:0 0 12px;
-              font-size:0.98rem;
-              line-height:1.8;
-              color:#475569;
-            }
-            .fm8-pane-block ul{
-              margin:0;
-              padding-left:20px;
-              font-size:0.95rem;
-              color:#334155;
-            }
-            .fm8-pane-block li{margin-bottom:6px;}
-
-            .fm8-mini-grid{
-              display:grid;
-              grid-template-columns:repeat(2,minmax(0,1fr));
-              gap:12px;
-            }
-            .fm8-mini-card{
-              background:#f1f5f9;
-              border-radius:14px;
-              border:1px solid #e2e8f0;
-              padding:12px 14px;
-              font-size:0.9rem;
-            }
-            .fm8-mini-label{
-              font-size:0.75rem;
-              text-transform:uppercase;
-              letter-spacing:0.08em;
-              color:#64748b;
-              margin-bottom:3px;
-            }
-            .fm8-mini-value{
-              font-weight:600;
-              color:#0f172a;
-              margin-bottom:2px;
-            }
-            .fm8-mini-note{
-              font-size:0.8rem;
-              color:#64748b;
-            }
-
-            .fm8-table{
-              width:100%;
-              border-collapse:collapse;
-              margin-top:6px;
-              font-size:0.92rem;
-            }
-            .fm8-table th,
-            .fm8-table td{
-              padding:8px 10px;
-              border-bottom:1px solid #e2e8f0;
-              text-align:left;
-            }
-            .fm8-table th{
-              background:#e5edf7;
-              font-weight:600;
-              color:#0f172a;
-              width:120px;
-              font-weight:500;
-              color:#475569;
-            }
-            
-            /* === МОБИЛЬНЫЙ СЛАЙДЕР ТРАСС: ПОЛНОЭКРАННЫЕ ВКЛАДКИ === */
-            @media (max-width: 768px) {
-                .fm8-tracks-slider {
-                    margin-top: 16px;
-                }
-
-                .fm8-tracks-carousel {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 8px;
-                    padding: 0 4px;
-                    width: 100%;
-                    box-sizing: border-box;
-                }
-
-                /* Стрелки на всю высоту и ширину кнопки */
-                .fm8-tracks-prev,
-                .fm8-tracks-next {
-                    width: 56px;
-                    height: 56px;
-                    border-radius: 12px;
-                    background: #2563eb;
-                    color: white;
-                    flex-shrink: 0;
-                    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-                }
-
-                .fm8-tracks-wrapper {
-                    flex-grow: 1;
-                    overflow-x: auto;
-                    scroll-behavior: smooth;
-                    -webkit-overflow-scrolling: touch;
-                    scrollbar-width: none; /* Firefox */
-                    padding: 0 8px;
-                    box-sizing: border-box;
-                }
-                
-                .fm8-tracks-wrapper::-webkit-scrollbar {
-                    display: none; /* Chrome/Safari */
-                }
-
-                .fm8-tracks-container {
-                    display: flex;
-                    gap: 8px;
-                    padding: 8px 0;
-                    min-width: max-content;
-                    transition: none; /* Отключаем transform при клике */
-                }
-
-                .fm8-tracks-item {
-                    width: calc(100vw - 176px); /* Ширина экрана минус стрелки (56px * 2) и отступы (64px) */
-                    max-width: none;
-                    min-width: calc(100vw - 176px);
-                    padding: 14px 16px;
-                    font-size: 0.95rem;
-                    text-align: center;
-                    border-radius: 12px;
-                    background: #f8fafc;
-                    border: 2px solid transparent;
-                    transition: all 0.2s ease;
-                    flex-shrink: 0;
-                    box-sizing: border-box;
-                }
-
-                .fm8-tracks-item.active {
-                    background: linear-gradient(135deg, #2563eb, #22c55e);
-                    border-color: #2563eb;
-                    color: white;
-                    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
-                }
-
-                /* Адаптация для горизонтальной ориентации и планшетов */
-                @media (min-width: 481px) and (max-width: 768px) and (orientation: landscape) {
-                    .fm8-tracks-item {
-                        width: calc(100vw - 176px); /* Ширина экрана минус стрелки (56px * 2) и отступы (64px) */
-                        min-width: calc(100vw - 176px);
-                        font-size: 0.85rem;
-                        padding: 12px 14px;
-                        flex-shrink: 0;
-                        box-sizing: border-box;
-                    }
-                }
-
-                /* На очень маленьких экранах */
-                @media (max-height: 500px), (max-width: 480px) {
-                    .fm8-tracks-item {
-                        width: calc(100vw - 128px); /* Ширина экрана минус стрелки (52px * 2) и отступы (24px) */
-                        min-width: calc(100vw - 128px);
-                        padding: 12px;
-                        font-size: 0.8rem;
-                        flex-shrink: 0;
-                        box-sizing: border-box;
-                    }
-                    .fm8-tracks-prev,
-                    .fm8-tracks-next {
-                        width: 52px;
-                        height: 52px;
-                    }
-                }
-            }
-            
-            /* СТИЛИ ДЛЯ СЛАЙДЕРА КОНФИГУРАЦИЙ ТРАСС */
-            .fm8-track-config-slider {
-              width:100%;
-              overflow:hidden;
-            }
-            
-            .fm8-track-config-container {
-              display:flex;
-              gap:8px;
-              padding:4px 0;
-            }
-            
-            .fm8-track-config-item {
-              padding:6px 12px;
-              border-radius:999px;
-              border:1px solid #cbd5e1;
-              background:#f8fafc;
-              font-size:0.8rem;
-              text-transform:none;
-              cursor:pointer;
-              color:#475569;
-              transition:all .18s ease;
-              white-space:nowrap;
-              min-width:80px;
-              text-align:center;
-            }
-            
-            .fm8-track-config-item.active {
-              background:#2563eb;
-              border-color:#2563eb;
-              color:#ffffff;
-            }
-            
-            .fm8-track-config-content {
-              margin-top:12px;
-              padding:12px;
-              background:#f1f5f9;
-              border-radius:8px;
-              border:1px solid #e2e8f0;
-              font-size:0.9rem;
-              color:#334155;
-            }
-            
-            .fm8-config-pane {
-              display:none;
-            }
-            
-            .fm8-config-pane.active {
-              display:block;
-            }
-
-            .fm8-subtabs{
-              display:flex;
-              flex-wrap:wrap;
-              gap:6px;
-              margin:0 0 14px;
-            }
-            .fm8-subtab{
-              padding:6px 12px;
-              border-radius:999px;
-              border:1px solid #d4d4d8;
-              background:#f9fafb;
-              font-size:0.75rem;
-              text-transform:uppercase;
-              letter-spacing:0.08em;
-              cursor:pointer;
-              color:#0f172a;
-              transition:all .16s ease;
-            }
-            .fm8-subtab.active{
-              background:#0f172a;
-              color:#ffffff;
-              border-color:#0f172a;
-            }
-            .fm8-subpane{display:none;}
-            .fm8-subpane.active{display:block;}
-
-            @media (max-width:1100px){
-              .fm8-pane-grid{grid-template-columns:minmax(0,1fr);}
-            }
-            @media (max-width:768px){
-              .fm8-main-section{padding:60px 16px 70px;}
-              .fm8-main-title{font-size:2.1rem;}
-              .fm8-main-heading{align-items:flex-start;}
-            }
-            @media (max-width:520px){
-              .fm8-main-title{font-size:1.7rem;}
-              .fm8-pane-block{padding:18px 18px;}
-              .fm8-mini-grid{grid-template-columns:minmax(0,1fr);}
-            }
-            @media (orientation:landscape) and (max-height:520px){
-              .fm8-main-section{padding:40px 16px 50px;}
-              .fm8-main-title{font-size:1.5rem;}
-            }
-        </style>
-
-        <div class="fm8-main-inner">
-
-            <div class="fm8-main-heading">
-                <div class="fm8-main-title-wrapper">
-                    <h1 class="fm8-main-title">Forza Motorsport</h1>
-                    <p class="fm8-main-subtitle">
-                        Главная секция об игре: кто её делает, на чём она построена, как устроена физика,
-                        какие есть режимы, трассы, автомобили и как игра развивается после релиза.
-                    </p>
-                </div>
-                <div class="fm8-main-image-wrapper">
-                    <img src="/images/forza-placeholder.jpg" alt="Forza Motorsport" style="width: 100%; height: 300px; object-fit: cover; border: 3px solid #2563eb; border-radius: 12px; box-shadow: 0 4px 24px rgba(37, 99, 235, 0.3);">
-                </div>
+<main class="w-full">
+    <!-- HERO SECTION -->
+    <section class="hero-bg py-24 px-4 relative">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-block mb-4 px-4 py-1.5 bg-[#2563eb] text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                Turn 10 Studios × Xbox Game Studios
             </div>
-
-            <div class="fm8-main-meta">
-                <div class="fm8-main-meta-item">Разработчик: Turn 10 Studios</div>
-                <div class="fm8-main-meta-item">Издатель: Xbox Game Studios</div>
-                <div class="fm8-main-meta-item">Платформы: PC, Xbox Series X|S</div>
-                <div class="fm8-main-meta-item">Движок: ForzaTech</div>
-            </div>
-
-            <div class="fm8-main-tabs">
-                <button class="fm8-main-tab active" data-main-tab="overview">Об игре</button>
-                <button class="fm8-main-tab" data-main-tab="physics">Физика и технологии</button>
-                <button class="fm8-main-tab" data-main-tab="tracks">Трассы</button>
-                <button class="fm8-main-tab" data-main-tab="cars">Автомобили</button>
-                <button class="fm8-main-tab" data-main-tab="modes">Режимы</button>
-                <button class="fm8-main-tab" data-main-tab="updates">Обновления и будущее</button>
-            </div>
-
-            <div class="fm8-main-content">
-
-                <!-- ОБ ИГРЕ -->
-                <div id="overview" class="fm8-main-pane active">
-                    <div class="fm8-pane-grid">
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Что это за игра</h3>
-                                <p>
-                                    Forza Motorsport (2023) — перезапуск трассовой серии Forza. Это не открытый мир,
-                                    а именно гоночный симулятор с упором на стабильный темп, работу с резиной,
-                                    траекторию и аккуратное управление машиной на пределе.
-                                </p>
-                                <p>
-                                    Игра строится вокруг заездов на закрытых автодромах, квалификаций, серий и
-                                    долгой работы с одной и той же машиной: настройка, прокачка, понимание поведения
-                                    на разных трассах и в разных условиях.
-                                </p>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Кто делает игру</h3>
-                                <table class="fm8-table">
-                                    <tr><th>Студия</th><td>Turn 10 Studios (в составе Xbox Game Studios)</td></tr>
-                                    <tr><th>Опыт</th><td>Серия Forza Motorsport с 2005 года</td></tr>
-                                    <tr><th>Фокус</th><td>Трассовый симулятор, физика, онлайновые серии</td></tr>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Тип</div>
-                                    <div class="fm8-mini-value">Трассовый симулятор</div>
-                                    <div class="fm8-mini-note">Закрытые автодромы, серия за серией</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Автомобили</div>
-                                    <div class="fm8-mini-value">500+ машин</div>
-                                    <div class="fm8-mini-note">Дорожные, GT, прототипы, классика</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Трассы</div>
-                                    <div class="fm8-mini-value">28+ автодромов</div>
-                                    <div class="fm8-mini-note">С разными конфигурациями</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Онлайн</div>
-                                    <div class="fm8-mini-value">Серии и рейтинги</div>
-                                    <div class="fm8-mini-note">Сетевые чемпионаты и расписания</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <h1 class="text-white font-black text-4xl md:text-5xl leading-tight mb-4">Forza Motorsport 8</h1>
+            <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light">
+                Новая эра автосимуляторов. Переосмысленная физика, реальные трассы и сотни автомобилей — в одной игре.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <div class="stat-pill">
+                    <span>🗓️</span> 10 октября 2023
                 </div>
-
-                <!-- ФИЗИКА И ТЕХНОЛОГИИ -->
-                <div id="physics" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-                        <div>
-                            <div class="fm8-pane-block">
-                                <div class="fm8-subtabs">
-                                    <button class="fm8-subtab active" data-subtab-group="physics" data-subtab="tires">Шины</button>
-                                    <button class="fm8-subtab" data-subtab-group="physics" data-subtab="aero">Аэродинамика</button>
-                                    <button class="fm8-subtab" data-subtab-group="physics" data-subtab="surface">Покрытие и погода</button>
-                                    <button class="fm8-subtab" data-subtab-group="physics" data-subtab="damage">Повреждения</button>
-                                </div>
-
-                                <div id="physics-tires" class="fm8-subpane active">
-                                    <h3>Модель шин</h3>
-                                    <p>
-                                        В новой Forza переработана модель сцепления: учитывается прогрев, давление,
-                                        износ и работа шины в разных фазах поворота. Ошибки на входе и выходе
-                                        чувствуется сильнее, чем в старых частях, а стабильный темп важнее
-                                        одиночных быстрых кругов.
-                                    </p>
-                                    <ul>
-                                        <li>Температура и состояние поверхности шины</li>
-                                        <li>Разная чувствительность к перегреву для типов резины</li>
-                                        <li>Более честное боковое скольжение и возврат сцепления</li>
-                                    </ul>
-                                </div>
-
-                                <div id="physics-aero" class="fm8-subpane">
-                                    <h3>Аэродинамика</h3>
-                                    <p>
-                                        Аэродинамика учитывает прижимную силу и сопротивление в зависимости
-                                        от скорости и настроек обвеса. Агрессивные настройки крыла дают
-                                        стабильность в быстрых поворотах ценой максималки на прямых.
-                                    </p>
-                                </div>
-
-                                <div id="physics-surface" class="fm8-subpane">
-                                    <h3>Покрытие, время суток и погода</h3>
-                                    <p>
-                                        Состояние трассы меняется: температура асфальта, уровень сцепления,
-                                        линия, по которой ездит пелотон. Время суток и погода добавляют
-                                        освещение, влажность и видимость — картинка и поведение машины
-                                        меняются по ходу заезда.
-                                    </p>
-                                </div>
-
-                                <div id="physics-damage" class="fm8-subpane">
-                                    <h3>Модель повреждений</h3>
-                                    <p>
-                                        Повреждения влияют на управляемость: можно повредить подвеску,
-                                        аэродинамику, тормоза, радиатор. Жёсткие контакты и удары по поребрикам
-                                        отражаются на темпе и стабильности машины.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Технологии рендера</h3>
-                                <ul>
-                                    <li>Детализированное освещение трассы и автомобиля</li>
-                                    <li>Материалы кузова, шин и асфальта с разным поведением света</li>
-                                    <li>Динамическое время суток и изменение картинки по ходу заезда</li>
-                                </ul>
-                            </div>
-
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Движок</div>
-                                    <div class="fm8-mini-value">ForzaTech</div>
-                                    <div class="fm8-mini-note">Собственный движок серии Forza</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Фокус</div>
-                                    <div class="fm8-mini-value">Темп и стабильность</div>
-                                    <div class="fm8-mini-note">Физика важнее эффектов</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="stat-pill">
+                    <span>🎮</span> Xbox Series X|S, PC
                 </div>
-
-                <!-- ТРАССЫ -->
-                <div id="tracks" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Каталог трасс</h3>
-                                <p>
-                                    Forza Motorsport включает в себя как реальные, так и вымышленные автодромы. Каждая трасса тщательно сканирована или стилистически воссоздана. Выберите трассу из вкладок ниже, чтобы увидеть подробную информацию.
-                                </p>
-                                
-                                <!-- СЛАЙДЕР С ВКЛАДКАМИ ТРАСС -->
-                                <div class="fm8-tracks-slider">
-                                    <div class="fm8-tracks-carousel">
-                                        <button class="fm8-tracks-prev" aria-label="Предыдущая трасса">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M15 19L8 12L15 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
-                                        
-                                        <div class="fm8-tracks-wrapper">
-                                            <div class="fm8-tracks-container">
-                                                <button class="fm8-tracks-item active" data-track="spa">
-                                                    <span>Spa-Francorchamps</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="silverstone">
-                                                    <span>Silverstone</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="suzuka">
-                                                    <span>Suzuka</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="laguna">
-                                                    <span>Laguna Seca</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="daytona">
-                                                    <span>Daytona</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="barcelona">
-                                                    <span>Barcelona-Catalunya</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="nurburgring">
-                                                    <span>Nürburgring</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="hakone">
-                                                    <span>Hakone Highland</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="indy">
-                                                    <span>Indianapolis</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="brands_hatch">
-                                                    <span>Brands Hatch</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="hockenheim">
-                                                    <span>Hockenheimring</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="kyalami">
-                                                    <span>Kyalami</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="panorama">
-                                                    <span>Mount Panorama</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="yas_marina">
-                                                    <span>Yas Marina</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="fujimi_kaido">
-                                                    <span>Fujimi Kaido</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="sunset_peninsula">
-                                                    <span>Sunset Peninsula</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="eaglerock">
-                                                    <span>Eaglerock Speedway</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="grand_oak">
-                                                    <span>Grand Oak Raceway</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="homestead">
-                                                    <span>Homestead-Miami</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="le_mans">
-                                                    <span>Le Mans</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="lime_rock">
-                                                    <span>Lime Rock Park</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="road_atlanta">
-                                                    <span>Road Atlanta</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="mid_ohio">
-                                                    <span>Mid-Ohio</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="maple_valley">
-                                                    <span>Maple Valley</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="mugello">
-                                                    <span>Mugello</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="road_america">
-                                                    <span>Road America</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="sebring">
-                                                    <span>Sebring</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="vir">
-                                                    <span>VIR</span>
-                                                </button>
-                                                <button class="fm8-tracks-item" data-track="watkins_glen">
-                                                    <span>Watkins Glen</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        
-                                        <button class="fm8-tracks-next" aria-label="Следующая трасса">
-                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="fm8-tracks-content">
-                                        <div id="track-spa" class="fm8-track-pane active">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Circuit de Spa-Francorchamps</td></tr>
-                                                <tr><th>Расположение</th><td>Бельгия</td></tr>
-                                                <tr><th>Длина</th><td>7.004 км</td></tr>
-                                                <tr><th>Особенности</th><td>Классическая трасса с Eau Rouge, Raidillon и переменной погодой</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Silverstone -->
-                                        <div id="track-silverstone" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Silverstone Circuit</td></tr>
-                                                <tr><th>Расположение</th><td>Великобритания</td></tr>
-                                                <tr><th>Длина</th><td>5.891 км</td></tr>
-                                                <tr><th>Особенности</th><td>Быстрая трасса с Maggotts-Becketts-Chapel</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Suzuka -->
-                                        <div id="track-suzuka" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Suzuka Circuit</td></tr>
-                                                <tr><th>Расположение</th><td>Япония</td></tr>
-                                                <tr><th>Длина</th><td>5.807 км</td></tr>
-                                                <tr><th>Особенности</th><td>Уникальная "восьмёрка", 130R, техничный серпантин</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Laguna Seca -->
-                                        <div id="track-laguna" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Laguna Seca</td></tr>
-                                                <tr><th>Расположение</th><td>США</td></tr>
-                                                <tr><th>Длина</th><td>3.607 км</td></tr>
-                                                <tr><th>Особенности</th><td>Знаменитый "штопор" (Corkscrew), подъём и перепад высот</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Daytona -->
-                                        <div id="track-daytona" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr>
-                                                    <th>Трасса</th>
-                                                    <td>
-                                                        <div class="fm8-track-config-slider">
-                                                            <div class="fm8-track-config-container">
-                                                                <button class="fm8-track-config-item active" data-config="oval">Овал</button>
-                                                                <button class="fm8-track-config-item" data-config="roval">ROVAL</button>
-                                                                <button class="fm8-track-config-item" data-config="motorsports">MotorSports</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr><th>Расположение</th><td>США</td></tr>
-                                                <tr><th>Длина</th><td>5.729 км (Oval)</td></tr>
-                                                <tr><th>Особенности</th><td>Легендарная овальная трасса с высокими поворотами</td></tr>
-                                            </table>
-                                            <div class="fm8-track-config-content">
-                                                <div id="config-oval" class="fm8-config-pane active">
-                                                    <strong>Oval</strong>: Основная конфигурация. Длина: 5.729 км.
-                                                </div>
-                                                <div id="config-roval" class="fm8-config-pane">
-                                                    <strong>ROVAL</strong>: Комбинированная. Длина: 5.730 км.
-                                                </div>
-                                                <div id="config-motorsports" class="fm8-config-pane">
-                                                    <strong>MotorSports Blvd</strong>: Внутренний контур. Длина: 4.28 км.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Barcelona -->
-                                        <div id="track-barcelona" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Circuit de Barcelona-Catalunya</td></tr>
-                                                <tr><th>Расположение</th><td>Испания</td></tr>
-                                                <tr><th>Длина</th><td>4.655 км</td></tr>
-                                                <tr><th>Особенности</th><td>Техничная трасса, используется для тестов F1</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Nürburgring: заменяем существующий блок на версию с конфигурациями -->
-                                        <div id="track-nurburgring" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr>
-            <th>Трасса</th>
-            <td>
-                <div class="fm8-track-config-slider">
-                    <div class="fm8-track-config-container">
-                        <button class="fm8-track-config-item active" data-config="nurburgring-gp">GP-Strecke</button>
-                        <button class="fm8-track-config-item" data-config="nurburgring-ns">Nordschleife</button>
-                        <button class="fm8-track-config-item" data-config="nurburgring-full">Full Circuit</button>
-                    </div>
+                <div class="stat-pill">
+                    <span>🚗</span> 500+ автомобилей
                 </div>
-            </td>
-        </tr>
-        <tr><th>Расположение</th><td>Германия</td></tr>
-        <tr><th>Особенности</th><td>Легендарная "Зелёная ада", техничная и требовательная трасса</td></tr>
-    </table>
-    <div class="fm8-track-config-content">
-        <div id="config-nurburgring-gp" class="fm8-config-pane active">
-            <strong>GP-Strecke</strong>: Официальная гоночная конфигурация. Длина: 5.148 км.
-        </div>
-        <div id="config-nurburgring-ns" class="fm8-config-pane">
-            <strong>Nordschleife</strong>: Легендарная "Северная петля". Длина: 20.832 км.
-        </div>
-        <div id="config-nurburgring-full" class="fm8-config-pane">
-            <strong>Full Circuit</strong>: GP-Strecke + Nordschleife. Длина: ~26 км.
-        </div>
-    </div>
-</div>
-
-                                        <!-- Hakone (вымышленная, но "в игре") -->
-        <div id="track-hakone" class="fm8-track-pane">
-            <table class="fm8-table">
-                <tr>
-                    <th>Трасса</th>
-                    <td>
-                        <div class="fm8-track-config-slider">
-                            <div class="fm8-track-config-container">
-                                <button class="fm8-track-config-item active" data-config="hakone-full">Полная</button>
-                                <button class="fm8-track-config-item" data-config="hakone-short">Короткая</button>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr><th>Расположение</th><td>Вымышленная трасса (в стиле Японии)</td></tr>
-                <tr><th>Тип</th><td>Вымышленный автодром</td></tr>
-                <tr><th>Конфигурации</th><td>2 (Полная и Короткая)</td></tr>
-                <tr><th>Направления</th><td>Обычное и Обратное</td></tr>
-                <tr><th>Особенности</th><td>Современный гоночный автодром в японском стиле, созданный специально для игры. Подходит для разнообразных серий и испытаний.</td></tr>
-            </table>
-            <div class="fm8-track-config-content">
-                <div id="config-hakone-full" class="fm8-config-pane active">
-                    <strong>Полная конфигурация</strong>: Основная версия трассы с полным набором поворотов.
-                </div>
-                <div id="config-hakone-short" class="fm8-config-pane">
-                    <strong>Короткая конфигурация</strong>: Упрощённая и более динамичная версия трассы.
+                <div class="stat-pill">
+                    <span>🏁</span> 28+ трасс
                 </div>
             </div>
         </div>
-
-                                        <!-- Indianapolis -->
-                                        <div id="track-indy" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Indianapolis Motor Speedway RC</td></tr>
-                                                <tr><th>Расположение</th><td>США</td></tr>
-                                                <tr><th>Длина</th><td>4.192 км</td></tr>
-                                                <tr><th>Особенности</th><td>Комбинированная трасса с овала, используется в IMSA</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Brands Hatch -->
-                                        <div id="track-brands_hatch" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Brands Hatch</td></tr>
-                                                <tr><th>Расположение</th><td>Великобритания</td></tr>
-                                                <tr><th>Длина</th><td>4.207 км</td></tr>
-                                                <tr><th>Особенности</th><td>Классическая британская трасса с быстрыми поворотами и перепадами высот</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Hockenheimring -->
-                                        <div id="track-hockenheim" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Hockenheimring</td></tr>
-                                                <tr><th>Расположение</th><td>Германия</td></tr>
-                                                <tr><th>Длина</th><td>4.574 км</td></tr>
-                                                <tr><th>Особенности</th><td>Современная трасса с длинными прямыми и скоростными поворотами</td></tr>
-                                            </table>
-                                        </div>
-
-                                    </div>
-
-                                        <!-- Kyalami -->
-                                        <div id="track-kyalami" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Kyalami Grand Prix Circuit</td></tr>
-                                                <tr><th>Расположение</th><td>Южно-Африканская Республика</td></tr>
-                                                <tr><th>Длина</th><td>4.525 км</td></tr>
-                                                <tr><th>Особенности</th><td>Техничная трасса с быстрыми поворотами и перепадами высот</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Sunset Peninsula -->
-                                        <div id="track-sunset_peninsula" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Sunset Peninsula</td></tr>
-                                                <tr><th>Расположение</th><td>Вымышленная трасса</td></tr>
-                                                <tr><th>Длина</th><td>5.120 км</td></tr>
-                                                <tr><th>Особенности</th><td>Комбинированная трасса с городскими улицами и прибрежными участками</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Mount Panorama -->
-                                        <div id="track-panorama" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Mount Panorama</td></tr>
-                                                <tr><th>Расположение</th><td>Батманс-Бей, Австралия</td></tr>
-                                                <tr><th>Длина</th><td>6.213 км</td></tr>
-                                                <tr><th>Особенности</th><td>Известная трасса с гонками Bathurst 1000, сложный рельеф и перепад высот</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Yas Marina -->
-                                        <div id="track-yas_marina" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Yas Marina Circuit</td></tr>
-                                                <tr><th>Расположение</th><td>Абу-Даби, ОАЭ</td></tr>
-                                                <tr><th>Длина</th><td>5.554 км</td></tr>
-                                                <tr><th>Особенности</th><td>Трасса с ночными гонками Формулы 1, современная инфраструктура и температура до 50°C</td></tr>
-                                            </table>
-                                        </div>
-
-                                        <!-- Fujimi Kaidō -->
-                                        <div id="track-fujimi_kaido" class="fm8-track-pane">
-                                            <table class="fm8-table">
-                                                <tr><th>Трасса</th><td>Fujimi Kaidō</td></tr>
-                                                <tr><th>Расположение</th><td>Япония</td></tr>
-                                                <tr><th>Длина</th><td>3.820 км</td></tr>
-                                                <tr><th>Особенности</th><td>Горная трасса с множеством поворотов, популярная у дрифтеров и любителей тюнинга</td></tr>
-                                            </table>
-                                        </div>
-
-                                    </div>
-
-<!-- Eaglerock Speedway -->
-<div id="track-eaglerock" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Eaglerock Speedway</td></tr>
-        <tr><th>Расположение</th><td>Вымышленная трасса</td></tr>
-        <tr><th>Длина</th><td>4.200 км</td></tr>
-        <tr><th>Тип</th><td>Комбинированный автодром</td></tr>
-        <tr><th>Особенности</th><td>Горная трасса с резкими поворотами и перепадами высот, вдохновлённая реальными треками США.</td></tr>
-    </table>
-</div>
-
-<!-- Grand Oak Raceway -->
-<div id="track-grand_oak" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Grand Oak Raceway</td></tr>
-        <tr><th>Расположение</th><td>Вымышленная трасса</td></tr>
-        <tr><th>Длина</th><td>5.600 км</td></tr>
-        <tr><th>Тип</th><td>Международный автодром</td></tr>
-        <tr><th>Особенности</th><td>Современный трек с длинными прямыми и техничными зонами, идеален для GT-гоночных серий.</td></tr>
-    </table>
-</div>
-
-<!-- Homestead-Miami Speedway -->
-<div id="track-homestead" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Homestead-Miami Speedway</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>2.414 км (Oval)</td></tr>
-        <tr><th>Особенности</th><td>Овальная трасса с медленным поворотом, используется в NASCAR и IMSA.</td></tr>
-    </table>
-</div>
-
-<!-- Le Mans - Circuit de la Sarthe -->
-<div id="track-le_mans" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Circuit de la Sarthe</td></tr>
-        <tr><th>Расположение</th><td>Франция</td></tr>
-        <tr><th>Длина</th><td>13.629 км</td></tr>
-        <tr><th>Особенности</th><td>Легендарная трасса 24 часов Ле-Мана, сочетает автодром и общественные дороги.</td></tr>
-    </table>
-</div>
-
-<!-- Lime Rock Park -->
-<div id="track-lime_rock" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Lime Rock Park</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>1.478 км</td></tr>
-        <tr><th>Особенности</th><td>Короткая, но техничная трасса в Новой Англии, популярна у GT-гонщиков.</td></tr>
-    </table>
-</div>
-
-<!-- Michelin Raceway Road Atlanta -->
-<div id="track-road_atlanta" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Road Atlanta</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>4.088 км</td></tr>
-        <tr><th>Особенности</th><td>Известна "Эль Торо" — сложным спуском и быстрым поворотом. Используется в IMSA.</td></tr>
-    </table>
-</div>
-
-<!-- Mid-Ohio Sports Car Course -->
-<div id="track-mid_ohio" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Mid-Ohio Sports Car Course</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>3.957 км</td></tr>
-        <tr><th>Особенности</th><td>Техничная трасса с множеством поворотов, часто используется в IndyCar.</td></tr>
-    </table>
-</div>
-
-<!-- Mobil 1 Presents Maple Valley -->
-<div id="track-maple_valley" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Maple Valley Raceway</td></tr>
-        <tr><th>Расположение</th><td>Вымышленная трасса</td></tr>
-        <tr><th>Длина</th><td>4.800 км</td></tr>
-        <tr><th>Тип</th><td>Лесной автодром</td></tr>
-        <tr><th>Особенности</th><td>Трасса среди лесов и холмов, с переменной погодой и освещением.</td></tr>
-    </table>
-</div>
-
-<!-- Mugello Circuit -->
-<div id="track-mugello" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Mugello Circuit</td></tr>
-        <tr><th>Расположение</th><td>Италия</td></tr>
-        <tr><th>Длина</th><td>5.245 км</td></tr>
-        <tr><th>Особенности</th><td>Быстрая и техничная трасса, домашняя база Ducati в MotoGP.</td></tr>
-    </table>
-</div>
-
-<!-- Road America -->
-<div id="track-road_america" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Road America</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>6.437 км</td></tr>
-        <tr><th>Особенности</th><td>Одна из самых длинных и разнообразных трасс в США, с быстрыми поворотами и подъёмами.</td></tr>
-    </table>
-</div>
-
-<!-- Sebring International Raceway -->
-<div id="track-sebring" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Sebring International Raceway</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>6.019 км</td></tr>
-        <tr><th>Особенности</th><td>Жёсткая трасса с бетонными участками, известна 12 часами Себринга.</td></tr>
-    </table>
-</div>
-
-<!-- Virginia International Raceway -->
-<div id="track-vir" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Virginia International Raceway</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>5.190 км</td></tr>
-        <tr><th>Особенности</th><td>Техничная трасса с большим количеством поворотов, популярна у любителей симуляторов.</td></tr>
-    </table>
-</div>
-
-<!-- Watkins Glen International -->
-<div id="track-watkins_glen" class="fm8-track-pane">
-    <table class="fm8-table">
-        <tr><th>Трасса</th><td>Watkins Glen International</td></tr>
-        <tr><th>Расположение</th><td>США</td></tr>
-        <tr><th>Длина</th><td>5.435 км</td></tr>
-        <tr><th>Особенности</th><td>Классическая трасса с живописным окружением, ранее принимала Формулу 1.</td></tr>
-    </table>
-</div>
-
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Характер трасс</h3>
-                                <ul>
-                                    <li><strong>Скоростные:</strong> Spa-Francorchamps, Silverstone, Hockenheimring</li>
-                                    <li><strong>Техничные:</strong> Suzuka, Barcelona-Catalunya, Nürburgring</li>
-                                    <li><strong>Комбинированные:</strong> Laguna Seca, Indianapolis, Mount Panorama</li>
-                                    <li><strong>Овальные трассы:</strong> Daytona, Indianapolis Oval</li>
-                                    <li><strong>Сложный рельеф:</strong> Mount Panorama (174 м), Laguna Seca (52 м), Brands Hatch</li>
-                                    <li><strong>Вымышленные трассы:</strong> Fujimi Kaidō, Sunset Peninsula, Hakone Raceway</li>
-                                </ul>
-                            </div>
-
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Конфигурации</div>
-                                    <div class="fm8-mini-value">2-5 на трассу</div>
-                                    <div class="fm8-mini-note">Полная, короткая, прямые, квалификация</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Онлайн</div>
-                                    <div class="fm8-mini-value">Рейтинги и серии</div>
-                                    <div class="fm8-mini-note">Организованные соревнования</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- АВТОМОБИЛИ -->
-                <div id="cars" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Каталог реальных автомобилей</h3>
-                                <p>
-                                    Forza Motorsport предлагает обширный каталог реальных автомобилей от ведущих мировых производителей, 
-                                    включая современные спортивные модели, легендарные гоночные машины и редкие экземпляры. Каждый автомобиль 
-                                    тщательно сканирован и воссоздан с высокой точностью, включая детализированную физику и звук.
-                                </p>
-                                <table class="fm8-table">
-                                    <tr><th>Автомобиль</th><th>Производитель</th><th>Год</th><th>Тип</th><th>Мощность</th></tr>
-                                    <tr><td>Ford GT '17</td><td>Ford</td><td>2017</td><td>Гиперкар</td><td>647 л.с.</td></tr>
-                                    <tr><td>Lamborghini Huracán ST</td><td>Lamborghini</td><td>2015</td><td>Суперкар</td><td>610 л.с.</td></tr>
-                                    <tr><td>Porsche 911 GT3 '22</td><td>Porsche</td><td>2022</td><td>Гоночный GT</td><td>510 л.с.</td></tr>
-                                    <tr><td>Ferrari 488 GT3 Evo 2020</td><td>Ferrari</td><td>2020</td><td>Гоночный GT</td><td>510 л.с.</td></tr>
-                                    <tr><td>Nissan GT-R NISMO '17</td><td>Nissan</td><td>2017</td><td>Гоночный GT</td><td>600 л.с.</td></tr>
-                                    <tr><td>BMW M4 GT3</td><td>BMW</td><td>2022</td><td>Гоночный GT</td><td>585 л.с.</td></tr>
-                                    <tr><td>McLaren 720S GT3</td><td>McLaren</td><td>2019</td><td>Гоночный GT</td><td>585 л.с.</td></tr>
-                                    <tr><td>Audi R8 LMS GT3 Evo II</td><td>Audi</td><td>2020</td><td>Гоночный GT</td><td>570 л.с.</td></tr>
-                                    <tr><td>Toyota GR Supra GT4</td><td>Toyota</td><td>2020</td><td>Гоночный GT</td><td>500 л.с.</td></tr>
-                                    <tr><td>Chevrolet Corvette C8.R</td><td>Chevrolet</td><td>2020</td><td>Гоночный прототип</td><td>500 л.с.</td></tr>
-                                    <tr><td>Mercedes-AMG GT3</td><td>Mercedes-Benz</td><td>2020</td><td>Гоночный GT</td><td>585 л.с.</td></tr>
-                                    <tr><td>Alpine A110 GT4</td><td>Alpine</td><td>2018</td><td>Гоночный GT</td><td>400 л.с.</td></tr>
-                                    <tr><td>Porsche 911 RSR (991)</td><td>Porsche</td><td>2017</td><td>Гоночный GT</td><td>510 л.с.</td></tr>
-                                    <tr><td>Lexus RC F GT3</td><td>Lexus</td><td>2016</td><td>Гоночный GT</td><td>550 л.с.</td></tr>
-                                    <tr><td>Bentley Continental GT3</td><td>Bentley</td><td>2018</td><td>Гоночный GT</td><td>550 л.с.</td></tr>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Классификация автомобилей</h3>
-                                <ul>
-                                    <li><strong>Гоночные GT:</strong> Ferrari 488 GT3, Porsche 911 GT3, BMW M4 GT3</li>
-                                    <li><strong>Гиперкары:</strong> Ford GT '17, Lamborghini Huracán ST</li>
-                                    <li><strong>Прототипы:</strong> Chevrolet Corvette C8.R, Porsche 911 RSR</li>
-                                    <li><strong>Серийные спорткары:</strong> Nissan GT-R, Mercedes-AMG GT</li>
-                                    <li><strong>Классика:</strong> Toyota Supra, BMW M3 E46</li>
-                                </ul>
-                            </div>
-
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Количество</div>
-                                    <div class="fm8-mini-value">500+ моделей</div>
-                                    <div class="fm8-mini-note">Реальные автомобили и трек-спецификации</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Физика</div>
-                                    <div class="fm8-mini-value">Точная симуляция</div>
-                                    <div class="fm8-mini-note">Реальное поведение на трассе</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- РЕЖИМЫ -->
-                <div id="modes" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Карьера</h3>
-                                <p>
-                                    Карьера строится вокруг серий и классов машин: цепочки событий,
-                                    освоение техники, работа с резиной и темпом. Важна не только
-                                    позиция, но и стабильность и чистота езды.
-                                </p>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Онлайн‑гонки</h3>
-                                <ul>
-                                    <li>Серии с расписанием и классами машин</li>
-                                    <li>Система рейтингов и подбора соперников</li>
-                                    <li>Фокус на чистой езде и дистанции, а не на хаосе</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Практика и тесты</h3>
-                                <p>
-                                    Можно отдельно тренировать трассы, машины и настройки: отрабатывать
-                                    связки поворотов, торможения, работу с газом и рулём. Здесь рождаются
-                                    твои пресеты и понимание поведения машины.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ОБНОВЛЕНИЯ И БУДУЩЕЕ -->
-                <div id="updates" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Поддержка после релиза</h3>
-                                <p>
-                                    Игра развивается через обновления: выходят новые машины и трассы,
-                                    корректируется физика, баланс классов и работа отдельных режимов.
-                                    Появляются сезонные события и временные серии.
-                                </p>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Чего ждать дальше</h3>
-                                <ul>
-                                    <li>Расширение автопарка и дивизионов</li>
-                                    <li>Новые конфигурации трасс и события</li>
-                                    <li>Доработка онлайна и рейтинговых систем</li>
-                                    <li>Тонкая настройка физики по обратной связи от игроков</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Формат</div>
-                                    <div class="fm8-mini-value">«Живая» игра</div>
-                                    <div class="fm8-mini-note">Контент и баланс меняются со временем</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Роль сайта</div>
-                                    <div class="fm8-mini-value">Твои серии и настройки</div>
-                                    <div class="fm8-mini-note">Здесь живут пресеты и разборы</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <script>
-                        // Переключение основных вкладок
-            document.querySelectorAll('.fm8-main-tab').forEach(btn => {
-              btn.addEventListener('click', () => {
-                const id = btn.dataset.mainTab;
-                document.querySelectorAll('.fm8-main-tab').forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('.fm8-main-pane').forEach(p => p.classList.remove('active'));
-                btn.classList.add('active');
-                const pane = document.getElementById(id);
-                if (pane) pane.classList.add('active');
-              });
-            });
-
-            // Переключение подвкладок (субтабов)
-            document.querySelectorAll('.fm8-subtab').forEach(btn => {
-              btn.addEventListener('click', () => {
-                const group = btn.dataset.subtabGroup;
-                const id = btn.dataset.subtab;
-
-                document.querySelectorAll('.fm8-subtab[data-subtab-group="'+group+'"]')
-                  .forEach(b => b.classList.remove('active'));
-                document.querySelectorAll('#'+group+' .fm8-subpane')
-                  .forEach(p => p.classList.remove('active'));
-
-                btn.classList.add('active');
-                const pane = document.getElementById(group+'-'+id);
-                if(pane) pane.classList.add('active');
-              });
-            });
-            
-            // === УЛУЧШЕННЫЙ СЛАЙДЕР ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ ===
-            const tracksContainer = document.querySelector('.fm8-tracks-container');
-            const trackItems = document.querySelectorAll('.fm8-tracks-item');
-            const prevButton = document.querySelector('.fm8-tracks-prev');
-            const nextButton = document.querySelector('.fm8-tracks-next');
-            let currentIndex = 0;
-            const trackIds = [
-              'spa', 'silverstone', 'suzuka', 'laguna', 'daytona', 'barcelona', 'nurburgring',
-              'hakone', 'indy', 'brands_hatch', 'hockenheim', 'kyalami', 'panorama', 'yas_marina',
-              'fujimi_kaido', 'sunset_peninsula', 'eaglerock', 'grand_oak', 'homestead', 'le_mans',
-              'lime_rock', 'road_atlanta', 'mid_ohio', 'maple_valley', 'mugello', 'road_america',
-              'sebring', 'vir', 'watkins_glen'
-            ];
-
-            // Переключение трассы
-            function switchTrack(index) {
-              // Обновляем контент
-              document.querySelectorAll('.fm8-track-pane').forEach(pane => pane.classList.remove('active'));
-              const pane = document.getElementById('track-' + trackIds[index]);
-              if (pane) pane.classList.add('active');
-
-              // Обновляем активный элемент
-              trackItems.forEach(item => item.classList.remove('active'));
-              trackItems[index].classList.add('active');
-
-              // Прокручиваем к активному элементу (для мобильных)
-              trackItems[index].scrollIntoView({
-                behavior: 'smooth',
-                block: 'nearest',
-                inline: 'center'
-              });
-
-              currentIndex = index;
-            }
-
-            // Клик по кнопкам трасс
-            trackItems.forEach((item, index) => {
-              item.addEventListener('click', () => {
-                switchTrack(index);
-              });
-            });
-
-            // Стрелки
-            prevButton.addEventListener('click', () => {
-              currentIndex = (currentIndex - 1 + trackIds.length) % trackIds.length;
-              switchTrack(currentIndex);
-            });
-
-            nextButton.addEventListener('click', () => {
-              currentIndex = (currentIndex + 1) % trackIds.length;
-              switchTrack(currentIndex);
-            });
-
-            // Инициализация
-            switchTrack(0);
-
-            // === ДОПОЛНИТЕЛЬНО: свайп на мобильных (через touch события) ===
-            let touchStartX = 0;
-            let touchEndX = 0;
-
-            tracksContainer.addEventListener('touchstart', e => {
-              touchStartX = e.changedTouches[0].screenX;
-            }, false);
-
-            tracksContainer.addEventListener('touchend', e => {
-              touchEndX = e.changedTouches[0].screenX;
-              if (touchStartX - touchEndX > 50) {
-                // Свайп влево → следующая
-                currentIndex = (currentIndex + 1) % trackIds.length;
-                switchTrack(currentIndex);
-              }
-              if (touchEndX - touchStartX > 50) {
-                // Свайп вправо ← предыдущая
-                currentIndex = (currentIndex - 1 + trackIds.length) % trackIds.length;
-                switchTrack(currentIndex);
-              }
-            }, false);
-            
-            // СЛАЙДЕР КОНФИГУРАЦИЙ ТРАСС
-            const configButtons = document.querySelectorAll('.fm8-track-config-item');
-            
-            configButtons.forEach(button => {
-              button.addEventListener('click', () => {
-                const configId = button.dataset.config;
-                const trackId = button.closest('.fm8-track-pane').id.replace('track-', '');
-                
-                // Обновляем вкладки конфигураций
-                configButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                
-                // Обновляем контент конфигураций
-                document.querySelectorAll('.fm8-config-pane').forEach(pane => pane.classList.remove('active'));
-                const configPane = document.getElementById('config-' + configId);
-                if (configPane) configPane.classList.add('active');
-              });
-            });
-            </script>
     </section>
 
-    <!-- НИЖЕ МОЖЕШЬ ОСТАВИТЬ/ВСТАВИТЬ СВОИ СЕКЦИИ НАСТРОЕК, КАК У ТЕБЯ БЫЛО -->
-    <!--
-    <section class="fm8-settings-section">
-      ... твои вкладки с настройками, пресетами и т.д. ...
-    </section>
-    -->
+    <!-- TABS SECTION -->
+    <section class="max-w-6xl mx-auto px-4 -mt-8 relative z-20 pb-16">
+        <!-- Tab Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="overview">
+                <span>ℹ️</span> Об игре
+            </button>
+            <button class="tab-btn" data-tab="physics">
+                <span>⚙️</span> Физика и технологии
+            </button>
+            <button class="tab-btn" data-tab="tracks">
+                <span>🗺️</span> Трассы
+            </button>
+            <button class="tab-btn" data-tab="cars">
+                <span>🚗</span> Автомобили
+            </button>
+            <button class="tab-btn" data-tab="modes">
+                <span>🎮</span> Режимы
+            </button>
+            <button class="tab-btn" data-tab="updates">
+                <span>🔄</span> Обновления
+            </button>
+        </div>
 
+        <!-- Tab Content -->
+        <div class="tabs-content">
+            <!-- OVERVIEW -->
+            <div id="overview" class="tab-content active">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">О Forza Motorsport 8</h2>
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            <strong>Forza Motorsport 8</strong> — это полный перезапуск легендарной гоночной серии от <strong>Turn 10 Studios</strong>. 
+                            Игра создавалась с нуля на протяжении шести лет и предлагает совершенно новый уровень реалистичной гоночной физики.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            Впервые в серии реализована полностью динамическая модель шин с отслеживанием состояния каждой точки контакта в реальном времени. 
+                            Каждый круг на трассе ощущается по-новому.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            Проект ориентирован как на хардкорных симрейсеров, так и на новичков — благодаря гибким настройкам сложности и системе помощи водителю.
+                        </p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#2563eb] mb-2">500+</div>
+                            <div class="text-sm text-slate-500">Автомобилей</div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#2563eb] mb-2">28+</div>
+                            <div class="text-sm text-slate-500">Трасс</div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#22c55e] mb-2">4K</div>
+                            <div class="text-sm text-slate-500">Разрешение</div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-bold text-[#22c55e] mb-2">60fps</div>
+                            <div class="text-sm text-slate-500">Рейтрейсинг</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-lg font-bold text-slate-700 mb-4">Ключевые особенности</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🔧 Новая физика</h4>
+                        <p class="text-sm text-slate-500">Полностью переработанная модель поведения автомобилей с 48-точечной моделью шин.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">☀️ Динамическое время суток</h4>
+                        <p class="text-sm text-slate-500">Реалистичная смена дня и ночи, влияющая на температуру трассы и сцепление.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🏆 Карьера Builder's Cup</h4>
+                        <p class="text-sm text-slate-500">Прогрессивная карьера с развитием автомобилей и очками опыта машин.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">👥 Мультиплеер</h4>
+                        <p class="text-sm text-slate-500">Соревновательные онлайн-гонки с рейтинговой системой Safety Rating и Skill Rating.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">✨ Ray Tracing</h4>
+                        <p class="text-sm text-slate-500">Трассировка лучей в реальном времени во время гонки — впервые в серии Forza.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4 class="font-semibold text-slate-700 mb-2">🎛️ Глубокий тюнинг</h4>
+                        <p class="text-sm text-slate-500">Детальная настройка подвески, аэродинамики, передаточных чисел и дифференциала.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHYSICS -->
+            <div id="physics" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4">Физика и технологии</h2>
+                <p class="text-slate-600 mb-6">Forza Motorsport использует передовые технологии для максимальной реалистичности.</p>
+
+                <div class="sub-tabs">
+                    <button class="sub-tab-btn active" data-subtab="tires">Модель шин</button>
+                    <button class="sub-tab-btn" data-subtab="aero">Аэродинамика</button>
+                    <button class="sub-tab-btn" data-subtab="damage">Повреждения</button>
+                    <button class="sub-tab-btn" data-subtab="render">Рендеринг</button>
+                </div>
+
+                <div id="tires" class="sub-content active">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">48-точечная модель шин</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            Каждая шина моделируется с 48 точками контакта, что позволяет точно рассчитывать сцепление, износ и температуру в реальном времени.
+                        </p>
+                        <div class="grid sm:grid-cols-3 gap-4">
+                            <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-[#2563eb]">48</div>
+                                <div class="text-xs text-slate-500 mt-1">Точек контакта</div>
+                            </div>
+                            <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-[#2563eb]">360°</div>
+                                <div class="text-xs text-slate-500 mt-1">Температурная карта</div>
+                            </div>
+                            <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-[#2563eb]">Real-time</div>
+                                <div class="text-xs text-slate-500 mt-1">Расчёт износа</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="aero" class="sub-content">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Динамическая аэродинамика</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Аэродинамическая модель учитывает форму кузова, угол атаки, скорость ветра и эффект слипстрима. 
+                            Прижимная сила изменяется в зависимости от настроек антикрыла и скорости автомобиля.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="damage" class="sub-content">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Система повреждений</h3>
+                        <p class="text-slate-600 leading-relaxed">
+                            Повреждения влияют на аэродинамику, управляемость и мощность двигателя. 
+                            Визуальные деформации кузова дополняются механическими последствиями столкновений.
+                        </p>
+                    </div>
+                </div>
+
+                <div id="render" class="sub-content">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Рендеринг нового поколения</h3>
+                        <p class="text-slate-600 leading-relaxed mb-3">
+                            Движок использует ray tracing в реальном времени для отражений, глобального освещения и теней. 
+                            Поддержка HDR и разрешения до 4K при 60 FPS.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">Ray Tracing</span>
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">HDR10</span>
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">4K 60fps</span>
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">Dynamic Lighting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRACKS -->
+            <div id="tracks" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Трассы</h2>
+                <p class="text-slate-600 mb-6">Полный каталог трасс, лазерно отсканированных для максимальной точности.</p>
+
+                <div class="track-slider" id="trackSlider"></div>
+
+                <div class="flex items-center justify-center gap-4 mt-6">
+                    <button id="prevTrack" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition">←</button>
+                    <div id="trackIndicators" class="flex gap-2"></div>
+                    <button id="nextTrack" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition">→</button>
+                </div>
+            </div>
+
+            <!-- CARS -->
+            <div id="cars" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Автомобили</h2>
+                <p class="text-slate-600 mb-6">Более 500 автомобилей от ведущих мировых производителей.</p>
+
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="car-table">
+                        <thead>
+                            <tr>
+                                <th>Производитель</th>
+                                <th>Модель</th>
+                                <th>Год</th>
+                                <th>Класс</th>
+                                <th>Тип</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BMW</td>
+                                <td>M4 Competition</td>
+                                <td>2021</td>
+                                <td>A</td>
+                                <td>GT</td>
+                            </tr>
+                            <tr>
+                                <td>Porsche</td>
+                                <td>911 GT3 RS</td>
+                                <td>2023</td>
+                                <td>S</td>
+                                <td>Суперкар</td>
+                            </tr>
+                            <tr>
+                                <td>Ferrari</td>
+                                <td>296 GTB</td>
+                                <td>2022</td>
+                                <td>S</td>
+                                <td>Суперкар</td>
+                            </tr>
+                            <tr>
+                                <td>Lamborghini</td>
+                                <td>Huracán STO</td>
+                                <td>2021</td>
+                                <td>S</td>
+                                <td>Суперкар</td>
+                            </tr>
+                            <tr>
+                                <td>Ford</td>
+                                <td>Mustang GT</td>
+                                <td>2024</td>
+                                <td>B</td>
+                                <td>Масл-кар</td>
+                            </tr>
+                            <tr>
+                                <td>McLaren</td>
+                                <td>720S</td>
+                                <td>2018</td>
+                                <td>R</td>
+                                <td>Гиперкар</td>
+                            </tr>
+                            <tr>
+                                <td>Toyota</td>
+                                <td>GR86</td>
+                                <td>2022</td>
+                                <td>C</td>
+                                <td>Спорткар</td>
+                            </tr>
+                            <tr>
+                                <td>Nissan</td>
+                                <td>GT-R NISMO</td>
+                                <td>2020</td>
+                                <td>A</td>
+                                <td>Суперкар</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- MODES -->
+            <div id="modes" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">Режимы игры</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="mode-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">🏆 Builder's Cup</h3>
+                        <p class="text-sm text-slate-600">Основная карьера. Прокачивай автомобили, зарабатывай очки опыта и открывай новые серии гонок.</p>
+                    </div>
+                    <div class="mode-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">👥 Мультиплеер</h3>
+                        <p class="text-sm text-slate-600">Соревновательные онлайн-гонки с рейтинговой системой Safety Rating и Skill Rating.</p>
+                    </div>
+                    <div class="mode-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">⏱️ Свободная практика</h3>
+                        <p class="text-sm text-slate-600">Тренируйся на любой трассе без ограничений. Идеально для отработки настроек.</p>
+                    </div>
+                    <div class="mode-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">⏰ Rivals</h3>
+                        <p class="text-sm text-slate-600">Асинхронные гонки против призраков других игроков. Побей время соперника.</p>
+                    </div>
+                    <div class="mode-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">🎨 Кастомизация</h3>
+                        <p class="text-sm text-slate-600">Создавай уникальные ливреи и тюнингуй машины. Делись настройками с сообществом.</p>
+                    </div>
+                    <div class="mode-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">📺 Зрительский режим</h3>
+                        <p class="text-sm text-slate-600">Наблюдай за гонками с разных камер. Идеально для стримеров и создателей контента.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UPDATES -->
+            <div id="updates" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Обновления и будущее</h2>
+                <p class="text-slate-600 mb-6">Turn 10 Studios регулярно обновляют Forza Motorsport, добавляя новые авто, трассы и функции.</p>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-4">✅ Выпущенные обновления</h3>
+                        <div class="update-item">
+                            <div class="font-semibold text-slate-700 text-sm">Обновление 1.0 — Запуск</div>
+                            <div class="text-xs text-slate-400 mt-1">Октябрь 2023</div>
+                            <p class="text-sm text-slate-500 mt-2">Базовый набор: 500+ машин, 28 трасс, карьера Builder's Cup, мультиплеер.</p>
+                        </div>
+                        <div class="update-item">
+                            <div class="font-semibold text-slate-700 text-sm">Обновление 2.0 — Featured Multiplayer</div>
+                            <div class="text-xs text-slate-400 mt-1">Ноябрь 2023</div>
+                            <p class="text-sm text-slate-500 mt-2">Обновлённый мультиплеер, новые серии гонок и баланс-патчи.</p>
+                        </div>
+                        <div class="update-item">
+                            <div class="font-semibold text-slate-700 text-sm">Обновление 5.0 — Open Top</div>
+                            <div class="text-xs text-slate-400 mt-1">Март 2024</div>
+                            <p class="text-sm text-slate-500 mt-2">Новые кабриолеты, трасса Sunset Peninsula, улучшения физики.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-4">🚀 Планы на будущее</h3>
+                        <div class="space-y-3">
+                            <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                                <div class="text-sm font-semibold text-slate-700 mb-1">📍 Новые трассы</div>
+                                <p class="text-sm text-slate-600">Добавление легендарных трасс по запросам сообщества.</p>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                                <div class="text-sm font-semibold text-slate-700 mb-1">🏆 Улучшения карьеры</div>
+                                <p class="text-sm text-slate-600">Расширение Builder's Cup с новыми сериями и наградами.</p>
+                            </div>
+                            <div class="bg-green-50 border border-green-100 rounded-xl p-4">
+                                <div class="text-sm font-semibold text-slate-700 mb-1">📅 Ежемесячные события</div>
+                                <p class="text-sm text-slate-600">Регулярные тематические серии и челленджи сообщества.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
-<script src="/js/welcome.js" defer></script>
+<!-- FOOTER -->
+<footer class="bg-[#0f172a] text-slate-400 py-8 px-4 text-center text-sm border-t border-slate-800">
+    <p>© 2024 <strong class="text-white">СайтСотика</strong> — Неофициальная страница</p>
+    <p class="mt-1 text-xs text-slate-500">Forza Motorsport является торговой маркой Microsoft Corporation / Xbox Game Studios</p>
+</footer>
+
+<script>
+    // ===== TABS SYSTEM =====
+    function initTabs() {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const subTabButtons = document.querySelectorAll('.sub-tab-btn');
+
+        // Main tabs
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+
+                // Hide all tabs
+                tabContents.forEach(tab => tab.classList.remove('active'));
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+
+                // Show active tab
+                document.getElementById(tabId).classList.add('active');
+                this.classList.add('active');
+            });
+        });
+
+        // Sub tabs
+        subTabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const subTabId = this.getAttribute('data-subtab');
+                const parent = this.closest('.tab-content');
+
+                if (!parent) return;
+
+                // Hide all sub tabs in parent
+                parent.querySelectorAll('.sub-content').forEach(tab => tab.classList.remove('active'));
+                parent.querySelectorAll('.sub-tab-btn').forEach(btn => btn.classList.remove('active'));
+
+                // Show active sub tab
+                document.getElementById(subTabId).classList.add('active');
+                this.classList.add('active');
+            });
+        });
+    }
+
+    // ===== TRACK SLIDER =====
+    function initTrackSlider() {
+        const tracks = [
+            { name: 'Maple Valley', location: 'США', turns: 11, length: '3.2 км', type: 'Оригинальная' },
+            { name: 'Circuit de Spa-Francorchamps', location: 'Бельгия', turns: 19, length: '7.0 км', type: 'Реальная' },
+            { name: 'Suzuka Circuit', location: 'Япония', turns: 18, length: '5.8 км', type: 'Реальная' },
+            { name: 'Mugello Circuit', location: 'Италия', turns: 15, length: '5.2 км', type: 'Реальная' },
+            { name: 'Laguna Seca', location: 'США', turns: 11, length: '3.6 км', type: 'Реальная' },
+            { name: 'Nürburgring GP', location: 'Германия', turns: 16, length: '5.1 км', type: 'Реальная' },
+            { name: 'Silverstone', location: 'Великобритания', turns: 18, length: '5.9 км', type: 'Реальная' },
+            { name: 'Yas Marina', location: 'ОАЭ', turns: 16, length: '5.5 км', type: 'Реальная' }
+        ];
+
+        const slider = document.getElementById('trackSlider');
+        const indicators = document.getElementById('trackIndicators');
+        let currentSlide = 0;
+
+        // Populate tracks
+        tracks.forEach((track, i) => {
+            const card = document.createElement('div');
+            card.className = 'track-card';
+            card.innerHTML = `
+                <h3 class="text-lg font-bold mb-1">${track.name}</h3>
+                <p class="text-sm text-slate-300 mb-3">${track.location}</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-2 py-1 bg-white/10 rounded text-xs">${track.turns} поворотов</span>
+                    <span class="px-2 py-1 bg-white/10 rounded text-xs">${track.length}</span>
+                    <span class="px-2 py-1 bg-white/10 rounded text-xs">${track.type}</span>
+                </div>
+            `;
+            slider.appendChild(card);
+
+            const indicator = document.createElement('div');
+            indicator.className = 'scroll-indicator' + (i === 0 ? ' active' : '');
+            indicators.appendChild(indicator);
+        });
+
+        function goToSlide(idx) {
+            const cards = slider.querySelectorAll('.track-card');
+            if (idx < 0) idx = 0;
+            if (idx >= cards.length) idx = cards.length - 1;
+            currentSlide = idx;
+
+            const card = cards[idx];
+            slider.scrollTo({ left: card.offsetLeft - slider.offsetLeft, behavior: 'smooth' });
+
+            document.querySelectorAll('.scroll-indicator').forEach((dot, i) => {
+                dot.classList.toggle('active', i === idx);
+            });
+        }
+
+        document.getElementById('prevTrack').addEventListener('click', () => goToSlide(currentSlide - 1));
+        document.getElementById('nextTrack').addEventListener('click', () => goToSlide(currentSlide + 1));
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', function() {
+        initTabs();
+        initTrackSlider();
+    });
+</script>
+
+<!-- HEADER NAVIGATION SCRIPT -->
+<script src="/js/header.js"></script>
 </body>
 </html>

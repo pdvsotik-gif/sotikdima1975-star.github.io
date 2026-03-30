@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!doctype html>
+<html lang="ru" class="h-full">
 <head>
     <meta charset="UTF-8">
-    <title>Forza Motorsport 8 — СайтСотика</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Forza Motorsport 8 — страница игры на официальном сайте стримера Дмитрия Переднего (СайтСотика)">
+    <title>Forza Motorsport 8 — СайтСотика</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+    <script src="/_sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <style>
         /* ===========================
-           header.css — БЕЗ ИЗМЕНЕНИЙ
-           =========================== */
+             БАЗОВЫЕ СТИЛИ
+             =========================== */
 
         * {
             margin: 0;
@@ -25,13 +29,13 @@
             font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
             color: #e5e7f0;
             background: radial-gradient(circle at top, #f7f8ff 0, #e4e7f5 40%, #d3d6e6 100%);
-            padding-top: 60px; /* БАЗОВАЯ высота хедера */
-            display:flex;
-            flex-direction:column;
-            min-height:100vh;
+            padding-top: 60px;
         }
 
-        main{flex:1}
+        /* ===========================
+             ГЛАВНЫЙ ХЭДЕР
+             (ВСЕГДА ОДНА СТРОКА: ЛОГОТИП СЛЕВА, МЕНЮ СПРАВА)
+             =========================== */
 
         #main-header {
             display: flex;
@@ -55,6 +59,10 @@
         #main-header > * {
             flex-shrink: 0;
         }
+
+        /* ===========================
+             ЛОГОТИП (СЛЕВА)
+             =========================== */
 
         .logo {
             position: relative;
@@ -88,6 +96,10 @@
             opacity: 0.7;
             pointer-events: none;
         }
+
+        /* ================================================
+             МЕНЮ — премиум‑кнопки (ГОРИЗОНТАЛЬНОЕ)
+             ================================================ */
 
         #main-nav,
         nav[id] {
@@ -211,6 +223,10 @@
                 rgba(10, 12, 24, 0.98));
         }
 
+        /* ================================================
+             МОБИЛЬНОЕ МЕНЮ: ГАМБУРГЕР + БОКОВАЯ ПАНЕЛЬ
+             ================================================ */
+
         #mobile-menu-btn {
             display: none;
             background: none;
@@ -220,7 +236,6 @@
             z-index: 3001;
             width: 44px;
             height: 44px;
-            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -303,6 +318,10 @@
             transform: translateX(6px);
         }
 
+        /* ================================================
+             АНИМАЦИИ
+             ================================================ */
+
         @keyframes buttonHoverGlow {
             0% { box-shadow: 0 0 6px rgba(111,66,193,0.4); }
             50% { box-shadow: 0 0 14px rgba(111,66,193,0.8); }
@@ -314,6 +333,10 @@
             50% { filter: brightness(1.15); }
             100% { filter: brightness(1.0); }
         }
+
+        /* ================================================
+             ВИДИМОСТЬ МЕНЮ (ТОЧКА РАЗДЕЛЕНИЯ: 720px)
+             ================================================ */
 
         .nav-hidden {
             display: none !important;
@@ -347,6 +370,10 @@
                 display: flex !important;
             }
         }
+
+        /* ================================================
+             РАЗМЕРЫ И ОТСТУПЫ ДЛЯ РАЗНЫХ ЭКРАНОВ
+             ================================================ */
 
         @media (min-width: 721px) and (max-width: 1024px) {
             body {
@@ -475,1995 +502,924 @@
         }
 
         /* ===========================
-           Глобальное из style.css
-           (кроме body — не трогаем хэдер)
-           =========================== */
+             КОНТЕНТ СТРАНИЦЫ
+             =========================== */
 
-        .page-nav{
-            position:fixed;
-            right:20px;
-            top:50%;
-            transform:translateY(-50%);
-            z-index:99;
-            display:flex;
-            flex-direction:column;
-            gap:12px;
-            background:rgba(255,255,255,0.95);
-            padding:12px;
-            border-radius:8px;
-            box-shadow:0 2px 8px rgba(0,0,0,0.1);
-        }
-        .page-nav a{
-            width:8px;
-            height:8px;
-            border-radius:50%;
-            background:#ccc;
-            display:block;
-            cursor:pointer;
-            transition:background 0.2s;
-        }
-        .page-nav a.active{
-            background:#007acc;
-            width:24px;
-        }
-        @media (max-width:768px){
-            .page-nav{display:none}
-        }
+        .tab-btn { position: relative; padding: 12px 20px; border: none; background: transparent; cursor: pointer; font-weight: 600; font-size: 0.9rem; color: #64748b; transition: all 0.3s; border-radius: 8px 8px 0 0; }
+        .tab-btn:hover { color: #2563eb; background: rgba(37,99,235,0.05); }
+        .tab-btn.active { color: #2563eb; background: #fff; box-shadow: 0 -2px 8px rgba(0,0,0,0.06); }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: #2563eb; border-radius: 3px 3px 0 0; }
 
-        footer{
-            background:#f8f9fa;
-            color:#666;
-            border-top:1px solid #eee;
-            padding:40px 20px;
-            text-align:center
-        }
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
 
-        /* ===========================
-           СЕКЦИЯ Forza Motorsport 8
-           АДАПТИВНАЯ, МОДУЛЬНАЯ
-           =========================== */
+        .sub-tab-btn { padding: 8px 16px; border: 1px solid #e2e8f0; background: #fff; cursor: pointer; font-size: 0.82rem; font-weight: 500; color: #64748b; border-radius: 6px; transition: all 0.25s; }
+        .sub-tab-btn:hover { border-color: #2563eb; color: #2563eb; }
+        .sub-tab-btn.active { background: #2563eb; color: #fff; border-color: #2563eb; }
 
-        #motorsport8-section{
-            padding:40px 0 60px;
-        }
+        .sub-content { display: none; animation: fadeIn 0.3s ease; }
+        .sub-content.active { display: block; }
 
-        .game-hero{
-            color:#111;
-            text-align:center;
-            padding:140px 20px 100px;
-            margin-bottom:40px;
-            background:#ffffff;
-            background-size:cover;
-            background-position:center;
-        }
-        .game-hero h1{
-            margin:0 0 12px;
-            font-size:2.4rem;
-            letter-spacing:0.06em;
-            text-transform:uppercase;
-            color:#111827;
-        }
-        .game-hero p{
-            margin:0;
-            max-width:720px;
-            margin-inline:auto;
-            font-size:0.98rem;
-            line-height:1.7;
-            color:#4b5563;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        .game-tabs{
-            max-width:1200px;
-            margin:0 auto 20px;
-            display:flex;
-            gap:10px;
-            flex-wrap:wrap;
-            padding:0 20px;
-        }
-        .game-tab{
-            padding:8px 16px;
-            border-radius:999px;
-            border:1px solid rgba(148,163,184,0.7);
-            background:rgba(255,255,255,0.9);
-            font-size:0.78rem;
-            text-transform:uppercase;
-            letter-spacing:0.09em;
-            cursor:pointer;
-            color:#111827;
-            transition:background 0.2s,border-color 0.2s,color 0.2s,transform 0.12s;
-        }
-        .game-tab.active{
-            background:linear-gradient(135deg,#2563eb,#22c55e);
-            border-color:transparent;
-            color:#f9fafb;
-            transform:translateY(-1px);
-        }
+        .feature-card { background: #fff; border-radius: 14px; padding: 24px; box-shadow: 0 1px 6px rgba(0,0,0,0.06); border: 1px solid #f1f5f9; transition: transform 0.25s, box-shadow 0.25s; }
+        .feature-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
 
-        .game-tab-content{
-            max-width:1200px;
-            margin:0 auto 40px;
-            padding:0 20px 20px;
-        }
-        .tab-pane{
-            display:none;
-        }
-        .tab-pane.active{
-            display:block;
-        }
+        .track-slider { display: flex; gap: 16px; overflow-x: auto; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .track-slider::-webkit-scrollbar { display: none; }
+        .track-card { min-width: 280px; background: linear-gradient(135deg, #1e293b, #334155); border-radius: 14px; padding: 24px; color: #fff; flex-shrink: 0; transition: transform 0.3s; }
+        .track-card:hover { transform: scale(1.03); }
 
-        /* Карточки видео / новости / трассы */
+        .car-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        .car-table th { background: #f8fafc; padding: 12px 16px; text-align: left; font-weight: 600; color: #334155; border-bottom: 2px solid #e2e8f0; }
+        .car-table td { padding: 10px 16px; border-bottom: 1px solid #f1f5f9; color: #475569; }
+        .car-table tr:hover td { background: #f0f7ff; }
 
-        .videos-section,
-        .news-section,
-        .tracks-section{
-            padding:20px 0 10px;
-        }
-        .videos-card,
-        .news-card,
-        .tracks-card{
-            background:#ffffff;
-            border-radius:16px;
-            box-shadow:0 14px 40px rgba(15,23,42,0.12);
-            padding:22px 22px 24px;
-            border:1px solid rgba(148,163,184,0.35);
-        }
-        .videos-card h2,
-        .news-card h2,
-        .tracks-card h2{
-            margin:0 0 12px;
-            font-size:1.4rem;
-            color:#111827;
-        }
-        .videos-card p{
-            margin:0 0 16px;
-            color:#4b5563;
-            font-size:0.96rem;
-        }
-        .news-list{
-            margin:0;
-            padding-left:18px;
-            color:#374151;
-            font-size:0.95rem;
-        }
-        .news-list li{
-            margin-bottom:6px;
-        }
+        .mode-card { background: linear-gradient(135deg, #eff6ff, #fff); border: 1px solid #dbeafe; border-radius: 14px; padding: 28px; transition: all 0.3s; }
+        .mode-card:hover { border-color: #93c5fd; box-shadow: 0 4px 16px rgba(37,99,235,0.1); }
 
-        .tracks-grid{
-            display:grid;
-            grid-template-columns:repeat(3,minmax(0,1fr));
-            gap:16px;
-        }
-        .track-item{
-            background:#f9fafb;
-            border-radius:12px;
-            overflow:hidden;
-            border:1px solid #e5e7eb;
-        }
-        .track-item img{
-            width:100%;
-            display:block;
-        }
-        .track-item-title{
-            padding:10px 12px;
-            font-size:0.95rem;
-            font-weight:600;
-            color:#111827;
-        }
+        .update-item { border-left: 3px solid #22c55e; padding: 16px 20px; background: #f0fdf4; border-radius: 0 10px 10px 0; margin-bottom: 12px; }
 
-        /* Блок настроек автомобиля */
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0c4a6e 70%, #164e63 100%); position: relative; overflow: hidden; }
+        .hero-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%, rgba(37,99,235,0.15) 0%, transparent 60%), radial-gradient(ellipse at 70% 30%, rgba(6,182,212,0.1) 0%, transparent 50%); }
+        .hero-bg::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to top, #f8fafc, transparent); }
 
-        .car-settings-section {
-            padding: 40px 0 60px;
-            background:#0b0c10;
-            color:#f5f5f5;
-            font-family: Arial, Helvetica, sans-serif;
-            border-radius:18px;
-            margin-bottom:20px;
-        }
-        .car-settings-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding:0 20px;
-        }
-        .car-settings-header {
-            display:flex;
-            justify-content:space-between;
-            align-items:flex-end;
-            gap:20px;
-            margin-bottom:28px;
-        }
-        .car-settings-title-block h2 {
-            margin:0 0 8px;
-            font-size:2.1em;
-            letter-spacing:0.03em;
-            text-transform:uppercase;
-            color:#00b4ff;
-        }
-        .car-settings-title-block p {
-            margin:0;
-            font-size:0.96em;
-            color:#b5b5b5;
-            max-width:520px;
-            line-height:1.6;
-        }
-        .car-settings-meta {
-            text-align:right;
-            font-size:0.9em;
-            color:#8a8a8a;
-        }
-        .car-settings-meta span {
-            display:block;
-        }
-        .car-settings-meta strong {
-            color:#ffffff;
-        }
-        .car-settings-layout {
-            display:grid;
-            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-            gap:24px;
-        }
-        .car-settings-panel {
-            background:#11131a;
-            border-radius: 14px;
-            padding:18px 18px 20px;
-            box-shadow:0 14px 40px rgba(0,0,0,0.55);
-            border:1px solid rgba(0,180,255,0.18);
-        }
-        .car-settings-tabs {
-            display:flex;
-            gap:8px;
-            margin-bottom:16px;
-            flex-wrap:wrap;
-        }
-        .car-settings-tab {
-            flex:0 0 auto;
-            padding:8px 14px;
-            border-radius:999px;
-            border:1px solid rgba(255,255,255,0.12);
-            background:rgba(10,12,18,0.9);
-            color:#c7c7c7;
-            font-size:0.9em;
-            cursor:pointer;
-            display:flex;
-            align-items:center;
-            gap:6px;
-            transition:background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.12s ease;
-        }
-        .car-settings-tab span.dot {
-            width:8px;
-            height:8px;
-            border-radius:50%;
-            background:#555;
-        }
-        .car-settings-tab.active {
-            background:linear-gradient(135deg,#00b4ff,#00ff9c);
-            border-color:transparent;
-            color:#05060a;
-            transform:translateY(-1px);
-        }
-        .car-settings-tab.active span.dot {
-            background:#05060a;
-        }
-        .car-settings-content {
-            position:relative;
-            min-height:220px;
-        }
-        .car-settings-pane {
-            display:none;
-        }
-        .car-settings-pane.active {
-            display:grid;
-            grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);
-            gap:18px;
-            align-items:stretch;
-        }
-        .car-settings-params {
-            display:grid;
-            grid-template-columns:repeat(2,minmax(0,1fr));
-            gap:10px 14px;
-            font-size:0.92em;
-        }
-        .car-settings-param {
-            padding:8px 10px;
-            border-radius:8px;
-            background:rgba(255,255,255,0.02);
-            border:1px solid rgba(255,255,255,0.06);
-            display:flex;
-            flex-direction:column;
-            gap:2px;
-        }
-        .car-settings-param-label {
-            font-size:0.78em;
-            text-transform:uppercase;
-            letter-spacing:0.08em;
-            color:#8f9bb5;
-        }
-        .car-settings-param-value {
-            font-size:1.02em;
-            color:#ffffff;
-        }
-        .car-settings-param-note {
-            font-size:0.78em;
-            color:#8a8a8a;
-        }
-        .car-settings-image-wrap {
-            border-radius:12px;
-            overflow:hidden;
-            background:radial-gradient(circle at 20% 0%,#1b2335 0,#05060a 55%);
-            border:1px solid rgba(0,180,255,0.25);
-            position:relative;
-            min-height:220px;
-            display:flex;
-            align-items:stretch;
-        }
-        .car-settings-image {
-            flex:1;
-            position:relative;
-        }
-        .car-settings-image img {
-            width:100%;
-            height:100%;
-            object-fit:cover;
-            display:block;
-            opacity:0.9;
-        }
-        .car-settings-image-label {
-            position:absolute;
-            left:14px;
-            bottom:12px;
-            padding:6px 10px;
-            border-radius:999px;
-            background:rgba(5,6,10,0.85);
-            border:1px solid rgba(255,255,255,0.18);
-            font-size:0.78em;
-            text-transform:uppercase;
-            letter-spacing:0.08em;
-            color:#e5e5e5;
-        }
-        .car-settings-image-label strong {
-            color:#00e0ff;
-        }
-        .car-settings-side {
-            display:flex;
-            flex-direction:column;
-            gap:14px;
-        }
-        .car-settings-side-block {
-            padding:10px 12px;
-            border-radius: 10px;
-            background:rgba(10,12,18,0.9);
-            border:1px solid rgba(255,255,255,0.06);
-            font-size:0.9em;
-            color:#c7c7c7;
-        }
-        .car-settings-side-block h3 {
-            margin:0 0 6px;
-            font-size:0.95em;
-            text-transform:uppercase;
-            letter-spacing:0.08em;
-            color:#9fb4ff;
-        }
-        .car-settings-side-block ul {
-            margin:0;
-            padding-left: 16px;
-            list-style:disc;
-        }
-        .car-settings-side-block li {
-            margin-bottom:4px;
-        }
-        .car-settings-side-block li:last-child {
-            margin-bottom:0;
-        }
-        .car-settings-footer-note {
-            margin-top:18px;
-            font-size:0.8em;
-            color:#7f7f7f;
-        }
-        .car-settings-footer-note span {
-            color:#00b4ff;
-        }
+        .stat-pill { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.1); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.15); padding: 8px 16px; border-radius: 50px; color: #e2e8f0; font-size: 0.82rem; }
 
-        /* ===========================
-           АДАПТИВНОСТЬ СЕКЦИИ
-           СИНХРОННО С ХЭДЕРОМ
-           =========================== */
+        .scroll-indicator { width: 60px; height: 4px; border-radius: 4px; background: #e2e8f0; cursor: pointer; transition: background 0.2s; }
+        .scroll-indicator.active { background: #2563eb; }
 
-        /* 1025+ — десктоп, базовые стили уже заданы */
-
-        /* 721–1024 — планшеты */
-        @media (min-width:721px) and (max-width:1024px){
-            #motorsport8-section{
-                padding:30px 0 50px;
-            }
-            .game-hero{
-                padding:110px 16px 70px;
-                margin-bottom:30px;
-            }
-            .game-hero h1{
-                font-size:2.1rem;
-            }
-            .game-tabs{
-                justify-content:flex-start;
-            }
-            .car-settings-title-block h2{
-                font-size:1.9em;
-            }
-            .car-settings-layout{
-                grid-template-columns:minmax(0,1fr) minmax(0,0.9fr);
-                gap:20px;
-            }
-            .car-settings-pane.active{
-                grid-template-columns:minmax(0,1fr);
-            }
-            .car-settings-params{
-                grid-template-columns:repeat(2,minmax(0,1fr));
-            }
-            .tracks-grid{
-                grid-template-columns:repeat(2,minmax(0,1fr));
-            }
+        @media (max-width: 768px) {
+          .tab-btn { padding: 10px 14px; font-size: 0.78rem; }
+          .track-card { min-width: 240px; }
+          .hero-title { font-size: 2rem !important; }
         }
-
-        /* ≤720 — мобильный режим */
-        @media (max-width:720px){
-            #motorsport8-section{
-                padding:24px 0 40px;
-            }
-            .game-hero{
-                padding:90px 14px 50px;
-                margin-bottom:24px;
-            }
-            .game-hero h1{
-                font-size:1.7rem;
-            }
-            .game-hero p{
-                font-size:0.9rem;
-            }
-            .game-tabs{
-                justify-content:center;
-                gap:6px;
-            }
-            .game-tab{
-                padding:6px 12px;
-                font-size:0.7rem;
-            }
-            .game-tab-content{
-                padding:0 14px 10px;
-            }
-            .videos-card,
-            .news-card,
-            .tracks-card{
-                padding:16px 14px 18px;
-                border-radius:12px;
-            }
-            .tracks-grid{
-                grid-template-columns:repeat(2,minmax(0,1fr));
-                gap:12px;
-            }
-            .car-settings-section{
-                margin:0 -4px 20px;
-                border-radius:14px;
-                padding:26px 0 34px;
-            }
-            .car-settings-inner{
-                padding:0 14px;
-            }
-            .car-settings-header{
-                flex-direction:column;
-                align-items:flex-start;
-                gap:10px;
-            }
-            .car-settings-meta{
-                text-align:left;
-            }
-            .car-settings-title-block h2{
-                font-size:1.6em;
-            }
-            .car-settings-title-block p{
-                font-size:0.9em;
-            }
-            .car-settings-layout{
-                grid-template-columns:minmax(0,1fr);
-                gap:18px;
-            }
-            .car-settings-pane.active{
-                grid-template-columns:minmax(0,1fr);
-            }
-            .car-settings-params{
-                grid-template-columns:minmax(0,1fr);
-            }
-        }
-
-        /* ≤480 — очень маленькие экраны */
-        @media (max-width:480px){
-            .game-hero{
-                padding:80px 10px 40px;
-            }
-            .game-hero h1{
-                font-size:1.45rem;
-            }
-            .game-tabs{
-                padding:0 10px;
-            }
-            .game-tab{
-                padding:5px 10px;
-                font-size:0.65rem;
-                letter-spacing:0.07em;
-            }
-            .game-tab-content{
-                padding:0 10px 8px;
-            }
-            .tracks-grid{
-                grid-template-columns:minmax(0,1fr);
-            }
-            .car-settings-section{
-                margin:0 -6px 18px;
-                padding:22px 0 30px;
-            }
-            .car-settings-inner{
-                padding:0 10px;
-            }
-            .car-settings-title-block h2{
-                font-size:1.45em;
-            }
-            .car-settings-panel{
-                padding:14px 12px 16px;
-            }
-            .car-settings-side-block{
-                font-size:0.86em;
-            }
-        }
-
-        /* LANDSCAPE ≤500px — компактный режим */
-        @media (orientation: landscape) and (max-height:500px){
-            #motorsport8-section{
-                padding:18px 0 26px;
-            }
-            .game-hero{
-                padding:70px 12px 32px;
-                margin-bottom:18px;
-            }
-            .game-hero h1{
-                font-size:1.4rem;
-            }
-            .game-tabs{
-                justify-content:center;
-            }
-            .car-settings-section{
-                padding:20px 0 26px;
-            }
-            .car-settings-layout{
-                grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-                gap:14px;
-            }
-            .car-settings-pane.active{
-                grid-template-columns:minmax(0,1fr);
-            }
-            .tracks-grid{
-                grid-template-columns:repeat(3,minmax(0,1fr));
-                gap:10px;
-            }
-        }
-
-        /* LANDSCAPE 501–1024px — расширенный компакт */
-        @media (orientation: landscape) and (min-height:501px) and (max-height:1024px){
-            #motorsport8-section{
-                padding:24px 0 34px;
-            }
-            .game-hero{
-                padding:90px 16px 40px;
-                margin-bottom:22px;
-            }
-            .car-settings-section{
-                padding:26px 0 34px;
-            }
-            .car-settings-layout{
-                grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
-            }
-            .tracks-grid{
-                grid-template-columns:repeat(3,minmax(0,1fr));
-            }
+        @media (max-width: 480px) {
+          .tab-btn { padding: 8px 10px; font-size: 0.72rem; }
+          .track-card { min-width: 200px; padding: 18px; }
+          .feature-card { padding: 18px; }
         }
     </style>
-
-    <script>
-        // ===========================
-        // header.js — БЕЗ ИЗМЕНЕНИЙ
-        // ===========================
-        document.addEventListener("DOMContentLoaded", function () {
-            const header = document.getElementById("main-header");
-            const mainNav = document.getElementById("main-nav");
-            const logo = header.querySelector(".logo");
-            const mobilePanel = document.getElementById("mobile-panel");
-
-            const menuStack = [];
-            const MENU_STATES = {
-                MAIN: "main",
-                GAMES: "games",
-                FORZA: "forza",
-                AC: "ac",
-                PC: "pc"
-            };
-
-            const path = window.location.pathname;
-            const currentPage = path.split("/").pop() || "index.html";
-
-            function getRootPrefix() {
-                const knownPrefixes = ["/sotikdima1975-star.github.io/new", "/sotikdima1975-star.github.io"];
-                for (const prefix of knownPrefixes) {
-                    if (path.startsWith(prefix)) {
-                        return prefix;
-                    }
-                }
-                return "";
-            }
-
-            const rootPrefix = getRootPrefix();
-
-            function normalizeLinkHref(selector, targetPath) {
-                const link = document.querySelector(selector);
-                if (link) {
-                    link.setAttribute("href", rootPrefix + targetPath);
-                }
-            }
-
-            function prefixPath(href) {
-                if (!href || typeof href !== 'string') return href;
-                if (href.startsWith('//')) return href;
-                if (!href.startsWith('/')) return href;
-                const normalized = rootPrefix ? rootPrefix + href : href;
-                if (href.startsWith(rootPrefix + '/')) return href;
-                return normalized;
-            }
-
-            function applyPrefixToNavLinks() {
-                document.querySelectorAll('#main-nav a, #mobile-panel a').forEach(link => {
-                    const href = link.getAttribute('href');
-                    const prefixed = prefixPath(href);
-                    link.setAttribute('href', prefixed);
-                });
-            }
-
-            normalizeLinkHref('link[href="/css/header.css"]', "/css/header.css");
-            normalizeLinkHref('link[href="/css/welcome.css"]', "/css/welcome.css");
-            applyPrefixToNavLinks();
-
-            function getInitialMenuState() {
-                if (path.includes("/pages/games/forza/")) return MENU_STATES.FORZA;
-                if (path.includes("/pages/games/ac/")) return MENU_STATES.AC;
-                if (path.includes("/pages/games/pc/")) return MENU_STATES.PC;
-                if (path.includes("/pages/games/")) return MENU_STATES.GAMES;
-                return MENU_STATES.MAIN;
-            }
-
-            function abs(link) {
-                return rootPrefix + link;
-            }
-
-            function highlightMainNav() {
-                const links = mainNav.querySelectorAll(".nav-link");
-                links.forEach(link => {
-                    link.classList.remove("active");
-                    const href = link.getAttribute("href");
-                    if (!href) return;
-
-                    if (href === "/pages/main/" && path.includes("/pages/main/")) {
-                        link.classList.add("active");
-                    } else if (href === "/pages/about/" && path.includes("/pages/about/")) {
-                        link.classList.add("active");
-                    } else if (href === "/pages/stream/" && path.includes("/pages/stream/")) {
-                        link.classList.add("active");
-                    } else if (href === "/pages/team/" && path.includes("/pages/team/")) {
-                        link.classList.add("active");
-                    } else if (href === "/pages/partners/" && path.includes("/pages/partners/")) {
-                        link.classList.add("active");
-                    } else if (href === "/pages/games/index.html" && path.includes("/pages/games/")) {
-                        link.classList.add("active");
-                    }
-                });
-            }
-
-            function getMainMenuHTML() {
-                return `
-                    <a href="${abs('/pages/main/')}" class="nav-link">Главная</a>
-                    <a href="${abs('/pages/about/')}" class="nav-link">Обо мне</a>
-                    <a href="#" class="nav-link" data-menu-action="open-games">Игры</a>
-                    <a href="${abs('/pages/stream/')}" class="nav-link">Стрим</a>
-                    <a href="${abs('/pages/team/')}" class="nav-link">Команда</a>
-                    <a href="${abs('/pages/partners/')}" class="nav-link">Партнеры</a>
-                `;
-            }
-
-            function getGamesMenuHTML() {
-                return `
-                    <a href="#" class="nav-link back-link" data-menu-action="back">← Назад</a>
-                    <a href="#" class="nav-link game-series" data-menu-action="open-forza">Forza Motorsport</a>
-                    <a href="#" class="nav-link game-series" data-menu-action="open-ac">Assetto Corsa</a>
-                    <a href="#" class="nav-link game-series" data-menu-action="open-pc">Project Cars</a>
-                `;
-            }
-
-            function getForzaMenuHTML() {
-                return `
-                    <a href="#" class="nav-link back-link" data-menu-action="back">← Назад к сериям</a>
-                    <a href="${abs('/pages/games/forza/motorsport7/')}" class="nav-link">Forza Motorsport 7</a>
-                    <a href="${abs('/pages/games/forza/motorsport8/')}" class="nav-link">Forza Motorsport 8</a>
-                `;
-            }
-
-            function getAcMenuHTML() {
-                return `
-                    <a href="#" class="nav-link back-link" data-menu-action="back">← Назад к сериям</a>
-                    <a href="${abs('/pages/games/ac/carrera.html')}" class="nav-link">Assetto Corsa</a>
-                    <a href="${abs('/pages/games/ac/competizione.html')}" class="nav-link">Assetto Corsa Competizione</a>
-                `;
-            }
-
-            function getPcMenuHTML() {
-                return `
-                    <a href="#" class="nav-link back-link" data-menu-action="back">← Назад к сериям</a>
-                    <a href="${abs('/pages/games/pc/1.html')}" class="nav-link">Project Cars 1</a>
-                    <a href="${abs('/pages/games/pc/2.html')}" class="nav-link">Project Cars 2</a>
-                    <a href="${abs('/pages/games/pc/3.html')}" class="nav-link">Project Cars 3</a>
-                `;
-            }
-
-            function getMenuHTML(state) {
-                switch(state) {
-                    case MENU_STATES.GAMES: return getGamesMenuHTML();
-                    case MENU_STATES.FORZA: return getForzaMenuHTML();
-                    case MENU_STATES.AC: return getAcMenuHTML();
-                    case MENU_STATES.PC: return getPcMenuHTML();
-                    case MENU_STATES.MAIN:
-                    default: return getMainMenuHTML();
-                }
-            }
-
-            function getMenuTitle(state) {
-                switch(state) {
-                    case MENU_STATES.GAMES: return "Игры • СайтСотика";
-                    case MENU_STATES.FORZA: return "Forza Motorsport • СайтСотика";
-                    case MENU_STATES.AC: return "Assetto Corsa • СайтСотика";
-                    case MENU_STATES.PC: return "Project Cars • СайтСотика";
-                    case MENU_STATES.MAIN:
-                    default: return "СайтСотика";
-                }
-            }
-
-            function renderMenu(state) {
-                mainNav.innerHTML = getMenuHTML(state);
-                logo.textContent = getMenuTitle(state);
-
-                if (state === MENU_STATES.MAIN) {
-                    highlightMainNav();
-                } else {
-                    const links = mainNav.querySelectorAll(".nav-link");
-                    links.forEach(link => link.classList.remove("active"));
-                }
-
-                attachEventListeners();
-            }
-
-            function openMenu(newState) {
-                menuStack.push(getCurrentMenuState());
-                renderMenu(newState);
-            }
-
-            function goBack() {
-                if (menuStack.length > 0) {
-                    const previousState = menuStack.pop();
-                    renderMenu(previousState);
-                } else {
-                    renderMenu(MENU_STATES.MAIN);
-                }
-            }
-
-            function getCurrentMenuState() {
-                const content = mainNav.innerHTML;
-
-                if (content.includes("Forza Motorsport 7")) return MENU_STATES.FORZA;
-                if (content.includes("Assetto Corsa Competizione")) return MENU_STATES.AC;
-                if (content.includes("Project Cars 1")) return MENU_STATES.PC;
-                if (content.includes("Forza Motorsport") && !content.includes("Forza Motorsport 7")) return MENU_STATES.GAMES;
-
-                return MENU_STATES.MAIN;
-            }
-
-            function attachEventListeners() {
-                mainNav.querySelectorAll("[data-menu-action]").forEach(element => {
-                    element.addEventListener("click", function(e) {
-                        const action = this.getAttribute("data-menu-action");
-
-                        if (action === "open-games") {
-                            e.preventDefault();
-                            openMenu(MENU_STATES.GAMES);
-                        } else if (action === "open-forza") {
-                            e.preventDefault();
-                            openMenu(MENU_STATES.FORZA);
-                        } else if (action === "open-ac") {
-                            e.preventDefault();
-                            openMenu(MENU_STATES.AC);
-                        } else if (action === "open-pc") {
-                            e.preventDefault();
-                            openMenu(MENU_STATES.PC);
-                        } else if (action === "back") {
-                            e.preventDefault();
-                            goBack();
-                        }
-                    });
-                });
-            }
-
-            const mobileBtn = document.createElement("button");
-            mobileBtn.id = "mobile-menu-btn";
-            mobileBtn.className = "mobile-menu-btn";
-            mobileBtn.innerHTML = `
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-                <span class="hamburger-line"></span>
-            `;
-            header.appendChild(mobileBtn);
-
-            const mobileMenuStack = [];
-            let currentMobileState = MENU_STATES.MAIN;
-
-            function renderMobileMenu(state) {
-                currentMobileState = state;
-                let html = ``;
-
-                switch(state) {
-                    case MENU_STATES.GAMES:
-                        html = `
-                            <a href="#" data-mobile-action="back">← Назад</a>
-                            <a href="#" data-mobile-action="open-forza">Forza Motorsport</a>
-                            <a href="#" data-mobile-action="open-ac">Assetto Corsa</a>
-                            <a href="#" data-mobile-action="open-pc">Project Cars</a>
-                        `;
-                        break;
-                    case MENU_STATES.FORZA:
-                        html = `
-                            <a href="#" data-mobile-action="back">← Назад</a>
-                            <a href="/pages/games/forza/motorsport7/">Forza Motorsport 7</a>
-                            <a href="/pages/games/forza/motorsport8/">Forza Motorsport 8</a>
-                        `;
-                        break;
-                    case MENU_STATES.AC:
-                        html = `
-                            <a href="#" data-mobile-action="back">← Назад</a>
-                            <a href="/pages/games/ac/carrera.html">Assetto Corsa</a>
-                            <a href="/pages/games/ac/competizione.html">Assetto Corsa Competizione</a>
-                        `;
-                        break;
-                    case MENU_STATES.PC:
-                        html = `
-                            <a href="#" data-mobile-action="back">← Назад</a>
-                            <a href="/pages/games/pc/1.html">Project Cars 1</a>
-                            <a href="/pages/games/pc/2.html">Project Cars 2</a>
-                            <a href="/pages/games/pc/3.html">Project Cars 3</a>
-                        `;
-                        break;
-                    case MENU_STATES.MAIN:
-                    default:
-                        html = `
-                            <a href="${abs('/pages/main/')}">Главная</a>
-                            <a href="${abs('/pages/about/')}">Обо мне</a>
-                            <a href="#" data-mobile-action="open-games">Игры</a>
-                            <a href="${abs('/pages/stream/')}">Стрим</a>
-                            <a href="${abs('/pages/team/')}">Команда</a>
-                            <a href="${abs('/pages/partners/')}">Партнеры</a>
-                        `;
-                }
-
-                mobilePanel.innerHTML = html;
-                attachMobileEventListeners();
-            }
-
-            function attachMobileEventListeners() {
-                mobilePanel.querySelectorAll("[data-mobile-action]").forEach(element => {
-                    element.addEventListener("click", function(e) {
-                        const action = this.getAttribute("data-mobile-action");
-
-                        if (action === "open-games") {
-                            e.preventDefault();
-                            mobileMenuStack.push(MENU_STATES.MAIN);
-                            renderMobileMenu(MENU_STATES.GAMES);
-                        } else if (action === "open-forza") {
-                            e.preventDefault();
-                            mobileMenuStack.push(MENU_STATES.GAMES);
-                            renderMobileMenu(MENU_STATES.FORZA);
-                        } else if (action === "open-ac") {
-                            e.preventDefault();
-                            mobileMenuStack.push(MENU_STATES.GAMES);
-                            renderMobileMenu(MENU_STATES.AC);
-                        } else if (action === "open-pc") {
-                            e.preventDefault();
-                            mobileMenuStack.push(MENU_STATES.GAMES);
-                            renderMobileMenu(MENU_STATES.PC);
-                        } else if (action === "back") {
-                            e.preventDefault();
-                            if (mobileMenuStack.length > 0) {
-                                const previousState = mobileMenuStack.pop();
-                                renderMobileMenu(previousState);
-                            } else {
-                                renderMobileMenu(MENU_STATES.MAIN);
-                                closeMobileMenu();
-                            }
-                        }
-                    });
-                });
-
-                mobilePanel.querySelectorAll("a:not([data-mobile-action])").forEach(element => {
-                    element.addEventListener("click", function() {
-                        closeMobileMenu();
-                    });
-                });
-            }
-
-            mobileBtn.addEventListener("click", () => {
-                if (mobilePanel.classList.contains("open")) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
-            });
-
-            renderMobileMenu(MENU_STATES.MAIN);
-
-            function closeMobileMenu() {
-                mobilePanel.classList.remove("open");
-                mobileBtn.classList.remove("open");
-            }
-
-            function openMobileMenu() {
-                mobilePanel.classList.add("open");
-                mobileBtn.classList.add("open");
-            }
-
-            function updateMenuDisplay() {
-                if (window.innerWidth <= 720) {
-                    mobileBtn.style.display = "flex";
-                    mainNav.classList.add("nav-hidden");
-                    closeMobileMenu();
-                } else {
-                    mobileBtn.style.display = "none";
-                    mainNav.classList.remove("nav-hidden");
-                    closeMobileMenu();
-                    mobileMenuStack.length = 0;
-                    renderMobileMenu(MENU_STATES.MAIN);
-                }
-            }
-
-            updateMenuDisplay();
-            window.addEventListener("resize", updateMenuDisplay);
-
-            header.addEventListener("mousemove", (e) => {
-                const x = e.clientX;
-                const max = window.innerWidth;
-                const hue = Math.floor((x / max) * 360);
-                header.style.background = `linear-gradient(to right, #f8f9fa, hsl(${hue}, 40%, 90%), #f8f9fa)`;
-            });
-
-            header.addEventListener("mouseleave", () => {
-                header.style.background = "#f8f9fa";
-            });
-
-            const initialState = getInitialMenuState();
-            if ([MENU_STATES.FORZA, MENU_STATES.AC, MENU_STATES.PC].includes(initialState)) {
-                menuStack.push(MENU_STATES.GAMES);
-            } else if (initialState === MENU_STATES.GAMES) {
-                menuStack.push(MENU_STATES.MAIN);
-            }
-
-            renderMenu(initialState);
-        });
-
-        // ===========================
-        // script.js — вкладки страницы
-        // ===========================
-        document.addEventListener("DOMContentLoaded", function(){
-            // Переключение основных вкладок страницы (гайды / видео / новости / трассы)
-            (function(){
-                var tabs = document.querySelectorAll('.game-tab');
-                var panes = document.querySelectorAll('.tab-pane');
-
-                tabs.forEach(function(tab){
-                    tab.addEventListener('click', function(){
-                        var target = tab.getAttribute('data-tab');
-                        tabs.forEach(function(t){ t.classList.remove('active'); });
-                        panes.forEach(function(p){
-                            if(p.id === target){
-                                p.classList.add('active');
-                            } else {
-                                p.classList.remove('active');
-                            }
-                        });
-                        tab.classList.add('active');
-                    });
-                });
-            })();
-
-            // Переключение вкладок настроек автомобиля
-            (function(){
-                var tabs = document.querySelectorAll('.car-settings-tab');
-                var panes = document.querySelectorAll('.car-settings-pane');
-
-                tabs.forEach(function(tab){
-                    tab.addEventListener('click', function(){
-                        var target = tab.getAttribute('data-settings-tab');
-                        tabs.forEach(function(t){ t.classList.remove('active'); });
-                        panes.forEach(function(p){
-                            if(p.getAttribute('data-settings-pane') === target){
-                                p.classList.add('active');
-                            } else {
-                                p.classList.remove('active');
-                            }
-                        });
-                        tab.classList.add('active');
-                    });
-                });
-            })();
-        });
-    </script>
+    <style>body { box-sizing: border-box; }</style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
 </head>
-<body>
-
+<body class="h-full bg-[#f8fafc] overflow-auto">
+<!-- PREMIUM HEADER -->
 <header id="main-header">
-    <div class="logo">СайтСотика</div>
+    <div class="logo" id="site-logo">
+        СайтСотика
+    </div>
     <nav id="main-nav">
-        <a href="/pages/main/" class="nav-link">Главная</a>
-        <a href="/pages/about/" class="nav-link">Обо мне</a>
-        <a href="#" class="nav-link active" data-menu-action="open-games">Игры</a>
-        <a href="/pages/stream/" class="nav-link">Стрим</a>
-        <a href="/pages/team/" class="nav-link">Команда</a>
-        <a href="/pages/partners/" class="nav-link">Партнеры</a>
+        <a href="#" class="nav-link">Главная</a> <a href="#" class="nav-link">Обо мне</a> <a href="#" class="nav-link" data-menu-action="open-games">Игры</a> <a href="#" class="nav-link">Стрим</a> <a href="#" class="nav-link">Команда</a> <a href="#" class="nav-link">Партнеры</a>
     </nav>
-</header>
-<div id="mobile-panel"></div>
-
-<main>
-    <section class="fm8-main-section">
-        <style>
-            .fm8-main-section{
-                padding:80px 20px 90px;
-                background:#ffffff;
-                color:#0f172a;
-                font-family:'Segoe UI',system-ui;
-                border-bottom:1px solid #e2e8f0;
-            }
-
-            .fm8-main-inner{
-                max-width:1320px;
-                margin:0 auto;
-            }
-
-            .fm8-main-heading{
-                display:flex;
-                flex-wrap:wrap;
-                align-items:flex-end;
-                justify-content:space-between;
-                gap:18px;
-                margin-bottom:32px;
-            }
-
-            .fm8-main-title{
-                font-size:2.9rem;
-                font-weight:900;
-                text-transform:uppercase;
-                letter-spacing:0.08em;
-                margin:0;
-                color:#0f172a;
-            }
-
-            .fm8-main-subtitle{
-                margin:0;
-                max-width:620px;
-                font-size:1.05rem;
-                line-height:1.8;
-                color:#475569;
-            }
-
-            .fm8-main-meta{
-                display:flex;
-                flex-wrap:wrap;
-                gap:10px;
-                margin-bottom:26px;
-            }
-
-            .fm8-main-meta-item{
-                padding:8px 14px;
-                border-radius:999px;
-                border:1px solid #cbd5e1;
-                background:#f8fafc;
-                font-size:0.8rem;
-                text-transform:uppercase;
-                letter-spacing:0.08em;
-                color:#0f172a;
-            }
-
-            /* верхние вкладки */
-            .fm8-main-tabs{
-                display:flex;
-                flex-wrap:wrap;
-                gap:8px;
-                margin-bottom:26px;
-            }
-
-            .fm8-main-tab{
-                padding:9px 18px;
-                border-radius:999px;
-                border:1px solid #cbd5e1;
-                background:#f8fafc;
-                font-size:0.8rem;
-                text-transform:uppercase;
-                letter-spacing:0.08em;
-                cursor:pointer;
-                color:#0f172a;
-                transition:all .18s ease;
-                white-space:nowrap;
-            }
-
-            .fm8-main-tab.active{
-                background:linear-gradient(135deg,#2563eb,#22c55e);
-                border-color:transparent;
-                color:#ffffff;
-                box-shadow:0 10px 30px rgba(15,23,42,0.25);
-                transform:translateY(-1px);
-            }
-
-            .fm8-main-content{
-                margin-top:10px;
-            }
-
-            .fm8-main-pane{
-                display:none;
-            }
-            .fm8-main-pane.active{
-                display:block;
-            }
-
-            /* общая сетка внутри панелей */
-            .fm8-pane-grid{
-                display:grid;
-                grid-template-columns:minmax(0,1.5fr) minmax(0,1.1fr);
-                gap:26px;
-                align-items:flex-start;
-            }
-
-            .fm8-pane-block{
-                background:#f8fafc;
-                border-radius:18px;
-                border:1px solid #e2e8f0;
-                padding:22px 24px;
-                margin-bottom:18px;
-                box-shadow:0 16px 40px rgba(15,23,42,0.08);
-            }
-
-            .fm8-pane-block h3{
-                margin:0 0 10px;
-                font-size:1.25rem;
-                color:#0f172a;
-            }
-
-            .fm8-pane-block p{
-                margin:0 0 12px;
-                font-size:0.98rem;
-                line-height:1.8;
-                color:#475569;
-            }
-
-            .fm8-pane-block ul{
-                margin:0;
-                padding-left:20px;
-                font-size:0.95rem;
-                color:#334155;
-            }
-
-            .fm8-pane-block li{
-                margin-bottom:6px;
-            }
-
-            /* мини‑карточки справа */
-            .fm8-mini-grid{
-                display:grid;
-                grid-template-columns:repeat(2,minmax(0,1fr));
-                gap:12px;
-            }
-
-            .fm8-mini-card{
-                background:#f1f5f9;
-                border-radius:14px;
-                border:1px solid #e2e8f0;
-                padding:12px 14px;
-                font-size:0.9rem;
-            }
-
-            .fm8-mini-label{
-                font-size:0.75rem;
-                text-transform:uppercase;
-                letter-spacing:0.08em;
-                color:#64748b;
-                margin-bottom:3px;
-            }
-
-            .fm8-mini-value{
-                font-weight:600;
-                color:#0f172a;
-                margin-bottom:2px;
-            }
-
-            .fm8-mini-note{
-                font-size:0.8rem;
-                color:#64748b;
-            }
-
-            /* таблицы */
-            .fm8-table{
-                width:100%;
-                border-collapse:collapse;
-                margin-top:6px;
-                font-size:0.92rem;
-            }
-
-            .fm8-table th,
-            .fm8-table td{
-                padding:8px 10px;
-                border-bottom:1px solid #e2e8f0;
-                text-align:left;
-            }
-
-            .fm8-table th{
-                background:#e5edf7;
-                font-weight:600;
-                color:#0f172a;
-            }
-
-            /* внутренняя навигация (подвкладки) */
-            .fm8-subtabs{
-                display:flex;
-                flex-wrap:wrap;
-                gap:6px;
-                margin:0 0 14px;
-            }
-
-            .fm8-subtab{
-                padding:6px 12px;
-                border-radius:999px;
-                border:1px solid #d4d4d8;
-                background:#f9fafb;
-                font-size:0.75rem;
-                text-transform:uppercase;
-                letter-spacing:0.08em;
-                cursor:pointer;
-                color:#0f172a;
-                transition:all .16s ease;
-            }
-
-            .fm8-subtab.active{
-                background:#0f172a;
-                color:#ffffff;
-                border-color:#0f172a;
-            }
-
-            .fm8-subpane{
-                display:none;
-            }
-            .fm8-subpane.active{
-                display:block;
-            }
-
-            /* адаптивность */
-            @media (max-width:1100px){
-                .fm8-pane-grid{
-                    grid-template-columns:minmax(0,1fr);
-                }
-            }
-
-            @media (max-width:768px){
-                .fm8-main-section{
-                    padding:60px 16px 70px;
-                }
-                .fm8-main-title{
-                    font-size:2.1rem;
-                }
-                .fm8-main-heading{
-                    align-items:flex-start;
-                }
-            }
-
-            @media (max-width:520px){
-                .fm8-main-title{
-                    font-size:1.7rem;
-                }
-                .fm8-pane-block{
-                    padding:18px 18px;
-                }
-                .fm8-mini-grid{
-                    grid-template-columns:minmax(0,1fr);
-                }
-            }
-
-            @media (orientation:landscape) and (max-height:520px){
-                .fm8-main-section{
-                    padding:40px 16px 50px;
-                }
-                .fm8-main-title{
-                    font-size:1.5rem;
-                }
-            }
-        </style>
-
-        <div class="fm8-main-inner">
-
-            <div class="fm8-main-heading">
-                <h2 class="fm8-main-title">Forza Motorsport</h2>
-                <p class="fm8-main-subtitle">
-                    Полная, техническая и честная секция об игре: кто её делает, на чём она построена,
-                    как устроена физика, какие есть режимы, трассы, автомобили и как игра развивается после релиза.
-                </p>
+    <div id="mobile-panel"></div>
+</header><!-- MAIN -->
+<main id="game-page" class="w-full">
+    <!-- HERO -->
+    <section class="hero-bg py-20 md:py-28 px-4 relative">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-block mb-4 px-4 py-1.5 bg-[#2563eb] text-white text-xs font-bold rounded-full uppercase tracking-wider">
+                Turn 10 Studios × Xbox Game Studios
             </div>
-
-            <div class="fm8-main-meta">
-                <div class="fm8-main-meta-item">Разработчик: Turn 10 Studios</div>
-                <div class="fm8-main-meta-item">Издатель: Xbox Game Studios</div>
-                <div class="fm8-main-meta-item">Платформы: PC, Xbox Series X|S</div>
-                <div class="fm8-main-meta-item">Движок: ForzaTech</div>
+            <h1 class="hero-title text-white font-black text-4xl md:text-5xl lg:text-[2.9rem] leading-tight mb-4" id="hero-game-title">Forza Motorsport</h1>
+            <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light">Новая эра автосимуляторов. Переосмысленная физика, реальные трассы и сотни автомобилей — в одной игре.</p>
+            <div class="flex flex-wrap justify-center gap-3 mb-6">
+                <div class="stat-pill">
+                    <i data-lucide="calendar" style="width:14px;height:14px;"></i> 10 октября 2023
+                </div>
+                <div class="stat-pill">
+                    <i data-lucide="monitor" style="width:14px;height:14px;"></i> Xbox Series X|S, PC
+                </div>
+                <div class="stat-pill">
+                    <i data-lucide="car" style="width:14px;height:14px;"></i> 500+ автомобилей
+                </div>
+                <div class="stat-pill">
+                    <i data-lucide="map-pin" style="width:14px;height:14px;"></i> 28+ трасс
+                </div>
             </div>
-
-            <!-- верхние вкладки -->
-            <div class="fm8-main-tabs">
-                <button class="fm8-main-tab active" data-main-tab="overview">Об игре</button>
-                <button class="fm8-main-tab" data-main-tab="physics">Физика и технологии</button>
-                <button class="fm8-main-tab" data-main-tab="tracks">Трассы</button>
-                <button class="fm8-main-tab" data-main-tab="cars">Автомобили</button>
-                <button class="fm8-main-tab" data-main-tab="modes">Режимы</button>
-                <button class="fm8-main-tab" data-main-tab="updates">Обновления и будущее</button>
-            </div>
-
-            <div class="fm8-main-content">
-
-                <!-- ОБ ИГРЕ -->
-                <div id="overview" class="fm8-main-pane active">
-                    <div class="fm8-pane-grid">
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Что это за игра</h3>
-                                <p>
-                                    Forza Motorsport — перезапуск гоночной серии с упором на трассовый симулятор.
-                                    Игра строится вокруг стабильного темпа, работы с резиной, понимания траектории
-                                    и аккуратного управления машиной на пределе, а не вокруг аркадных эффектов.
-                                </p>
-                                <p>
-                                    В отличие от Horizon, здесь нет открытого мира: только гоночные трассы,
-                                    реальные и вымышленные конфигурации, квалификации, заезды, серии и работа
-                                    с автомобилем как с инструментом для результата.
-                                </p>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Кто делает игру</h3>
-                                <table class="fm8-table">
-                                    <tr><th>Студия</th><td>Turn 10 Studios (в составе Xbox Game Studios)</td></tr>
-                                    <tr><th>Роль</th><td>Полный цикл разработки Forza Motorsport</td></tr>
-                                    <tr><th>Опыт</th><td>Серия Forza Motorsport с 2005 года</td></tr>
-                                    <tr><th>Фокус</th><td>Трассовый симулятор, физика, онлайновые серии</td></tr>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Тип игры</div>
-                                    <div class="fm8-mini-value">Трассовый симулятор</div>
-                                    <div class="fm8-mini-note">Закрытые трассы, серия за серией</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Автомобили</div>
-                                    <div class="fm8-mini-value">Сотни машин</div>
-                                    <div class="fm8-mini-note">От дорожных до прототипов и GT</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Трассы</div>
-                                    <div class="fm8-mini-value">Десятки конфигураций</div>
-                                    <div class="fm8-mini-note">Реальные и вымышленные автодромы</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Онлайн</div>
-                                    <div class="fm8-mini-value">Серии и рейтинги</div>
-                                    <div class="fm8-mini-note">Сетевые чемпионаты и расписания</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- ФИЗИКА И ТЕХНОЛОГИИ -->
-                <div id="physics" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <div class="fm8-subtabs">
-                                    <button class="fm8-subtab active" data-subtab-group="physics" data-subtab="tires">Шины</button>
-                                    <button class="fm8-subtab" data-subtab-group="physics" data-subtab="aero">Аэродинамика</button>
-                                    <button class="fm8-subtab" data-subtab-group="physics" data-subtab="surface">Покрытие и погода</button>
-                                    <button class="fm8-subtab" data-subtab-group="physics" data-subtab="damage">Повреждения</button>
-                                </div>
-
-                                <div id="physics-tires" class="fm8-subpane active">
-                                    <h3>Модель шин</h3>
-                                    <p>
-                                        В игре переработана модель сцепления: учитывается прогрев, давление,
-                                        износ и работа шины в разных фазах поворота. Машина по‑другому реагирует
-                                        на перегрев и срыв, а ошибки на входе и выходе из поворота чувствуется
-                                        гораздо сильнее, чем в старых частях.
-                                    </p>
-                                    <ul>
-                                        <li>Отдельный учёт температуры по поверхности шины</li>
-                                        <li>Разная чувствительность к перегреву для типов резины</li>
-                                        <li>Более честное боковое скольжение и возврат сцепления</li>
-                                    </ul>
-                                </div>
-
-                                <div id="physics-aero" class="fm8-subpane">
-                                    <h3>Аэродинамика</h3>
-                                    <p>
-                                        Аэродинамика учитывает прижимную силу и сопротивление в зависимости
-                                        от скорости и настроек обвеса. На высоких скоростях машина «садится»
-                                        на трассу, а агрессивные настройки крыла дают стабильность в быстрых
-                                        поворотах ценой максималки.
-                                    </p>
-                                </div>
-
-                                <div id="physics-surface" class="fm8-subpane">
-                                    <h3>Покрытие, время суток и погода</h3>
-                                    <p>
-                                        Состояние трассы меняется в течение заезда: температура асфальта,
-                                        уровень сцепления и даже линия, по которой ездит пелотон, влияют
-                                        на поведение машины. Время суток и погода добавляют к этому
-                                        освещение, влажность и видимость.
-                                    </p>
-                                </div>
-
-                                <div id="physics-damage" class="fm8-subpane">
-                                    <h3>Модель повреждений</h3>
-                                    <p>
-                                        Повреждения влияют не только визуально, но и на управляемость:
-                                        можно повредить подвеску, аэродинамику, радиатор, тормоза.
-                                        Сильные контакты на поребриках и столкновения с соперниками
-                                        отражаются на темпе и стабильности машины.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Технологии рендера</h3>
-                                <ul>
-                                    <li>Детализированное освещение трассы и автомобиля</li>
-                                    <li>Материалы кузова, шин и асфальта с разным поведением света</li>
-                                    <li>Динамическое время суток и изменение картинки по ходу заезда</li>
-                                </ul>
-                            </div>
-
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Движок</div>
-                                    <div class="fm8-mini-value">ForzaTech</div>
-                                    <div class="fm8-mini-note">Собственный движок серии Forza</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Фокус</div>
-                                    <div class="fm8-mini-value">Стабильный темп</div>
-                                    <div class="fm8-mini-note">Физика важнее эффектов</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- ТРАССЫ -->
-                <div id="tracks" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Реальные автодромы</h3>
-                                <p>
-                                    В игре представлены известные мировые трассы с разными конфигурациями:
-                                    от классических европейских автодромов до современных комплексов.
-                                </p>
-                                <table class="fm8-table">
-                                    <tr><th>Трасса</th><th>Тип</th></tr>
-                                    <tr><td>Circuit de Spa‑Francorchamps</td><td>Классический европейский автодром</td></tr>
-                                    <tr><td>Silverstone Circuit</td><td>Британский автодром Формулы‑1</td></tr>
-                                    <tr><td>Suzuka Circuit</td><td>Японский автодром с «восьмёркой»</td></tr>
-                                    <tr><td>Laguna Seca</td><td>Американская трасса с «штопором»</td></tr>
-                                </table>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Конфигурации и сложность</h3>
-                                <ul>
-                                    <li>Короткие и полные конфигурации для тренировок и гонок</li>
-                                    <li>Разный характер: скоростные, техничные, смешанные</li>
-                                    <li>Возможность строить карьеру под любимые трассы</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Вымышленные трассы</h3>
-                                <p>
-                                    Помимо реальных автодромов есть вымышленные трассы, созданные под
-                                    определённый стиль пилотирования: городские, скоростные, с акцентом
-                                    на связки поворотов или на работу с торможением.
-                                </p>
-                            </div>
-
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Характер</div>
-                                    <div class="fm8-mini-value">От техничных до скоростных</div>
-                                    <div class="fm8-mini-note">Можно подобрать трассу под свой стиль</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Режимы</div>
-                                    <div class="fm8-mini-value">Практика, гонки, серии</div>
-                                    <div class="fm8-mini-note">Одна и та же трасса — разные сценарии</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- АВТОМОБИЛИ -->
-                <div id="cars" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Классы автомобилей</h3>
-                                <p>
-                                    Автопарк игры покрывает дорожные машины, спорткары, GT, прототипы,
-                                    классические и современные гоночные автомобили. Машины разбиты на
-                                    дивизионы, чтобы подбирать соперников с похожими характеристиками.
-                                </p>
-                                <table class="fm8-table">
-                                    <tr><th>Категория</th><th>Примеры</th></tr>
-                                    <tr><td>GT и кузовные</td><td>Lamborghini Huracán ST, Porsche 911 GT3</td></tr>
-                                    <tr><td>Прототипы</td><td>Современные LMP и экспериментальные машины</td></tr>
-                                    <tr><td>Дорожные спорткары</td><td>Ferrari, McLaren, BMW M‑серии и др.</td></tr>
-                                    <tr><td>Классика</td><td>Исторические спорткары и muscle‑cars</td></tr>
-                                </table>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Прокачка и настройка</h3>
-                                <ul>
-                                    <li>Уровень машины растёт по мере езды</li>
-                                    <li>Открываются детали и варианты тюнинга</li>
-                                    <li>Можно строить «свою» версию каждой машины под стиль пилотирования</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Подход</div>
-                                    <div class="fm8-mini-value">Машина как проект</div>
-                                    <div class="fm8-mini-note">Не просто купить и забыть, а развивать</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Настройки</div>
-                                    <div class="fm8-mini-value">Подвеска, передаточные, аэродинамика</div>
-                                    <div class="fm8-mini-note">Всё это потом живёт в твоих пресетах</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- РЕЖИМЫ -->
-                <div id="modes" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Карьера</h3>
-                                <p>
-                                    Карьерный режим строится вокруг серий и классов машин: игрок проходит
-                                    цепочки событий, осваивает технику, учится работать с резиной и темпом.
-                                    Важен не только результат, но и стабильность и чистота езды.
-                                </p>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Онлайн‑гонки</h3>
-                                <ul>
-                                    <li>Серии с расписанием и классами машин</li>
-                                    <li>Система рейтингов и подбора соперников</li>
-                                    <li>Фокус на чистой езде и дистанции, а не на хаосе</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Практика и тесты</h3>
-                                <p>
-                                    Можно отдельно тренировать трассы, машины и настройки: отрабатывать
-                                    связки поворотов, торможения, работу с газом и рулём. Это тот режим,
-                                    где рождаются твои пресеты и понимание поведения машины.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- ОБНОВЛЕНИЯ И БУДУЩЕЕ -->
-                <div id="updates" class="fm8-main-pane">
-                    <div class="fm8-pane-grid">
-
-                        <div>
-                            <div class="fm8-pane-block">
-                                <h3>Поддержка после релиза</h3>
-                                <p>
-                                    Игра развивается через обновления: выходят новые машины, трассы,
-                                    корректируется физика, баланс классов и работа отдельных режимов.
-                                    Появляются сезонные события и временные серии.
-                                </p>
-                            </div>
-
-                            <div class="fm8-pane-block">
-                                <h3>Чего ждать дальше</h3>
-                                <ul>
-                                    <li>Расширение автопарка и дивизионов</li>
-                                    <li>Новые конфигурации трасс и события</li>
-                                    <li>Доработка онлайна и рейтинговых систем</li>
-                                    <li>Тонкая настройка физики по обратной связи от игроков</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="fm8-mini-grid">
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Формат</div>
-                                    <div class="fm8-mini-value">«Живая» игра</div>
-                                    <div class="fm8-mini-note">Контент и баланс меняются со временем</div>
-                                </div>
-                                <div class="fm8-mini-card">
-                                    <div class="fm8-mini-label">Роль сайта</div>
-                                    <div class="fm8-mini-value">Твои серии и настройки</div>
-                                    <div class="fm8-mini-note">Здесь живут твои пресеты и разборы</div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
         </div>
-
-        <script>
-            // верхние вкладки
-            document.querySelectorAll('.fm8-main-tab').forEach(btn=>{
-                btn.addEventListener('click',()=>{
-                    const id = btn.dataset.mainTab;
-                    document.querySelectorAll('.fm8-main-tab').forEach(b=>b.classList.remove('active'));
-                    document.querySelectorAll('.fm8-main-pane').forEach(p=>p.classList.remove('active'));
-                    btn.classList.add('active');
-                    const pane = document.getElementById(id);
-                    if(pane) pane.classList.add('active');
-                });
-            });
-
-            // подвкладки (физика)
-            document.querySelectorAll('.fm8-subtab').forEach(btn=>{
-                btn.addEventListener('click',()=>{
-                    const group = btn.dataset.subtabGroup;
-                    const id = btn.dataset.subtab;
-
-                    document.querySelectorAll('.fm8-subtab[data-subtab-group="'+group+'"]')
-                        .forEach(b=>b.classList.remove('active'));
-                    document.querySelectorAll('.fm8-subpane')
-                        .forEach(p=>p.classList.remove('active'));
-
-                    btn.classList.add('active');
-                    const pane = document.getElementById(group+'-'+id);
-                    if(pane) pane.classList.add('active');
-                });
-            });
-        </script>
-    </section>
-    <section id="motorsport8-section">
-
-        <div class="game-hero">
-            <h1>Forza Motorsport 8 — Гайды и разборы</h1>
-            <p>Подробные руководства по симулятору гонок: настройки автомобилей, стратегии, разбор трасс и стабильный темп на дистанции.</p>
-        </div>
-
-        <div class="game-tabs">
-            <button class="game-tab active" data-tab="guides">Гайды</button>
-            <button class="game-tab" data-tab="videos">Видео</button>
-            <button class="game-tab" data-tab="news">Новости</button>
-            <button class="game-tab" data-tab="tracks">Трассы</button>
-        </div>
-
-        <div class="game-tab-content">
-
-            <!-- ГАЙДЫ -->
-            <div id="guides" class="tab-pane active">
-                <section class="car-settings-section">
-                    <div class="car-settings-inner">
-                        <div class="car-settings-header">
-                            <div class="car-settings-title-block">
-                                <h2>Настройки автомобиля</h2>
-                                <p>Быстрый профиль настроек для стабильного темпа в Forza Motorsport 8. Вкладки ниже переключают подвеску, аэродинамику, тормоза и трансмиссию.</p>
+    </section><!-- TABS SECTION -->
+    <section class="fm8-main-section max-w-7xl mx-auto px-4 -mt-6 relative z-20 pb-16">
+        <!-- Tab Navigation -->
+        <div class="flex flex-wrap bg-[#f1f5f9] rounded-t-xl border border-b-0 border-slate-200 overflow-x-auto">
+            <button class="tab-btn active" data-tab="overview"> <span class="flex items-center gap-2"><i data-lucide="info" style="width:16px;height:16px;"></i> Об игре</span> </button> <button class="tab-btn" data-tab="physics"> <span class="flex items-center gap-2"><i data-lucide="settings" style="width:16px;height:16px;"></i> Физика и технологии</span> </button> <button class="tab-btn" data-tab="tracks"> <span class="flex items-center gap-2"><i data-lucide="map" style="width:16px;height:16px;"></i> Трассы</span> </button> <button class="tab-btn" data-tab="cars"> <span class="flex items-center gap-2"><i data-lucide="car" style="width:16px;height:16px;"></i> Автомобили</span> </button> <button class="tab-btn" data-tab="modes"> <span class="flex items-center gap-2"><i data-lucide="gamepad-2" style="width:16px;height:16px;"></i> Режимы</span> </button> <button class="tab-btn" data-tab="updates"> <span class="flex items-center gap-2"><i data-lucide="refresh-cw" style="width:16px;height:16px;"></i> Обновления</span> </button>
+        </div><!-- Tab Content Container -->
+        <div class="bg-white rounded-b-xl border border-slate-200 p-6 md:p-8 shadow-sm">
+            <!-- OVERVIEW -->
+            <div id="overview" class="tab-content active">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">О Forza Motorsport</h2>
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div>
+                        <p class="text-slate-600 leading-relaxed mb-4"><strong>Forza Motorsport (2023)</strong> — это полный перезапуск легендарной гоночной серии от <strong>Turn 10 Studios</strong>. Игра создавалась с нуля на протяжении шести лет и предлагает совершенно новый уровень реалистичной гоночной физики.</p>
+                        <p class="text-slate-600 leading-relaxed mb-4">Впервые в серии реализована полностью динамическая модель шин с отслеживанием состояния каждой точки контакта в реальном времени. Каждый круг на трассе ощущается по-новому.</p>
+                        <p class="text-slate-600 leading-relaxed">Проект ориентирован как на хардкорных симрейсеров, так и на новичков — благодаря гибким настройкам сложности и системе помощи водителю.</p>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-black text-[#2563eb] mb-1">
+                                500+
                             </div>
-                            <div class="car-settings-meta">
-                                <span>Автомобиль: <strong>Lamborghini Huracan ST</strong></span>
-                                <span>Пресет: <strong>Стабильный темп</strong></span>
-                                <span>Режим: <strong>Онлайн спринт</strong></span>
+                            <div class="text-sm text-slate-500">
+                                Автомобилей
                             </div>
                         </div>
-
-                        <div class="car-settings-layout">
-                            <div class="car-settings-panel">
-                                <div class="car-settings-tabs">
-                                    <button class="car-settings-tab active" data-settings-tab="suspension">
-                                        <span class="dot"></span> Подвеска
-                                    </button>
-                                    <button class="car-settings-tab" data-settings-tab="aero">
-                                        <span class="dot"></span> Аэродинамика
-                                    </button>
-                                    <button class="car-settings-tab" data-settings-tab="brakes">
-                                        <span class="dot"></span> Тормоза
-                                    </button>
-                                    <button class="car-settings-tab" data-settings-tab="gears">
-                                        <span class="dot"></span> Трансмиссия
-                                    </button>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-black text-[#2563eb] mb-1">
+                                28+
+                            </div>
+                            <div class="text-sm text-slate-500">
+                                Трасс
+                            </div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-black text-[#22c55e] mb-1">
+                                4K
+                            </div>
+                            <div class="text-sm text-slate-500">
+                                Разрешение
+                            </div>
+                        </div>
+                        <div class="feature-card text-center">
+                            <div class="text-3xl font-black text-[#22c55e] mb-1">
+                                60fps
+                            </div>
+                            <div class="text-sm text-slate-500">
+                                Рейтрейсинг
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="text-lg font-bold text-slate-700 mb-4">Ключевые особенности</h3>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div class="feature-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center">
+                                <i data-lucide="zap" style="width:20px;height:20px;color:#2563eb;"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-700">Новая физика</h4>
+                        </div>
+                        <p class="text-sm text-slate-500">Полностью переработанная модель поведения автомобилей с 48-точечной моделью шин.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center">
+                                <i data-lucide="sun" style="width:20px;height:20px;color:#22c55e;"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-700">Динамическое время суток</h4>
+                        </div>
+                        <p class="text-sm text-slate-500">Реалистичная смена дня и ночи, влияющая на температуру трассы и сцепление.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-purple-50 flex items-center justify-center">
+                                <i data-lucide="trophy" style="width:20px;height:20px;color:#7c3aed;"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-700">Карьера Builder's Cup</h4>
+                        </div>
+                        <p class="text-sm text-slate-500">Прогрессивная карьера с развитием автомобилей и очками опыта машин.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center">
+                                <i data-lucide="users" style="width:20px;height:20px;color:#d97706;"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-700">Мультиплеер</h4>
+                        </div>
+                        <p class="text-sm text-slate-500">Соревновательные онлайн-гонки с рейтинговой системой Safety Rating и Skill Rating.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-cyan-50 flex items-center justify-center">
+                                <i data-lucide="eye" style="width:20px;height:20px;color:#0891b2;"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-700">Ray Tracing</h4>
+                        </div>
+                        <p class="text-sm text-slate-500">Трассировка лучей в реальном времени во время гонки — впервые в серии Forza.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-rose-50 flex items-center justify-center">
+                                <i data-lucide="wrench" style="width:20px;height:20px;color:#e11d48;"></i>
+                            </div>
+                            <h4 class="font-semibold text-slate-700">Глубокий тюнинг</h4>
+                        </div>
+                        <p class="text-sm text-slate-500">Детальная настройка подвески, аэродинамики, передаточных чисел и дифференциала.</p>
+                    </div>
+                </div>
+            </div><!-- PHYSICS -->
+            <div id="physics" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-4">Физика и технологии</h2>
+                <p class="text-slate-500 mb-6">Forza Motorsport использует передовые технологии для достижения максимально реалистичного поведения автомобилей.</p>
+                <div class="flex flex-wrap gap-2 mb-6">
+                    <button class="sub-tab-btn active" data-subtab="tires">Модель шин</button> <button class="sub-tab-btn" data-subtab="aero">Аэродинамика</button> <button class="sub-tab-btn" data-subtab="damage">Повреждения</button> <button class="sub-tab-btn" data-subtab="render">Рендеринг</button>
+                </div>
+                <div id="tires" class="sub-content active">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">48-точечная модель шин</h3>
+                        <p class="text-slate-600 leading-relaxed mb-3">Каждая шина моделируется с 48 точками контакта, что позволяет точно рассчитывать сцепление, износ и температуру в реальном времени.</p>
+                        <div class="grid sm:grid-cols-3 gap-4 mt-4">
+                            <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-[#2563eb]">
+                                    48
                                 </div>
-
-                                <div class="car-settings-content">
-
-                                    <div class="car-settings-pane active" data-settings-pane="suspension">
-                                        <div class="car-settings-params">
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Клиренс (перед)</div>
-                                                <div class="car-settings-param-value">58 мм</div>
-                                                <div class="car-settings-param-note">Чуть выше порога, чтобы не цеплять поребрики на агрессивных связках.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Клиренс (зад)</div>
-                                                <div class="car-settings-param-value">62 мм</div>
-                                                <div class="car-settings-param-note">Стабильность на выходе из поворотов и при торможении в наклон.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Пружины (перед)</div>
-                                                <div class="car-settings-param-value">145 Н/мм</div>
-                                                <div class="car-settings-param-note">Чёткий отклик при смене направления, без излишней нервности.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Пружины (зад)</div>
-                                                <div class="car-settings-param-value">155 Н/мм</div>
-                                                <div class="car-settings-param-note">Контроль сноса на высоких скоростях, без резких срывов.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Стабилизатор (перед)</div>
-                                                <div class="car-settings-param-value">28</div>
-                                                <div class="car-settings-param-note">Меньше крена при резком повороте руля в быстрых связках.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Стабилизатор (зад)</div>
-                                                <div class="car-settings-param-value">24</div>
-                                                <div class="car-settings-param-note">Чуть более живой зад, но без сноса при резком газе.</div>
-                                            </div>
-                                        </div>
-                                        <div class="car-settings-image-wrap">
-                                            <div class="car-settings-image">
-                                                <img src="/images/games/forza/clirens.png" alt="Схема подвески автомобиля">
-                                                <div class="car-settings-image-label">
-                                                    Профиль: <strong>Подвеска</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="car-settings-pane" data-settings-pane="aero">
-                                        <div class="car-settings-params">
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Переднее крыло</div>
-                                                <div class="car-settings-param-value">60%</div>
-                                                <div class="car-settings-param-note">Баланс между поворотом и прямой, без избыточного сноса.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Заднее крыло</div>
-                                                <div class="car-settings-param-value">75%</div>
-                                                <div class="car-settings-param-note">Стабильность при торможении и на выходе из поворотов.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Баланс прижима</div>
-                                                <div class="car-settings-param-value">52% вперёд</div>
-                                                <div class="car-settings-param-note">Чуть острее вход, но без нервности на торможении.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Высота сплиттера</div>
-                                                <div class="car-settings-param-value">Низко</div>
-                                                <div class="car-settings-param-note">Максимум прижима на медленных и средних поворотах.</div>
-                                            </div>
-                                        </div>
-                                        <div class="car-settings-image-wrap">
-                                            <div class="car-settings-image">
-                                                <img src="/images/games/forza/iTurn0image1.png" alt="Аэродинамические настройки">
-                                                <div class="car-settings-image-label">
-                                                    Профиль: <strong>Аэродинамика</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="car-settings-pane" data-settings-pane="brakes">
-                                        <div class="car-settings-params">
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Баланс тормозов</div>
-                                                <div class="car-settings-param-value">60% вперёд</div>
-                                                <div class="car-settings-param-note">Без блокировок задней оси при позднем торможении.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Сила тормозов</div>
-                                                <div class="car-settings-param-value">105%</div>
-                                                <div class="car-settings-param-note">Под ABS, агрессивный, но контролируемый замедляющий момент.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Температурное окно</div>
-                                                <div class="car-settings-param-value">Среднее</div>
-                                                <div class="car-settings-param-note">Оптимально для спринтов 5–10 кругов.</div>
-                                            </div>
-                                        </div>
-                                        <div class="car-settings-image-wrap">
-                                            <div class="car-settings-image">
-                                                <img src="/images/games/forza/placeholder-event.svg" alt="Настройки тормозов">
-                                                <div class="car-settings-image-label">
-                                                    Профиль: <strong>Тормоза</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="car-settings-pane" data-settings-pane="gears">
-                                        <div class="car-settings-params">
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">Макс. скорость</div>
-                                                <div class="car-settings-param-value">285 км/ч</div>
-                                                <div class="car-settings-param-note">Под средние по длине прямые, без упора в отсечку.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">1–2 передача</div>
-                                                <div class="car-settings-param-value">Короткие</div>
-                                                <div class="car-settings-param-note">Выстрел с медленных шпилек и медленных поворотов.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">3–5 передача</div>
-                                                <div class="car-settings-param-value">Средние</div>
-                                                <div class="car-settings-param-note">Рабочий диапазон по трассе, без провалов по тяге.</div>
-                                            </div>
-                                            <div class="car-settings-param">
-                                                <div class="car-settings-param-label">6 передача</div>
-                                                <div class="car-settings-param-value">Чуть длиннее</div>
-                                                <div class="car-settings-param-note">Не упирается в отсечку на главной прямой.</div>
-                                            </div>
-                                        </div>
-                                        <div class="car-settings-image-wrap">
-                                            <div class="car-settings-image">
-                                                <img src="/images/games/forza/placeholder-hero.svg" alt="Настройки трансмиссии">
-                                                <div class="car-settings-image-label">
-                                                    Профиль: <strong>Трансмиссия</strong>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="car-settings-footer-note">
-                                    Все значения — ориентировочный пресет. <span>Картинки-заглушки</span> справа можно заменить на реальные скриншоты из игры.
+                                <div class="text-xs text-slate-500 mt-1">
+                                    Точек контакта
                                 </div>
                             </div>
-
-                            <div class="car-settings-side">
-                                <div class="car-settings-side-block">
-                                    <h3>Как использовать этот пресет</h3>
-                                    <ul>
-                                        <li>Начни с подвески и проверь, нет ли избыточного крена в быстрых связках.</li>
-                                        <li>Подстрой аэродинамику под конкретную трассу: больше прижима — меньше максималка.</li>
-                                        <li>Тормоза подбирай под свой стиль: любишь позднее торможение — смещай баланс вперёд.</li>
-                                        <li>Трансмиссию корректируй под длину главной прямой и частоту выхода в отсечку.</li>
-                                    </ul>
+                            <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-[#2563eb]">
+                                    360°
                                 </div>
-                                <div class="car-settings-side-block">
-                                    <h3>Где менять картинки</h3>
-                                    <ul>
-                                        <li>Каждая вкладка использует свой <code>src</code> в теге <code>img</code>.</li>
-                                        <li>Пути сейчас указывают на заглушки в <code>/images/games/forza/...</code>.</li>
-                                        <li>Просто замени путь на реальный скриншот из игры с нужным меню.</li>
-                                        <li>Структура и размеры блока уже оптимизированы под игровые скрины.</li>
-                                    </ul>
+                                <div class="text-xs text-slate-500 mt-1">
+                                    Температурная карта
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 rounded-lg p-4 text-center">
+                                <div class="text-2xl font-bold text-[#2563eb]">
+                                    Real-time
+                                </div>
+                                <div class="text-xs text-slate-500 mt-1">
+                                    Расчёт износа
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </div>
-
-            <!-- ВИДЕО -->
-            <div id="videos" class="tab-pane">
-                <section class="videos-section">
-                    <div class="videos-card">
-                        <h2>Видео</h2>
-                        <p>Здесь будут видеогайды, разборы трасс, сравнения автомобилей и обучающие ролики по Forza Motorsport 8.</p>
-                        <img src="/images/games/forza/placeholder-cars.svg" alt="Автомобили Forza" style="width:100%;display:block;border-radius:10px;">
+                </div>
+                <div id="aero" class="sub-content">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Динамическая аэродинамика</h3>
+                        <p class="text-slate-600 leading-relaxed">Аэродинамическая модель учитывает форму кузова, угол атаки, скорость ветра и эффект слипстрима. Прижимная сила изменяется в зависимости от настроек антикрыла и скорости автомобиля.</p>
                     </div>
-                </section>
-            </div>
-
-            <!-- НОВОСТИ -->
-            <div id="news" class="tab-pane">
-                <section class="news-section">
-                    <div class="news-card">
-                        <h2>Новости</h2>
-                        <ul class="news-list">
-                            <li>Обновление физики шин в Forza Motorsport 8 — улучшенная работа бокового сцепления.</li>
-                            <li>Добавлены новые события в режиме карьеры.</li>
-                            <li>Патч оптимизации графики для трасс Spa и Suzuka.</li>
-                            <li>Исправлены ошибки с отображением телеметрии.</li>
-                        </ul>
+                </div>
+                <div id="damage" class="sub-content">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Система повреждений</h3>
+                        <p class="text-slate-600 leading-relaxed">Повреждения влияют на аэродинамику, управляемость и мощность двигателя. Визуальные деформации кузова дополняются механическими последствиями столкновений.</p>
                     </div>
-                </section>
-            </div>
-
-            <!-- ТРАССЫ -->
-            <div id="tracks" class="tab-pane">
-                <section class="tracks-section">
-                    <div class="tracks-card">
-                        <h2>Трассы</h2>
-                        <div class="tracks-grid">
-                            <div class="track-item">
-                                <img src="/images/games/forza/placeholder-hero.svg" alt="Mugello">
-                                <div class="track-item-title">Mugello</div>
+                </div>
+                <div id="render" class="sub-content">
+                    <div class="feature-card">
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Рендеринг нового поколения</h3>
+                        <p class="text-slate-600 leading-relaxed mb-3">Движок использует ray tracing в реальном времени для отражений, глобального освещения и теней. Поддержка HDR и разрешения до 4K при 60 FPS.</p>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">Ray Tracing</span> <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">HDR10</span> <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">4K 60fps</span> <span class="px-3 py-1 bg-slate-100 rounded-full text-xs font-medium text-slate-600">Dynamic Lighting</span>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- TRACKS -->
+            <div id="tracks" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Трассы</h2>
+                <p class="text-slate-500 mb-6">Полный каталог трасс, доступных в Forza Motorsport. Каждая трасса лазерно отсканирована для максимальной точности.</p>
+                <div class="relative">
+                    <div class="track-slider" id="trackSlider"></div>
+                    <div class="flex items-center justify-center gap-4 mt-6">
+                        <button id="prevTrack" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition" aria-label="Предыдущая трасса"> <i data-lucide="chevron-left" style="width:18px;height:18px;color:#334155;"></i> </button>
+                        <div id="trackIndicators" class="flex gap-2"></div><button id="nextTrack" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center shadow-sm hover:bg-slate-50 transition" aria-label="Следующая трасса"> <i data-lucide="chevron-right" style="width:18px;height:18px;color:#334155;"></i> </button>
+                    </div>
+                </div>
+            </div><!-- CARS -->
+            <div id="cars" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Автомобили</h2>
+                <p class="text-slate-500 mb-6">Более 500 автомобилей от ведущих мировых производителей. Вот некоторые из доступных машин:</p>
+                <div class="overflow-x-auto rounded-xl border border-slate-200">
+                    <table class="car-table">
+                        <thead>
+                        <tr>
+                            <th>Производитель</th>
+                            <th>Модель</th>
+                            <th>Год</th>
+                            <th>Класс</th>
+                            <th>Тип</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>BMW</td>
+                            <td>M4 Competition</td>
+                            <td>2021</td>
+                            <td>A</td>
+                            <td>GT</td>
+                        </tr>
+                        <tr>
+                            <td>Porsche</td>
+                            <td>911 GT3 RS</td>
+                            <td>2023</td>
+                            <td>S</td>
+                            <td>Суперкар</td>
+                        </tr>
+                        <tr>
+                            <td>Ferrari</td>
+                            <td>296 GTB</td>
+                            <td>2022</td>
+                            <td>S</td>
+                            <td>Суперкар</td>
+                        </tr>
+                        <tr>
+                            <td>Lamborghini</td>
+                            <td>Huracán STO</td>
+                            <td>2021</td>
+                            <td>S</td>
+                            <td>Суперкар</td>
+                        </tr>
+                        <tr>
+                            <td>Ford</td>
+                            <td>Mustang GT</td>
+                            <td>2024</td>
+                            <td>B</td>
+                            <td>Масл-кар</td>
+                        </tr>
+                        <tr>
+                            <td>McLaren</td>
+                            <td>720S</td>
+                            <td>2018</td>
+                            <td>R</td>
+                            <td>Гиперкар</td>
+                        </tr>
+                        <tr>
+                            <td>Toyota</td>
+                            <td>GR86</td>
+                            <td>2022</td>
+                            <td>C</td>
+                            <td>Спорткар</td>
+                        </tr>
+                        <tr>
+                            <td>Nissan</td>
+                            <td>GT-R NISMO</td>
+                            <td>2020</td>
+                            <td>A</td>
+                            <td>Суперкар</td>
+                        </tr>
+                        <tr>
+                            <td>Aston Martin</td>
+                            <td>Vantage</td>
+                            <td>2019</td>
+                            <td>A</td>
+                            <td>GT</td>
+                        </tr>
+                        <tr>
+                            <td>Chevrolet</td>
+                            <td>Corvette Z06</td>
+                            <td>2023</td>
+                            <td>S</td>
+                            <td>Суперкар</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <div class="text-center px-4 py-2 bg-slate-50 rounded-lg border border-slate-100">
+                        <div class="text-xs text-slate-400 mb-1">
+                            Класс D–C
+                        </div>
+                        <div class="text-sm font-semibold text-slate-600">
+                            Стартовые
+                        </div>
+                    </div>
+                    <div class="text-center px-4 py-2 bg-blue-50 rounded-lg border border-blue-100">
+                        <div class="text-xs text-blue-400 mb-1">
+                            Класс B–A
+                        </div>
+                        <div class="text-sm font-semibold text-blue-600">
+                            Средние
+                        </div>
+                    </div>
+                    <div class="text-center px-4 py-2 bg-amber-50 rounded-lg border border-amber-100">
+                        <div class="text-xs text-amber-400 mb-1">
+                            Класс S
+                        </div>
+                        <div class="text-sm font-semibold text-amber-600">
+                            Суперкары
+                        </div>
+                    </div>
+                    <div class="text-center px-4 py-2 bg-red-50 rounded-lg border border-red-100">
+                        <div class="text-xs text-red-400 mb-1">
+                            Класс R
+                        </div>
+                        <div class="text-sm font-semibold text-red-600">
+                            Гиперкары
+                        </div>
+                    </div>
+                </div>
+            </div><!-- MODES -->
+            <div id="modes" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">Режимы игры</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="mode-card">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
+                            <i data-lucide="trophy" style="width:24px;height:24px;color:#2563eb;"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">Builder's Cup</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Основная карьера. Прокачивай автомобили, зарабатывай очки опыта и открывай новые серии гонок. Каждый автомобиль развивается отдельно.</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
+                            <i data-lucide="users" style="width:24px;height:24px;color:#22c55e;"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">Мультиплеер</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Соревновательные онлайн-гонки с рейтинговой системой. Safety Rating и Skill Rating определяют твой уровень.</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4">
+                            <i data-lucide="clock" style="width:24px;height:24px;color:#7c3aed;"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">Свободная практика</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Тренируйся на любой трассе без ограничений. Идеально для отработки настроек и изучения поворотов.</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center mb-4">
+                            <i data-lucide="timer" style="width:24px;height:24px;color:#d97706;"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">Rivals</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Асинхронные гонки против призраков других игроков. Побей время соперника и поднимись в таблице лидеров.</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center mb-4">
+                            <i data-lucide="palette" style="width:24px;height:24px;color:#0891b2;"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">Кастомизация</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Создавай уникальные ливреи, тюнингуй машины и делись настройками с сообществом.</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center mb-4">
+                            <i data-lucide="radio" style="width:24px;height:24px;color:#e11d48;"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">Зрительский режим</h3>
+                        <p class="text-sm text-slate-500 leading-relaxed">Наблюдай за гонками с разных камер. Идеально для стримеров и создателей контента.</p>
+                    </div>
+                </div>
+            </div><!-- UPDATES -->
+            <div id="updates" class="tab-content">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">Обновления и будущее</h2>
+                <p class="text-slate-500 mb-6">Turn 10 Studios регулярно обновляют Forza Motorsport, добавляя новые автомобили, трассы и функции.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center gap-2"><i data-lucide="check-circle" style="width:20px;height:20px;color:#22c55e;"></i> Выпущенные обновления</h3>
+                        <div class="update-item">
+                            <div class="font-semibold text-slate-700 text-sm">
+                                Обновление 1.0 — Запуск
                             </div>
-                            <div class="track-item">
-                                <img src="/images/games/forza/placeholder-hero.svg" alt="Spa">
-                                <div class="track-item-title">Spa</div>
+                            <div class="text-xs text-slate-400 mt-1">
+                                Октябрь 2023
                             </div>
-                            <div class="track-item">
-                                <img src="/images/games/forza/placeholder-hero.svg" alt="Suzuka">
-                                <div class="track-item-title">Suzuka</div>
+                            <p class="text-sm text-slate-500 mt-2">Базовый набор: 500+ машин, 28 трасс, карьера Builder's Cup, мультиплеер.</p>
+                        </div>
+                        <div class="update-item">
+                            <div class="font-semibold text-slate-700 text-sm">
+                                Обновление 2.0 — Featured Multiplayer
+                            </div>
+                            <div class="text-xs text-slate-400 mt-1">
+                                Ноябрь 2023
+                            </div>
+                            <p class="text-sm text-slate-500 mt-2">Обновлённый мультиплеер, новые серии гонок и баланс-патчи.</p>
+                        </div>
+                        <div class="update-item">
+                            <div class="font-semibold text-slate-700 text-sm">
+                                Обновление 5.0 — Open Top
+                            </div>
+                            <div class="text-xs text-slate-400 mt-1">
+                                Март 2024
+                            </div>
+                            <p class="text-sm text-slate-500 mt-2">Новые кабриолеты, трасса Sunset Peninsula, улучшения физики.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-4 flex items-center gap-2"><i data-lucide="rocket" style="width:20px;height:20px;color:#2563eb;"></i> Планы на будущее</h3>
+                        <div class="space-y-4">
+                            <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2 py-0.5 bg-blue-200 text-blue-800 text-[0.65rem] font-bold rounded uppercase">Ожидается</span> <span class="text-sm font-semibold text-slate-700">Новые трассы</span>
+                                </div>
+                                <p class="text-sm text-slate-500">Добавление легендарных трасс по запросам сообщества.</p>
+                            </div>
+                            <div class="bg-blue-50 border border-blue-100 rounded-xl p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2 py-0.5 bg-blue-200 text-blue-800 text-[0.65rem] font-bold rounded uppercase">Ожидается</span> <span class="text-sm font-semibold text-slate-700">Улучшения карьеры</span>
+                                </div>
+                                <p class="text-sm text-slate-500">Расширение Builder's Cup с новыми сериями и наградами.</p>
+                            </div>
+                            <div class="bg-green-50 border border-green-100 rounded-xl p-4">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2 py-0.5 bg-green-200 text-green-800 text-[0.65rem] font-bold rounded uppercase">Сезонные</span> <span class="text-sm font-semibold text-slate-700">Ежемесячные события</span>
+                                </div>
+                                <p class="text-sm text-slate-500">Регулярные тематические серии и челленджи сообщества.</p>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
+                <div class="mt-8 bg-slate-50 rounded-xl p-6 border border-slate-200">
+                    <h3 class="font-bold text-slate-700 mb-2 flex items-center gap-2"><i data-lucide="bar-chart-3" style="width:18px;height:18px;color:#2563eb;"></i> Роль СайтСотика</h3>
+                    <p class="text-sm text-slate-500 leading-relaxed">Наш сайт служит платформой для аналитики Forza Motorsport: разбор сетапов, рейтинги машин по классам, анализ трасс и рекомендации по настройкам. Следите за обновлениями и стримами Дмитрия Переднего!</p>
+                </div>
             </div>
-
         </div>
     </section>
-</main>
-
-<footer>
-    Forza Motorsport 8 — СайтСотика. Все права защищены.
+</main><!-- FOOTER -->
+<footer class="bg-[#0f172a] text-slate-400 py-8 px-4 text-center text-sm border-t border-slate-800">
+    <p>© 2024 <strong class="text-white">СайтСотика</strong> — Неофициальная информационная страница</p>
+    <p class="mt-1 text-xs text-slate-500">Forza Motorsport является торговой маркой Microsoft Corporation / Xbox Game Studios</p>
 </footer>
+<script>
+    // ===== HEADER & NAVIGATION INITIALIZATION =====
+    document.addEventListener("DOMContentLoaded", function() {
+      const header = document.getElementById("main-header");
+      const mainNav = document.getElementById("main-nav");
+      const logo = document.querySelector(".logo");
+      const mobilePanel = document.getElementById("mobile-panel");
 
-</body>
+      // СОСТОЯНИЕ ПРИЛОЖЕНИЯ - управление стеком меню
+      const menuStack = [];
+      const MENU_STATES = {
+        MAIN: "main",
+        GAMES: "games",
+        FORZA: "forza",
+        AC: "ac",
+        PC: "pc"
+      };
+
+      function getInitialMenuState() {
+        return MENU_STATES.MAIN;
+      }
+
+      function getMainMenuHTML() {
+        return `
+          <a href="#" class="nav-link" data-section="home">Главная</a>
+          <a href="#" class="nav-link">Обо мне</a>
+          <a href="#" class="nav-link" data-menu-action="open-games">Игры</a>
+          <a href="#" class="nav-link">Стрим</a>
+          <a href="#" class="nav-link">Команда</a>
+          <a href="#" class="nav-link">Партнеры</a>
+        `;
+      }
+
+      function getGamesMenuHTML() {
+        return `
+          <a href="#" class="nav-link back-link" data-menu-action="back">← Назад</a>
+          <a href="#" class="nav-link" data-section="forza-m">Forza Motorsport</a>
+          <a href="#" class="nav-link" data-section="ac">Assetto Corsa</a>
+          <a href="#" class="nav-link" data-section="pc">Project Cars</a>
+        `;
+      }
+
+      function getForzaMenuHTML() {
+        return `
+          <a href="#" class="nav-link back-link" data-menu-action="back">← Назад к сериям</a>
+          <a href="#" class="nav-link" data-section="forza-7">Forza Motorsport 7</a>
+          <a href="#" class="nav-link active" data-section="forza-8">Forza Motorsport 8</a>
+        `;
+      }
+
+      function getAcMenuHTML() {
+        return `
+          <a href="#" class="nav-link back-link" data-menu-action="back">← Назад к сериям</a>
+          <a href="#" class="nav-link">Assetto Corsa</a>
+          <a href="#" class="nav-link">Assetto Corsa Competizione</a>
+        `;
+      }
+
+      function getPcMenuHTML() {
+        return `
+          <a href="#" class="nav-link back-link" data-menu-action="back">← Назад к сериям</a>
+          <a href="#" class="nav-link">Project Cars 1</a>
+          <a href="#" class="nav-link">Project Cars 2</a>
+          <a href="#" class="nav-link">Project Cars 3</a>
+        `;
+      }
+
+      function getMenuHTML(state) {
+        switch(state) {
+          case MENU_STATES.GAMES: return getGamesMenuHTML();
+          case MENU_STATES.FORZA: return getForzaMenuHTML();
+          case MENU_STATES.AC: return getAcMenuHTML();
+          case MENU_STATES.PC: return getPcMenuHTML();
+          case MENU_STATES.MAIN:
+          default: return getMainMenuHTML();
+        }
+      }
+
+      function attachEventListeners() {
+        mainNav.querySelectorAll("[data-menu-action]").forEach(element => {
+          element.addEventListener("click", function(e) {
+            const action = this.getAttribute("data-menu-action");
+            e.preventDefault();
+
+            if (action === "open-games") {
+              menuStack.push(MENU_STATES.MAIN);
+              renderMenu(MENU_STATES.GAMES);
+            } else if (action === "open-forza") {
+              menuStack.push(MENU_STATES.GAMES);
+              renderMenu(MENU_STATES.FORZA);
+            } else if (action === "open-ac") {
+              menuStack.push(MENU_STATES.GAMES);
+              renderMenu(MENU_STATES.AC);
+            } else if (action === "open-pc") {
+              menuStack.push(MENU_STATES.GAMES);
+              renderMenu(MENU_STATES.PC);
+            } else if (action === "back") {
+              if (menuStack.length > 0) {
+                const previousState = menuStack.pop();
+                renderMenu(previousState);
+              } else {
+                renderMenu(MENU_STATES.MAIN);
+              }
+            }
+          });
+        });
+
+        mainNav.querySelectorAll("[data-section]").forEach(element => {
+          element.addEventListener("click", function(e) {
+            e.preventDefault();
+            const section = this.getAttribute("data-section");
+            if (section === "home") {
+              window.location.href = "/";
+            } else if (section === "forza-m") {
+              menuStack.push(MENU_STATES.GAMES);
+              renderMenu(MENU_STATES.FORZA);
+            }
+          });
+        });
+      }
+
+      function renderMenu(state) {
+        mainNav.innerHTML = getMenuHTML(state);
+        attachEventListeners();
+      }
+
+      renderMenu(getInitialMenuState());
+
+      // ===== МОБИЛЬНОЕ МЕНЮ =====
+      const mobileMenuStack = [];
+      let currentMobileState = MENU_STATES.MAIN;
+
+      function renderMobileMenu(state) {
+        currentMobileState = state;
+        let html = ``;
+
+        switch(state) {
+          case MENU_STATES.GAMES:
+            html = `
+              <a href="#" data-mobile-action="back">← Назад</a>
+              <a href="#" data-mobile-action="open-forza">Forza Motorsport</a>
+              <a href="#" data-mobile-action="open-ac">Assetto Corsa</a>
+              <a href="#" data-mobile-action="open-pc">Project Cars</a>
+            `;
+            break;
+          case MENU_STATES.FORZA:
+            html = `
+              <a href="#" data-mobile-action="back">← Назад</a>
+              <a href="#">Forza Motorsport 7</a>
+              <a href="#">Forza Motorsport 8</a>
+            `;
+            break;
+          case MENU_STATES.AC:
+            html = `
+              <a href="#" data-mobile-action="back">← Назад</a>
+              <a href="#">Assetto Corsa</a>
+              <a href="#">Assetto Corsa Competizione</a>
+            `;
+            break;
+          case MENU_STATES.PC:
+            html = `
+              <a href="#" data-mobile-action="back">← Назад</a>
+              <a href="#">Project Cars 1</a>
+              <a href="#">Project Cars 2</a>
+              <a href="#">Project Cars 3</a>
+            `;
+            break;
+          case MENU_STATES.MAIN:
+          default:
+            html = `
+              <a href="#">Главная</a>
+              <a href="#">Обо мне</a>
+              <a href="#" data-mobile-action="open-games">Игры</a>
+              <a href="#">Стрим</a>
+              <a href="#">Команда</a>
+              <a href="#">Партнеры</a>
+            `;
+        }
+
+        mobilePanel.innerHTML = html;
+        attachMobileEventListeners();
+      }
+
+      function attachMobileEventListeners() {
+        mobilePanel.querySelectorAll("[data-mobile-action]").forEach(element => {
+          element.addEventListener("click", function(e) {
+            const action = this.getAttribute("data-mobile-action");
+            e.preventDefault();
+
+            if (action === "open-games") {
+              mobileMenuStack.push(MENU_STATES.MAIN);
+              renderMobileMenu(MENU_STATES.GAMES);
+            } else if (action === "open-forza") {
+              mobileMenuStack.push(MENU_STATES.GAMES);
+              renderMobileMenu(MENU_STATES.FORZA);
+            } else if (action === "open-ac") {
+              mobileMenuStack.push(MENU_STATES.GAMES);
+              renderMobileMenu(MENU_STATES.AC);
+            } else if (action === "open-pc") {
+              mobileMenuStack.push(MENU_STATES.GAMES);
+              renderMobileMenu(MENU_STATES.PC);
+            } else if (action === "back") {
+              if (mobileMenuStack.length > 0) {
+                const previousState = mobileMenuStack.pop();
+                renderMobileMenu(previousState);
+              } else {
+                renderMobileMenu(MENU_STATES.MAIN);
+                closeMobileMenu();
+              }
+            }
+          });
+        });
+
+        mobilePanel.querySelectorAll("a:not([data-mobile-action])").forEach(element => {
+          element.addEventListener("click", function() {
+            closeMobileMenu();
+          });
+        });
+      }
+
+      const mobileBtn = document.createElement("button");
+      mobileBtn.id = "mobile-menu-btn";
+      mobileBtn.className = "mobile-menu-btn";
+      mobileBtn.innerHTML = `
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      `;
+      header.appendChild(mobileBtn);
+
+      mobileBtn.addEventListener("click", () => {
+        if (mobilePanel.classList.contains("open")) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
+
+      function openMobileMenu() {
+        mobilePanel.classList.add("open");
+        mobileBtn.classList.add("open");
+      }
+
+      function closeMobileMenu() {
+        mobilePanel.classList.remove("open");
+        mobileBtn.classList.remove("open");
+      }
+
+      renderMobileMenu(MENU_STATES.MAIN);
+
+      // ===== ГРАДИЕНТ АНИМАЦИЯ ХЭДЕРА =====
+      header.addEventListener("mousemove", (e) => {
+        const x = e.clientX;
+        const max = window.innerWidth;
+        const hue = Math.floor((x / max) * 360);
+        header.style.background = `linear-gradient(to right, #f8f9fa, hsl(${hue}, 40%, 90%), #f8f9fa)`;
+      });
+
+      header.addEventListener("mouseleave", () => {
+        header.style.background = "#f8f9fa";
+      });
+    });
+
+    // ===== CONFIG & SDK =====
+    const defaultConfig = {
+      background_color: '#f8fafc',
+      surface_color: '#ffffff',
+      text_color: '#334155',
+      primary_color: '#2563eb',
+      accent_color: '#22c55e',
+      font_family: 'Exo 2',
+      font_size: 16,
+      site_title: 'СайтСотика',
+      game_title: 'Forza Motorsport'
+    };
+
+    function applyConfig(cfg) {
+      document.body.style.background = cfg.background_color || defaultConfig.background_color;
+      const primary = cfg.primary_color || defaultConfig.primary_color;
+      const logoEl = document.querySelector('.logo');
+      if (logoEl) {
+        logoEl.textContent = cfg.site_title || defaultConfig.site_title;
+      }
+      const heroTitle = document.getElementById('hero-game-title');
+      if (heroTitle) heroTitle.textContent = cfg.game_title || defaultConfig.game_title;
+      document.body.style.fontFamily = `'${cfg.font_family || defaultConfig.font_family}', 'Segoe UI', system-ui, sans-serif`;
+    }
+
+    window.elementSdk.init({
+      defaultConfig,
+      onConfigChange: async (cfg) => { applyConfig(cfg); },
+      mapToCapabilities: (cfg) => ({
+        recolorables: [
+          { get: () => cfg.background_color || defaultConfig.background_color, set: (v) => { cfg.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => cfg.surface_color || defaultConfig.surface_color, set: (v) => { cfg.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+          { get: () => cfg.text_color || defaultConfig.text_color, set: (v) => { cfg.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => cfg.primary_color || defaultConfig.primary_color, set: (v) => { cfg.primary_color = v; window.elementSdk.setConfig({ primary_color: v }); } },
+          { get: () => cfg.accent_color || defaultConfig.accent_color, set: (v) => { cfg.accent_color = v; window.elementSdk.setConfig({ accent_color: v }); } }
+        ],
+        borderables: [],
+        fontEditable: { get: () => cfg.font_family || defaultConfig.font_family, set: (v) => { cfg.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => cfg.font_size || defaultConfig.font_size, set: (v) => { cfg.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+      }),
+      mapToEditPanelValues: (cfg) => new Map([
+        ['site_title', cfg.site_title || defaultConfig.site_title],
+        ['game_title', cfg.game_title || defaultConfig.game_title]
+      ])
+    });
+
+    // ===== TABS =====
+    document.addEventListener('DOMContentLoaded', () => {
+      // Обработчик для основных вкладок
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const tabId = btn.getAttribute('data-tab');
+          if (!tabId) return;
+
+          // Удаляем активный класс со всех основных вкладок и контента
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+          // Добавляем активный класс текущей вкладке
+          btn.classList.add('active');
+          const tabContent = document.getElementById(tabId);
+          if (tabContent) {
+            tabContent.classList.add('active');
+          }
+        });
+      });
+
+      // Обработчик для подвкладок
+      document.querySelectorAll('.sub-tab-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const subtabId = btn.getAttribute('data-subtab');
+          if (!subtabId) return;
+
+          // Находим контейнер вкладки, в котором находится эта кнопка
+          const container = btn.closest('.tab-content');
+          if (container) {
+            // Удаляем активный класс только внутри этого контейнера
+            container.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+            container.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
+
+            // Добавляем активный класс текущей подвкладке
+            btn.classList.add('active');
+            const subContent = document.getElementById(subtabId);
+            if (subContent) {
+              subContent.classList.add('active');
+            }
+          }
+        });
+      });
+    });
+
+    // ===== TRACK SLIDER =====
+    const tracks = [
+      { name: 'Maple Valley', location: 'США', turns: 11, length: '3.2 км', type: 'Оригинальная', emoji: '🇺🇸' },
+      { name: 'Circuit de Spa-Francorchamps', location: 'Бельгия', turns: 19, length: '7.0 км', type: 'Реальная', emoji: '🇧🇪' },
+      { name: 'Suzuka Circuit', location: 'Япония', turns: 18, length: '5.8 км', type: 'Реальная', emoji: '🇯🇵' },
+      { name: 'Mugello Circuit', location: 'Италия', turns: 15, length: '5.2 км', type: 'Реальная', emoji: '🇮🇹' },
+      { name: 'Laguna Seca', location: 'США', turns: 11, length: '3.6 км', type: 'Реальная', emoji: '🇺🇸' },
+      { name: 'Nürburgring GP', location: 'Германия', turns: 16, length: '5.1 км', type: 'Реальная', emoji: '🇩🇪' },
+      { name: 'Silverstone', location: 'Великобритания', turns: 18, length: '5.9 км', type: 'Реальная', emoji: '🇬🇧' },
+      { name: 'Hakone', location: 'Япония', turns: 14, length: '4.1 км', type: 'Оригинальная', emoji: '🇯🇵' },
+      { name: 'Brands Hatch', location: 'Великобритания', turns: 9, length: '3.9 км', type: 'Реальная', emoji: '🇬🇧' },
+      { name: 'Yas Marina', location: 'ОАЭ', turns: 16, length: '5.5 км', type: 'Реальная', emoji: '🇦🇪' }
+    ];
+
+    const slider = document.getElementById('trackSlider');
+    const indicators = document.getElementById('trackIndicators');
+    let currentSlide = 0;
+
+    tracks.forEach((t, i) => {
+      const card = document.createElement('div');
+      card.className = 'track-card';
+      card.innerHTML = `<div class="text-2xl mb-2">${t.emoji}</div><h3 class="text-lg font-bold mb-1">${t.name}</h3><p class="text-sm text-slate-300 mb-3">${t.location}</p><div class="flex flex-wrap gap-2"><span class="px-2 py-1 bg-white/10 rounded text-xs">${t.turns} поворотов</span><span class="px-2 py-1 bg-white/10 rounded text-xs">${t.length}</span><span class="px-2 py-1 bg-white/10 rounded text-xs">${t.type}</span></div>`;
+      slider.appendChild(card);
+      const dot = document.createElement('div');
+      dot.className = 'scroll-indicator' + (i === 0 ? ' active' : '');
+      indicators.appendChild(dot);
+    });
+
+    function scrollToSlide(idx) {
+      const cards = slider.querySelectorAll('.track-card');
+      if (idx < 0) idx = 0;
+      if (idx >= cards.length) idx = cards.length - 1;
+      currentSlide = idx;
+      const card = cards[idx];
+      slider.scrollTo({ left: card.offsetLeft - slider.offsetLeft, behavior: 'smooth' });
+      indicators.querySelectorAll('.scroll-indicator').forEach((d, i) => d.classList.toggle('active', i === idx));
+    }
+
+    document.getElementById('prevTrack').addEventListener('click', () => scrollToSlide(currentSlide - 1));
+    document.getElementById('nextTrack').addEventListener('click', () => scrollToSlide(currentSlide + 1));
+
+    lucide.createIcons();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9e443179b43eacf1',t:'MTc3NDg0MzA3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
