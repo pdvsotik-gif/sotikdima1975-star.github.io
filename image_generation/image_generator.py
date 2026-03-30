@@ -44,13 +44,15 @@ def generate_image_from_prompt(prompt, output_path="generated_image.jpg", width=
         os.makedirs(os.path.dirname(output_path) if os.path.dirname(output_path) else ".", exist_ok=True)
         
         # Run the image generation script
+        from pathlib import Path
+        BASE_DIR = Path(__file__).parent
         result = subprocess.run([
             sys.executable, "generate_image.py",
             prompt,
             "--output", output_path,
             "--width", str(width),
             "--height", str(height)
-        ], cwd="C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/image_generation", capture_output=True, text=True)
+        ], cwd=str(BASE_DIR), capture_output=True, text=True)
         
         if result.returncode == 0:
             print(f"Image generated successfully: {output_path}")
@@ -79,8 +81,10 @@ def main():
     ]
     
     print("\nGenerating example images...")
+    from pathlib import Path
+    BASE_DIR = Path(__file__).parent.parent
     for i, prompt in enumerate(example_prompts):
-        output_path = f"C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/image_generation/generated_examples/example_{i+1}.jpg"
+        output_path = str(BASE_DIR / "image_generation" / "generated_examples" / f"example_{i+1}.jpg")
         generate_image_from_prompt(prompt, output_path)
         
     print("\nSetup complete! You can now generate images with custom prompts.")

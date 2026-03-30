@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
     <script src="/_sdk/element_sdk.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="../../../../css/header.css">
     <style>
         /* ===== CONTENT STYLES (без header стилей - они в header.css) ===== */
         .hero-bg {
@@ -203,11 +203,13 @@
             padding: 20px;
             color: #fff;
             flex-shrink: 0;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
         .track-card:hover {
             transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.2);
         }
 
         .car-table {
@@ -727,14 +729,14 @@
     // ===== TRACK SLIDER =====
     function initTrackSlider() {
         const tracks = [
-            { name: 'Maple Valley', location: 'США', turns: 11, length: '3.2 км', type: 'Оригинальная' },
-            { name: 'Circuit de Spa-Francorchamps', location: 'Бельгия', turns: 19, length: '7.0 км', type: 'Реальная' },
-            { name: 'Suzuka Circuit', location: 'Япония', turns: 18, length: '5.8 км', type: 'Реальная' },
-            { name: 'Mugello Circuit', location: 'Италия', turns: 15, length: '5.2 км', type: 'Реальная' },
-            { name: 'Laguna Seca', location: 'США', turns: 11, length: '3.6 км', type: 'Реальная' },
-            { name: 'Nürburgring GP', location: 'Германия', turns: 16, length: '5.1 км', type: 'Реальная' },
-            { name: 'Silverstone', location: 'Великобритания', turns: 18, length: '5.9 км', type: 'Реальная' },
-            { name: 'Yas Marina', location: 'ОАЭ', turns: 16, length: '5.5 км', type: 'Реальная' }
+            { name: 'Maple Valley', slug: 'maple-valley', location: 'США', turns: 11, length: '3.2 км', type: 'Оригинальная' },
+            { name: 'Circuit de Spa-Francorchamps', slug: 'spa-francorchamps', location: 'Бельгия', turns: 19, length: '7.0 км', type: 'Реальная' },
+            { name: 'Suzuka Circuit', slug: 'suzuka-circuit', location: 'Япония', turns: 18, length: '5.8 км', type: 'Реальная' },
+            { name: 'Mugello Circuit', slug: 'mugello-circuit', location: 'Италия', turns: 15, length: '5.2 км', type: 'Реальная' },
+            { name: 'Laguna Seca', slug: 'laguna-seca', location: 'США', turns: 11, length: '3.6 км', type: 'Реальная' },
+            { name: 'Nürburgring GP', slug: 'nurburgring-gp', location: 'Германия', turns: 16, length: '5.1 км', type: 'Реальная' },
+            { name: 'Silverstone', slug: 'silverstone', location: 'Великобритания', turns: 18, length: '5.9 км', type: 'Реальная' },
+            { name: 'Yas Marina', slug: 'yas-marina', location: 'ОАЭ', turns: 16, length: '5.5 км', type: 'Реальная' }
         ];
 
         const slider = document.getElementById('trackSlider');
@@ -745,6 +747,7 @@
         tracks.forEach((track, i) => {
             const card = document.createElement('div');
             card.className = 'track-card';
+            card.setAttribute('data-url', `/pages/games/forza/motorsport8/tracks/${track.slug.replace('maple-valley', 'maple_valley')}/`);
             card.innerHTML = `
                 <h3 class="text-lg font-bold mb-1">${track.name}</h3>
                 <p class="text-sm text-slate-300 mb-3">${track.location}</p>
@@ -754,6 +757,13 @@
                     <span class="px-2 py-1 bg-white/10 rounded text-xs">${track.type}</span>
                 </div>
             `;
+            
+            // Обработчик клика
+            card.addEventListener('click', function () {
+                const url = this.getAttribute('data-url');
+                window.location.href = url;
+            });
+
             slider.appendChild(card);
 
             const indicator = document.createElement('div');
@@ -787,6 +797,6 @@
 </script>
 
 <!-- HEADER NAVIGATION SCRIPT -->
-<script src="/js/header.js"></script>
+<script src="../../../../js/header.js"></script>
 </body>
 </html>

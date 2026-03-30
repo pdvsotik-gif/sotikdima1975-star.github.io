@@ -163,8 +163,10 @@ def create_pdf_with_md_code(md_code: str, output_path: str) -> None:
 
 
 def main():
-    md_file = r"C:\Users\sotik\IdeaProjects\sotikdima1975-star.github.io\motorsport8_index.md"
-    output_pdf = r"C:\Users\sotik\IdeaProjects\sotikdima1975-star.github.io\pdf_output\motorsport8_index_code.pdf"
+    from pathlib import Path
+    BASE_DIR = Path(__file__).parent
+    md_file = BASE_DIR / "motorsport8_index.md"
+    output_pdf = BASE_DIR / "pdf_output" / "motorsport8_index_code.pdf"
 
     os.makedirs(os.path.dirname(output_pdf), exist_ok=True)
 

@@ -260,8 +260,8 @@ def main():
         print("⚠️  Установка reportlab...")
         os.system("pip install reportlab")
     
-    md_file = r"C:\\Users\\sotik\\IdeaProjects\\sotikdima1975-star.github.io\\motorsport8_index.md"
-    output_pdf = r"C:\\Users\\sotik\\IdeaProjects\\sotikdima1975-star.github.io\\pdf_output\\motorsport8_index_code_final.pdf"
+    md_file = BASE_DIR / "motorsport8_index.md"
+    output_pdf = BASE_DIR / "pdf_output" / "motorsport8_index_code_final.pdf"
     
     # Создаем папку для вывода, если она не существует
     os.makedirs(os.path.dirname(output_pdf), exist_ok=True)

@@ -1,13 +1,15 @@
+from pathlib import Path
 from rembg import remove
 from PIL import Image
 import os
 
 # Настройки
-INPUT_PATH = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/image1.png"
-OUTPUT_DIR = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character"
+BASE_DIR = Path(__file__).parent.parent
+INPUT_PATH = BASE_DIR / "images" / "image1.png"
+OUTPUT_DIR = BASE_DIR / "images" / "character"
 
 # Создаем папку для результатов
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(str(OUTPUT_DIR), exist_ok=True)
 
 # Удаляем фон
 input_image = Image.open(INPUT_PATH)

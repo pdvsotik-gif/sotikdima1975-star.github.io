@@ -169,8 +169,8 @@ def convert_md_to_pdf(md_content, output_path):
 def main():
     """Основная функция"""
     
-    md_file = r"C:\\Users\\sotik\\IdeaProjects\\sotikdima1975-star.github.io\\motorsport8_index.md"
-    output_pdf = r"C:\\Users\\sotik\\IdeaProjects\\sotikdima1975-star.github.io\\pdf_output\\motorsport8_guide.pdf"
+    md_file = Path(__file__).parent / "motorsport8_index.md"
+    output_pdf = Path(__file__).parent / "pdf_output" / "motorsport8_guide.pdf"
     
     # Создаем папку для вывода, если она не существует
     os.makedirs(os.path.dirname(output_pdf), exist_ok=True)
