@@ -1,12 +1,14 @@
+from pathlib import Path
 from PIL import Image
 import os
 
 # Настройки
-FRAMES_DIR = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/animation"
-OUTPUT_PATH = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/animation/character_animation.gif"
+BASE_DIR = Path(__file__).parent.parent
+FRAMES_DIR = BASE_DIR / "images" / "character" / "animation"
+OUTPUT_PATH = FRAMES_DIR / "character_animation.gif"
 
 # Проверяем существование папки с кадрами
-if not os.path.exists(FRAMES_DIR):
+if not os.path.exists(str(FRAMES_DIR)):
     print(f"Папка не найдена: {FRAMES_DIR}")
     exit(1)
 

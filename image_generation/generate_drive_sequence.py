@@ -1,13 +1,16 @@
+from pathlib import Path
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 import os
 import numpy as np
 
 # Настройки
-SOURCE = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/cayman2017.jpg"
-OUT = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/drive"
+BASE_DIR = Path(__file__).parent.parent
+SOURCE = BASE_DIR / "images" / "cayman2017.jpg"
+OUT = BASE_DIR / "images" / "drive"
 FRAME_COUNT = 12  # Количество кадров для эффекта движения
 
 # Создаем папку для результатов
+os.makedirs(str(OUT), exist_ok=True)
 os.makedirs(OUT, exist_ok=True)
 
 # Открываем исходное изображение

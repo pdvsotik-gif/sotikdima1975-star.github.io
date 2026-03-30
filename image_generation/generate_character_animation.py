@@ -1,13 +1,15 @@
+from pathlib import Path
 from PIL import Image, ImageSequence
 import os
 
 # Настройки
-CHARACTER_PATH = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/character.png"
-OUTPUT_DIR = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/animation"
+BASE_DIR = Path(__file__).parent.parent
+CHARACTER_PATH = BASE_DIR / "images" / "character" / "character.png"
+OUTPUT_DIR = BASE_DIR / "images" / "character" / "animation"
 FRAME_COUNT = 8
 
 # Создаем папку для анимации
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+os.makedirs(str(OUTPUT_DIR), exist_ok=True)
 
 # Загружаем персонажа без фона
 character = Image.open(CHARACTER_PATH).convert("RGBA")

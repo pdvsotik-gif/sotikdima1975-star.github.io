@@ -3,12 +3,14 @@ import os
 import math
 
 def create_animated_character():
+    from pathlib import Path
     # Пути
-    input_path = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/character.png"
-    output_dir = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/anims"
+    BASE_DIR = Path(__file__).parent.parent
+    input_path = BASE_DIR / "images" / "character" / "character.png"
+    output_dir = BASE_DIR / "images" / "character" / "anims"
     
     # Создаем папку для анимации
-    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(str(output_dir), exist_ok=True)
     
     # Открываем изображение персонажа
     character = Image.open(input_path)

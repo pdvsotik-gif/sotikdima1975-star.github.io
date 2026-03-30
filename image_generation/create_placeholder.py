@@ -37,7 +37,9 @@ def create_forza_placeholder():
             draw.rectangle([x, y, x+15, y+15], fill=color)
     
     # Save image
-    output_dir = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images"
+    from pathlib import Path
+    BASE_DIR = Path(__file__).parent.parent
+    output_dir = str(BASE_DIR / "images")
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     

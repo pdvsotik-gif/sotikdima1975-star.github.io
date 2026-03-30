@@ -1,12 +1,14 @@
+from pathlib import Path
 from PIL import Image
 import os
 
 # Настройки
-CHARACTER_PATH = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/character.png"
-OUT_DIR = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/character/animation"
+BASE_DIR = Path(__file__).parent.parent
+CHARACTER_PATH = BASE_DIR / "images" / "character" / "character.png"
+OUT_DIR = BASE_DIR / "images" / "character" / "animation"
 
 # Создаем папку для кадров
-os.makedirs(OUT_DIR, exist_ok=True)
+os.makedirs(str(OUT_DIR), exist_ok=True)
 
 # Загружаем изображение персонажа
 src = Image.open(CHARACTER_PATH)

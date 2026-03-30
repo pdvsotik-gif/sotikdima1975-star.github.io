@@ -1,12 +1,14 @@
+from pathlib import Path
 from PIL import Image, ImageEnhance, ImageFilter
 import os
 
 # === Исходное изображение ===
-SOURCE = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/cayman2017.jpg"
+BASE_DIR = Path(__file__).parent.parent
+SOURCE = BASE_DIR / "images" / "cayman2017.jpg"
 
 # === Папка для результата ===
-OUT = "C:/Users/sotik/IdeaProjects/sotikdima1975-star.github.io/images/wallpapers"
-os.makedirs(OUT, exist_ok=True)
+OUT = BASE_DIR / "images" / "wallpapers"
+os.makedirs(str(OUT), exist_ok=True)
 
 img = Image.open(SOURCE).convert("RGB")
 
