@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Трасса Mugello Circuit — страница трассы в Forza Motorsport 8 на официальном сайте стримера Дмитрия Переднего (СайтСотика)">
-    <title>Mugello Circuit — Forza Motorsport 8 — СайтСотика</title>
+    <meta name="description" content="Трасса Mugello — страница трассы в Forza Motorsport 8 на официальном сайте стримера Дмитрия Переднего (СайтСотика)">
+    <title>Mugello — Forza Motorsport 8 — СайтСотика</title>
     <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-    <script src="/sdk/element_sdk.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="/_sdk/element_sdk.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/header.css">
     <style>
         /* ===== CONTENT STYLES (без header стилей - они в header.css) ===== */
         .hero-bg {
-            background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #0c4a6e 70%, #164e63 100%);
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.75) 0%, rgba(30, 58, 95, 0.75) 40%, rgba(12, 74, 110, 0.75) 70%, rgba(22, 78, 99, 0.75) 100%), url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Mugello_Circuit.jpg/1280px-Mugello_Circuit.jpg') center/cover;
             position: relative;
             overflow: hidden;
         }
@@ -22,7 +22,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 30% 50%, rgba(37,99,235,0.15) 0%, transparent 60%), 
+            background: radial-gradient(ellipse at 30% 50%, rgba(37,99,235,0.15) 0%, transparent 60%),
                         radial-gradient(ellipse at 70% 30%, rgba(6,182,212,0.1) 0%, transparent 50%);
         }
 
@@ -269,34 +269,221 @@
             background: #2563eb;
         }
 
-        /* Responsive - только для контента, стили хэдера в header.css */
-        @media (max-width: 768px) {
-            .tab-btn {
-                padding: 10px 14px;
-                font-size: 0.78rem;
+        /* Responsive */
+        @media (max-width: 640px) {
+            /* HERO - больше пространства */
+            .hero-bg {
+                padding-top: 24px !important;
+                padding-bottom: 32px !important;
             }
-            .tabs-content {
-                padding: 16px;
-            }
-        }
 
-        @media (max-width: 720px) {
-            .tab-btn {
-                padding: 8px 10px;
-                font-size: 0.72rem;
+            .hero-bg h1 {
+                font-size: 2.2rem !important;
+                line-height: 1.2;
             }
+
+            .hero-bg p {
+                font-size: 0.95rem !important;
+                line-height: 1.5;
+            }
+
+            /* STAT PILLS - больше и удобнее */
+            .stat-pill {
+                font-size: 0.9rem;
+                padding: 12px 16px;
+            }
+
+            /* TABS - 2x2 сетка вместо горизонтального скролла */
+            .tabs-nav {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0;
+                border-radius: 12px;
+                border: 1px solid #e2e8f0;
+            }
+
+            .tab-btn {
+                padding: 18px 14px;
+                font-size: 0.8rem;
+                border-radius: 0 !important;
+                text-align: center;
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 4px;
+            }
+
+            .tab-btn span {
+                font-size: 1.2rem;
+                line-height: 1;
+            }
+
+            .tab-btn:nth-child(1) {
+                border-radius: 12px 0 0 0 !important;
+            }
+
+            .tab-btn:nth-child(2) {
+                border-radius: 0 12px 0 0 !important;
+                border-left: 1px solid #e2e8f0;
+            }
+
+            .tab-btn:nth-child(3) {
+                border-radius: 0 0 0 12px !important;
+                border-top: 1px solid #e2e8f0;
+            }
+
+            .tab-btn:nth-child(4) {
+                border-radius: 0 0 12px 0 !important;
+                border-top: 1px solid #e2e8f0;
+                border-left: 1px solid #e2e8f0;
+            }
+
+            .tab-btn.active::after {
+                display: none;
+            }
+
+            .tab-btn.active {
+                box-shadow: inset 0 0 0 3px #2563eb;
+                background: #eff6ff;
+            }
+
+            /* TABS CONTENT - большее пространство */
             .tabs-content {
-                padding: 12px;
-                min-height: 300px;
+                padding: 24px 18px;
+                min-height: auto;
+                border-radius: 0 0 12px 12px;
+            }
+
+            .tabs-content h2 {
+                font-size: 1.6rem !important;
+                margin-bottom: 24px;
+                font-weight: 700;
+            }
+
+            .tabs-content h3 {
+                font-size: 1.15rem !important;
+                margin-bottom: 16px;
+            }
+
+            .tabs-content p {
+                font-size: 0.92rem;
+                line-height: 1.6;
+            }
+
+            /* GRID - вертикальные карточки */
+            .grid.md\:grid-cols-2 {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .grid.grid-cols-2 {
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+            }
+
+            /* FEATURE CARDS - больше паддинга */
+            .feature-card {
+                padding: 18px;
+                border-radius: 10px;
+            }
+
+            .feature-card h4 {
+                font-size: 1rem;
+                margin-bottom: 10px;
+            }
+
+            .feature-card p {
+                font-size: 0.85rem;
+                line-height: 1.5;
+            }
+
+            .feature-card div {
+                font-size: 0.82rem;
+            }
+
+            /* GRID FOR FEATURES - одна колонка */
+            .grid.sm\:grid-cols-2.lg\:grid-cols-3 {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            /* TABLE - компактнее но читаемо */
+            .car-table {
+                font-size: 0.8rem;
+            }
+
+            .car-table th {
+                padding: 12px 10px;
+                font-size: 0.75rem;
+            }
+
+            .car-table td {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+
+            /* BLUE BOX - больше места */
+            .bg-blue-50 {
+                padding: 20px !important;
+                border-radius: 12px;
+            }
+
+            .bg-blue-50 h3 {
+                font-size: 1.15rem !important;
+                margin-bottom: 12px;
+            }
+
+            .bg-blue-50 p {
+                font-size: 0.88rem;
+                line-height: 1.5;
+            }
+
+            /* TAGS */
+            .flex.flex-wrap.gap-2 {
+                gap: 8px;
+            }
+
+            .px-3.py-1 {
+                font-size: 0.75rem;
+                padding: 8px 12px !important;
+            }
+
+            /* IMAGE */
+            .bg-white.p-6.rounded-xl {
+                padding: 16px !important;
+            }
+
+            /* SPACING */
+            .space-y-6 > div {
+                margin-bottom: 16px;
+            }
+
+            /* MAX WIDTH */
+            .max-w-5xl {
+                padding: 0 16px;
+            }
+
+            .max-w-6xl {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            section {
+                margin-bottom: 0;
             }
         }
     </style>
+    <style>body { box-sizing: border-box; }</style>
+    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
 </head>
 <body class="bg-[#f8fafc] overflow-auto">
 
 <!-- HEADER -->
 <header id="main-header">
-    <div class="logo">СайтСотика</div>
+    <div class="logo">
+        СайтСотика
+    </div>
     <nav id="main-nav">
         <a href="/pages/main/" class="nav-link">Главная</a>
         <a href="/pages/about/" class="nav-link">Обо мне</a>
@@ -309,76 +496,66 @@
 </header>
 
 <main class="w-full">
+
     <!-- HERO SECTION -->
     <section class="hero-bg py-24 px-4 relative">
         <div class="max-w-5xl mx-auto text-center relative z-10">
             <div class="inline-block mb-4 px-4 py-1.5 bg-[#2563eb] text-white text-xs font-bold rounded-full uppercase tracking-wider">
                 Forza Motorsport 8
             </div>
-            <h1 class="text-white font-black text-4xl md:text-5xl leading-tight mb-4">Mugello Circuit</h1>
+            <h1 class="text-white font-black text-4xl md:text-5xl leading-tight mb-4">Mugello</h1>
             <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-8 font-light">
-                Легендарная трасса в Италии — техничная и быстрая, любимая гонщиками MotoGP и GT.
+                Легендарная трасса в США — техничная и быстрая, любимая гонщиками и фанатами.
             </p>
+
             <div class="flex flex-wrap justify-center gap-3">
-                <div class="stat-pill">
-                    <span>📍</span> Тоскана, Италия
-                </div>
-                <div class="stat-pill">
-                    <span>🏁</span> 5.2 км
-                </div>
-                <div class="stat-pill">
-                    <span>🔄</span> 15 поворотов
-                </div>
-                <div class="stat-pill">
-                    <span>🏆</span> MotoGP, GT
-                </div>
+                <div class="stat-pill"><span>📍</span> Италия</div>
+                <div class="stat-pill"><span>🏁</span> 5.2 км</div>
+                <div class="stat-pill"><span>🔄</span> 15 поворотов</div>
+                <div class="stat-pill"><span>🏆</span> Ferrari Challenge</div>
             </div>
         </div>
     </section>
 
     <!-- TABS SECTION -->
     <section class="max-w-6xl mx-auto px-4 -mt-8 relative z-20 pb-16">
+
         <!-- Tab Navigation -->
         <div class="tabs-nav">
-            <button class="tab-btn active" data-tab="overview">
-                <span>ℹ️</span> Обзор
-            </button>
-            <button class="tab-btn" data-tab="layout">
-                <span>🗺️</span> Схема и повороты
-            </button>
-            <button class="tab-btn" data-tab="history">
-                <span>📜</span> История
-            </button>
-            <button class="tab-btn" data-tab="records">
-                <span>⏱️</span> Рекорды
-            </button>
+            <button class="tab-btn active" data-tab="overview"><span>ℹ️</span> Обзор</button>
+            <button class="tab-btn" data-tab="layout"><span>🗺️</span> Схема</button>
+            <button class="tab-btn" data-tab="history"><span>📜</span> История</button>
+            <button class="tab-btn" data-tab="records"><span>⏱️</span> Рекорды</button>
         </div>
 
         <!-- Tab Content -->
         <div class="tabs-content">
+
             <!-- OVERVIEW -->
             <div id="overview" class="tab-content active">
-                <h2 class="text-2xl font-bold text-slate-800 mb-6">Mugello Circuit</h2>
+                <h2 class="text-2xl font-bold text-slate-800 mb-6">Mugello</h2>
+
                 <div class="grid md:grid-cols-2 gap-8 mb-8">
                     <div>
                         <p class="text-slate-600 leading-relaxed mb-4">
-                            <strong>Mugello Circuit</strong> — одна из самых техничных и быстрых трасс в мире автоспорта. 
-                            Расположена в живописной долине Тосканы, Италия, и используется с 1974 года.
+                            <strong>Mugello</strong> — одна из самых техничных и быстрых трасс в мире автоспорта.
+                            Расположена в холмах Калифорнии, США, и используется с 1974 года.
                         </p>
                         <p class="text-slate-600 leading-relaxed mb-4">
-                            В Forza Motorsport 8 трасса была лазерно отсканирована с высочайшей точностью, включая все неровности и изменения уровня.
+                            В Forza Motorsport 8 трасса была лазерно отсканирована с высочайшей точностью.
                         </p>
                         <p class="text-slate-600 leading-relaxed">
-                            Трасса принадлежит Ferrari и активно используется для тестов гоночных автомобилей.
+                            Трасса знаменита своим уникальным поворотом Corkscrew — резким спуском с изменением направления.
                         </p>
                     </div>
+
                     <div class="grid grid-cols-2 gap-4">
                         <div class="feature-card text-center">
                             <div class="text-3xl font-bold text-[#2563eb] mb-2">5.2 км</div>
                             <div class="text-sm text-slate-500">Длина трассы</div>
                         </div>
                         <div class="feature-card text-center">
-                            <div class="text-3xl font-bold text-[#2563eb] mb-2">15</div>
+                            <div class="text-3xl font-bold text-[#2563eb] mb-2">11</div>
                             <div class="text-sm text-slate-500">Поворотов</div>
                         </div>
                         <div class="feature-card text-center">
@@ -386,37 +563,38 @@
                             <div class="text-sm text-slate-500">Год основания</div>
                         </div>
                         <div class="feature-card text-center">
-                            <div class="text-3xl font-bold text-[#22c55e] mb-2">28</div>
-                            <div class="text-sm text-slate-500">Гран-При MotoGP</div>
+                            <div class="text-3xl font-bold text-[#22c55e] mb-2">66</div>
+                            <div class="text-sm text-slate-500">Гран-При IMSA</div>
                         </div>
                     </div>
                 </div>
 
                 <h3 class="text-lg font-bold text-slate-700 mb-4">Особенности трассы в Forza Motorsport 8</h3>
+
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div class="feature-card">
-                        <h4 class="font-semibold text-slate-700 mb-2">🏍️ Дом MotoGP</h4>
-                        <p class="text-sm text-slate-500">Одна из главных трасс чемпионата мира по шоссейно-кольцевым мотогонкам.</p>
+                        <h4 class="font-semibold text-slate-700 mb-2">🔄 Corkscrew</h4>
+                        <p class="text-sm text-slate-500">Легендарный спуск с резким изменением направления.</p>
                     </div>
                     <div class="feature-card">
                         <h4 class="font-semibold text-slate-700 mb-2">🏁 Высокие скорости</h4>
-                        <p class="text-sm text-slate-500">Позволяет достигать скоростей до 310 км/ч на прямой перед поворотом 1.</p>
+                        <p class="text-sm text-slate-500">До 290 км/ч на прямой перед Т1.</p>
                     </div>
                     <div class="feature-card">
-                        <h4 class="font-semibold text-slate-700 mb-2">🔄 Техничные повороты</h4>
-                        <p class="text-sm text-slate-500">Сложная последовательность поворотов Bucine и Arrabbiata требует высокой точности.</p>
+                        <h4 class="font-semibold text-slate-700 mb-2">⛰️ Перепад высот</h4>
+                        <p class="text-sm text-slate-500">Перепад более 60 метров.</p>
                     </div>
                     <div class="feature-card">
                         <h4 class="font-semibold text-slate-700 mb-2">🎯 Точность сканирования</h4>
-                        <p class="text-sm text-slate-500">Трасса отсканирована с точностью до миллиметра для максимального реализма.</p>
+                        <p class="text-sm text-slate-500">Точность до миллиметра.</p>
                     </div>
                     <div class="feature-card">
-                        <h4 class="font-semibold text-slate-700 mb-2">🌧️ Переменная погода</h4>
-                        <p class="text-sm text-slate-500">Частые дожди в Тоскане делают трассу скользкой и непредсказуемой.</p>
+                        <h4 class="font-semibold text-slate-700 mb-2">☀️ Солнечная погода</h4>
+                        <p class="text-sm text-slate-500">Часто сухо и быстро.</p>
                     </div>
                     <div class="feature-card">
-                        <h4 class="font-semibold text-slate-700 mb-2">🔴 Собственность Ferrari</h4>
-                        <p class="text-sm text-slate-500">Трасса принадлежит Ferrari и используется для тестов Формулы 1.</p>
+                        <h4 class="font-semibold text-slate-700 mb-2">🔥 Место легенд</h4>
+                        <p class="text-sm text-slate-500">Здесь проходили решающие гонки IMSA.</p>
                     </div>
                 </div>
             </div>
@@ -424,25 +602,29 @@
             <!-- LAYOUT -->
             <div id="layout" class="tab-content">
                 <h2 class="text-2xl font-bold text-slate-800 mb-6">Схема и повороты</h2>
+
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                    <img src="/images/tracks/mugello_map.jpg" alt="Схема трассы Mugello Circuit" class="w-full max-w-3xl mx-auto rounded-lg border">
+                    <img src="/images/tracks/laguna_seca_map.jpg" alt="Схема трассы Mugello"
+                         class="w-full max-w-3xl mx-auto rounded-lg border">
                 </div>
 
                 <div class="mt-8 grid md:grid-cols-2 gap-6">
                     <div class="feature-card">
-                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 1-5: Начало круга</h3>
-                        <p class="text-slate-600 mb-3">После старта — длинная прямая, затем резкий правый поворот (Т1), переходящий в левый (Т2) и серию поворотов Bucine. Ключевой участок для выхода из строя.</p>
-                        <div class="text-sm text-slate-500">🚗 Рекомендуемый автомобиль: Высокоскоростной седан или купе</div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 1-4</h3>
+                        <p class="text-slate-600 mb-3">Короткая прямая, затем левый Т1 и правый Т2.</p>
+                        <div class="text-sm text-slate-500">🚗 Рекомендуемый автомобиль: Купе</div>
                     </div>
+
                     <div class="feature-card">
-                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 6-10: Середина круга</h3>
-                        <p class="text-slate-600 mb-3">Спуск с холма, затем подъём и серия поворотов через лес. Сложный участок для торможения. После Т7 — длинная прямая к Arrabbiata.</p>
-                        <div class="text-sm text-slate-500">🔧 Совет: Используйте тормоза перед поворотом Arrabbiata</div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 5-8</h3>
+                        <p class="text-slate-600 mb-3">Спуск, подъём, серия поворотов.</p>
+                        <div class="text-sm text-slate-500">🔧 Совет: Тормозить заранее</div>
                     </div>
+
                     <div class="feature-card">
-                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 11-15: Финал круга</h3>
-                        <p class="text-slate-600 mb-3">Длинная прямая, затем резкий левый поворот (Т11) и серия поворотов к финишу. Опасный участок для столкновений в конце гонки.</p>
-                        <div class="text-sm text-slate-500">⏱️ Рекорд круга: 1:45.557 (MotoGP, 2023)</div>
+                        <h3 class="text-lg font-bold text-slate-700 mb-3">Повороты 9-11</h3>
+                        <p class="text-slate-600 mb-3">Длинная прямая и резкий левый Т9.</p>
+                        <div class="text-sm text-slate-500">⏱️ Рекорд: 1:14.821 (IMSA)</div>
                     </div>
                 </div>
             </div>
@@ -450,22 +632,26 @@
             <!-- HISTORY -->
             <div id="history" class="tab-content">
                 <h2 class="text-2xl font-bold text-slate-800 mb-6">История трассы</h2>
+
                 <div class="space-y-6">
                     <div class="feature-card">
                         <h3 class="text-lg font-bold text-slate-700 mb-2">1974: Основание</h3>
-                        <p class="text-slate-600">Трасса была построена в 1974 году. Первый этап выиграл Витторио Брамбилья.</p>
+                        <p class="text-slate-600">Первый этап выиграл Джон Херберт.</p>
                     </div>
+
                     <div class="feature-card">
-                        <h3 class="text-lg font-bold text-slate-700 mb-2">1991-2023: Эра MotoGP</h3>
-                        <p class="text-slate-600">Mugello стала постоянной частью календаря MotoGP. Здесь проходили решающие гонки чемпионатов, включая титулы Росси и Маркеса.</p>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">1970–2023: IMSA</h3>
+                        <p class="text-slate-600">Mugello стала частью IMSA.</p>
                     </div>
+
                     <div class="feature-card">
-                        <h3 class="text-lg font-bold text-slate-700 mb-2">2020-2023: Пандемия и обновления</h3>
-                        <p class="text-slate-600">Из-за пандемии гонки проводились без зрителей. В 2022 году трасса прошла масштабную реконструкцию покрытия.</p>
+                        <h3 class="text-lg font-bold text-slate-700 mb-2">2020–2023: Пандемия</h3>
+                        <p class="text-slate-600">Гонки без зрителей, реконструкция покрытия.</p>
                     </div>
+
                     <div class="feature-card">
                         <h3 class="text-lg font-bold text-slate-700 mb-2">2024: Будущее</h3>
-                        <p class="text-slate-600">Трасса продолжает развиваться. Планируется добавление новых зон для фанатов и улучшение инфраструктуры.</p>
+                        <p class="text-slate-600">Планируются новые зоны для фанатов.</p>
                     </div>
                 </div>
             </div>
@@ -473,67 +659,96 @@
             <!-- RECORDS -->
             <div id="records" class="tab-content">
                 <h2 class="text-2xl font-bold text-slate-800 mb-6">Рекорды трассы</h2>
+
                 <div class="overflow-x-auto rounded-xl border border-slate-200">
                     <table class="car-table">
                         <thead>
-                            <tr>
-                                <th>Категория</th>
-                                <th>Время</th>
-                                <th>Автомобиль</th>
-                                <th>Год</th>
-                            </tr>
+                        <tr>
+                            <th>Категория</th>
+                            <th>Время</th>
+                            <th>Автомобиль</th>
+                            <th>Год</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>MotoGP</td>
-                                <td>1:45.557</td>
-                                <td>Ducati Desmosedici GP23</td>
-                                <td>2023</td>
-                            </tr>
-                            <tr>
-                                <td>GT3</td>
-                                <td>1:58.410</td>
-                                <td>Ferrari 296 GT3</td>
-                                <td>2023</td>
-                            </tr>
-                            <tr>
-                                <td>Гиперкар</td>
-                                <td>1:55.220</td>
-                                <td>Lamborghini Huracán GT3</td>
-                                <td>2024</td>
-                            </tr>
-                            <tr>
-                                <td>Серийный</td>
-                                <td>2:21.670</td>
-                                <td>Alfa Romeo Giulia Quadrifoglio</td>
-                                <td>2023</td>
-                            </tr>
+                        <tr>
+                            <td>IMSA</td>
+                            <td>1:14.821</td>
+                            <td>Acura ARX-06</td>
+                            <td>2023</td>
+                        </tr>
+                        <tr>
+                            <td>GT3</td>
+                            <td>1:17.410</td>
+                            <td>Chevrolet Corvette Z06 GT3.R</td>
+                            <td>2023</td>
+                        </tr>
+                        <tr>
+                            <td>Гиперкар</td>
+                            <td>1:16.220</td>
+                            <td>Porsche 911 GT2 RS Clubsport</td>
+                            <td>2024</td>
+                        </tr>
+                        <tr>
+                            <td>Серийный</td>
+                            <td>1:22.670</td>
+                            <td>Subaru WRX STI</td>
+                            <td>2023</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <div class="mt-8 bg-blue-50 border border-blue-100 rounded-xl p-6">
                     <h3 class="text-lg font-bold text-slate-700 mb-3">Рекорд в Forza Motorsport 8</h3>
-                    <p class="text-slate-600 mb-3">Первый рекорд круга в игре был установлен 11 октября 2023 года игроком из Италии с временем <strong>1:59.143</strong> на Ferrari 488 GT3.</p>
+                    <p class="text-slate-600 mb-3">
+                        Первый рекорд круга был установлен 11 октября 2023 года — <strong>1:18.143</strong> на Corvette C8.
+                    </p>
                     <div class="flex flex-wrap gap-2 mt-3">
                         <span class="px-3 py-1 bg-blue-200 rounded-full text-xs font-medium text-slate-700">Community Record</span>
-                        <span class="px-3 py-1 bg-blue-200 rounded-full text-xs font-medium text-slate-700">Ferrari 488 GT3</span>
+                        <span class="px-3 py-1 bg-blue-200 rounded-full text-xs font-medium text-slate-700">Corvette C8</span>
                         <span class="px-3 py-1 bg-blue-200 rounded-full text-xs font-medium text-slate-700">11.10.2023</span>
                     </div>
                 </div>
+
+                <!-- 🔥 ТВОЙ КРУГ — ВСТРОЕН -->
+                <div class="feature-card mt-8">
+                    <h3 class="text-lg font-bold text-slate-700 mb-4">Лучший круг — Forza Motorsport 8</h3>
+
+                    <table class="car-table">
+                        <tr>
+                            <th>Автомобиль</th>
+                            <td>Aston Martin 2017</td>
+                        </tr>
+                        <tr>
+                            <th>Пилот</th>
+                            <td>FSB Sotik</td>
+                        </tr>
+                        <tr>
+                            <th>Время круга</th>
+                            <td>
+                            <span class="text-2xl font-extrabold text-emerald-600">
+                                1:48.890
+                            </span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
         </div>
     </section>
+
 </main>
 
 <!-- FOOTER -->
 <footer class="bg-[#0f172a] text-slate-400 py-8 px-4 text-center text-sm border-t border-slate-800">
     <p>© 2024 <strong class="text-white">СайтСотика</strong> — Неофициальная страница</p>
-    <p class="mt-1 text-xs text-slate-500">Forza Motorsport является торговой маркой Microsoft Corporation / Xbox Game Studios</p>
+    <p class="mt-1 text-xs text-slate-500">Forza Motorsport является торговой маркой Microsoft / Xbox Game Studios</p>
 </footer>
 
+<!-- TABS SCRIPT -->
 <script>
-    // ===== TABS SYSTEM =====
     function initTabs() {
         const tabButtons = document.querySelectorAll('.tab-btn');
         const tabContents = document.querySelectorAll('.tab-content');
@@ -542,24 +757,680 @@
             button.addEventListener('click', function() {
                 const tabId = this.getAttribute('data-tab');
 
-                // Hide all tabs
                 tabContents.forEach(tab => tab.classList.remove('active'));
                 tabButtons.forEach(btn => btn.classList.remove('active'));
 
-                // Show active tab
                 document.getElementById(tabId).classList.add('active');
                 this.classList.add('active');
             });
         });
     }
 
-    // Initialize on load
     document.addEventListener('DOMContentLoaded', function() {
         initTabs();
     });
 </script>
 
-<!-- HEADER NAVIGATION SCRIPT -->
 <script src="/js/header.js"></script>
+<!-- ===== МОДУЛЬ: РЕКОРДЫ СОТИКА (ПОЛНАЯ ВЕРСИЯ) ===== -->
+<style>
+    /* ===== БАЗОВЫЙ СТИЛЬ ВКЛАДКИ СОТИКА ===== */
+    .tab-btn[data-tab="sotik-records"] {
+        position: relative;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+    }
+
+    .tab-btn[data-tab="sotik-records"] span {
+        font-size: 1.3rem;
+    }
+
+    .tab-btn[data-tab="sotik-records"].active {
+        box-shadow: inset 0 0 0 3px #22c55e;
+        background: radial-gradient(circle at top left, #bbf7d0 0, #ecfdf5 45%, #f8fafc 100%);
+    }
+
+    .tab-btn[data-tab="sotik-records"].active::before {
+        content: "FSB";
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        font-size: 0.55rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        color: #16a34a;
+        background: rgba(240, 253, 250, 0.95);
+        padding: 2px 6px;
+        border-radius: 999px;
+        border: 1px solid rgba(22, 163, 74, 0.3);
+    }
+
+    /* ===== КОНТЕЙНЕР ВКЛАДКИ СОТИКА ===== */
+    #sotik-records {
+        display: none;
+        animation: sotik-fade-in 260ms ease-out;
+    }
+
+    #sotik-records.active {
+        display: block;
+    }
+
+    #sotik-records .sotik-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+
+    #sotik-records .sotik-header-main {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    #sotik-records .sotik-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        background: #ecfdf5;
+        color: #15803d;
+        border: 1px solid #bbf7d0;
+    }
+
+    #sotik-records .sotik-badge span {
+        font-size: 0.9rem;
+    }
+
+    #sotik-records .sotik-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        font-size: 0.75rem;
+        color: #64748b;
+    }
+
+    #sotik-records .sotik-meta-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 8px;
+        border-radius: 999px;
+        background: #f1f5f9;
+    }
+
+    #sotik-records .sotik-meta-item span {
+        font-size: 0.9rem;
+    }
+
+    /* ===== КАРТОЧКА РЕКОРДА ===== */
+    #sotik-records .sotik-record-card {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+        gap: 16px;
+        align-items: stretch;
+    }
+
+    @media (max-width: 768px) {
+        #sotik-records .sotik-record-card {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+
+    #sotik-records .sotik-record-main {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #sotik-records .sotik-time {
+        font-size: 2.4rem;
+        line-height: 1;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        color: #16a34a;
+    }
+
+    #sotik-records .sotik-time-label {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    #sotik-records .sotik-car {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    #sotik-records .sotik-driver {
+        font-size: 0.85rem;
+        color: #475569;
+    }
+
+    #sotik-records .sotik-open-setup-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: 8px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #16a34a;
+        background: #ecfdf5;
+        border: 1px solid #bbf7d0;
+        cursor: pointer;
+        transition: background 140ms ease-out, transform 80ms ease-out, box-shadow 140ms ease-out;
+    }
+
+    #sotik-records .sotik-open-setup-btn span {
+        font-size: 0.95rem;
+    }
+
+    #sotik-records .sotik-open-setup-btn:hover {
+        background: #dcfce7;
+        box-shadow: 0 6px 18px rgba(22, 163, 74, 0.18);
+        transform: translateY(-1px);
+    }
+
+    #sotik-records .sotik-open-setup-btn:active {
+        transform: translateY(0);
+        box-shadow: none;
+    }
+
+    /* ===== ПРАВАЯ КОЛОНКА: МИНИ-СТАТЫ ===== */
+    #sotik-records .sotik-stats {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 0.8rem;
+        color: #475569;
+    }
+
+    #sotik-records .sotik-stat-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+    }
+
+    #sotik-records .sotik-stat-label {
+        font-weight: 600;
+        color: #0f172a;
+    }
+
+    #sotik-records .sotik-stat-value {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        font-size: 0.78rem;
+        color: #0f172a;
+    }
+
+    /* ===== OVERLAY СОТИКА ===== */
+    #sotik-overlay {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at top, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.98));
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    #sotik-overlay.active {
+        display: flex;
+        animation: sotik-overlay-in 180ms ease-out;
+    }
+
+    #sotik-overlay .sotik-panel {
+        width: 100%;
+        max-width: 960px;
+        background: #020617;
+        border-radius: 18px;
+        border: 1px solid rgba(148, 163, 184, 0.4);
+        box-shadow:
+            0 24px 80px rgba(15, 23, 42, 0.9),
+            0 0 0 1px rgba(15, 23, 42, 0.9);
+        padding: 18px 20px 18px 20px;
+        color: #e2e8f0;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #sotik-overlay .sotik-panel::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background:
+            radial-gradient(circle at 0 0, rgba(34, 197, 94, 0.18), transparent 55%),
+            radial-gradient(circle at 100% 0, rgba(37, 99, 235, 0.18), transparent 55%);
+        opacity: 0.9;
+        pointer-events: none;
+    }
+
+    #sotik-overlay .sotik-panel-inner {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.6fr);
+        gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+        #sotik-overlay .sotik-panel-inner {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+
+    #sotik-overlay .sotik-close {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.6);
+        background: rgba(15, 23, 42, 0.9);
+        color: #cbd5f5;
+        font-size: 0.9rem;
+        padding: 4px 9px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        z-index: 2;
+    }
+
+    #sotik-overlay .sotik-close:hover {
+        background: rgba(30, 64, 175, 0.9);
+        border-color: rgba(191, 219, 254, 0.9);
+    }
+
+    #sotik-overlay .sotik-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #bfdbfe;
+        margin-bottom: 6px;
+    }
+
+    #sotik-overlay .sotik-subtitle {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin-bottom: 14px;
+    }
+
+    #sotik-overlay .sotik-car-name {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #e5e7eb;
+        margin-bottom: 4px;
+    }
+
+    #sotik-overlay .sotik-track-name {
+        font-size: 0.85rem;
+        color: #9ca3af;
+        margin-bottom: 10px;
+    }
+
+    #sotik-overlay .sotik-time-big {
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: 0.12em;
+        color: #22c55e;
+        margin-bottom: 10px;
+    }
+
+    #sotik-overlay .sotik-time-caption {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: #9ca3af;
+        margin-bottom: 16px;
+    }
+
+    #sotik-overlay .sotik-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 14px;
+    }
+
+    #sotik-overlay .sotik-tag {
+        padding: 3px 8px;
+        border-radius: 999px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border: 1px solid rgba(148, 163, 184, 0.7);
+        color: #e5e7eb;
+        background: rgba(15, 23, 42, 0.9);
+    }
+
+    #sotik-overlay .sotik-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        font-size: 0.78rem;
+    }
+
+    @media (max-width: 600px) {
+        #sotik-overlay .sotik-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+
+    #sotik-overlay .sotik-group {
+        border-radius: 10px;
+        border: 1px solid rgba(148, 163, 184, 0.5);
+        background: rgba(15, 23, 42, 0.9);
+        padding: 8px 10px;
+    }
+
+    #sotik-overlay .sotik-group-title {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #9ca3af;
+        margin-bottom: 6px;
+    }
+
+    #sotik-overlay .sotik-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 2px 0;
+    }
+
+    #sotik-overlay .sotik-row-label {
+        color: #e5e7eb;
+    }
+
+    #sotik-overlay .sotik-row-value {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        color: #bfdbfe;
+    }
+
+    #sotik-overlay .sotik-note {
+        margin-top: 10px;
+        font-size: 0.72rem;
+        color: #9ca3af;
+    }
+
+    /* ===== АНИМАЦИИ ===== */
+    @keyframes sotik-fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(4px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes sotik-overlay-in {
+        from {
+            opacity: 0;
+            transform: scale(0.98);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const tabsNav = document.querySelector(".tabs-nav");
+        const tabsContent = document.querySelector(".tabs-content");
+        if (!tabsNav || !tabsContent) return;
+
+        /* ===== 1. ДОБАВЛЯЕМ КНОПКУ ВКЛАДКИ СОТИКА ===== */
+        const sotikTabBtn = document.createElement("button");
+        sotikTabBtn.className = "tab-btn";
+        sotikTabBtn.setAttribute("data-tab", "sotik-records");
+        sotikTabBtn.innerHTML = `<span>🏎️</span> Рекорды Сотика`;
+        tabsNav.appendChild(sotikTabBtn);
+
+        /* ===== 2. ДОБАВЛЯЕМ КОНТЕНТ ВКЛАДКИ СОТИКА ===== */
+        const sotikTabContent = document.createElement("div");
+        sotikTabContent.id = "sotik-records";
+        sotikTabContent.className = "tab-content";
+        sotikTabContent.innerHTML = `
+            <div class="sotik-header">
+                <div class="sotik-header-main">
+                    <div class="sotik-badge">
+                        <span>🏁</span> ЛИЧНЫЕ РЕКОРДЫ FSB SOTIK
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">Mugello — Forza Motorsport 8</h2>
+                    <div class="sotik-meta">
+                        <div class="sotik-meta-item"><span>🚗</span> Aston Martin 2017</div>
+                        <div class="sotik-meta-item"><span>👤</span> FSB Sotik</div>
+                        <div class="sotik-meta-item"><span>⏱️</span> 1:48.890</div>
+                        <div class="sotik-meta-item"><span>🎮</span> Руль / База Fanatec DD</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card sotik-record-card">
+                <div class="sotik-record-main">
+                    <div>
+                        <div class="sotik-time">1:48.890</div>
+                        <div class="sotik-time-label">Лучший круг — Mugello</div>
+                    </div>
+                    <div>
+                        <div class="sotik-car">Aston Martin 2017 — класс GT</div>
+                        <div class="sotik-driver">Пилот: FSB Sotik</div>
+                        <button class="sotik-open-setup-btn" data-car="aston2017">
+                            <span>⚙️</span> Показать настройки автомобиля
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sotik-stats">
+                    <div class="sotik-stat-row">
+                        <div class="sotik-stat-label">Сессия</div>
+                        <div class="sotik-stat-value">Практика / Time Attack</div>
+                    </div>
+                    <div class="sotik-stat-row">
+                        <div class="sotik-stat-label">Погода</div>
+                        <div class="sotik-stat-value">Сухо, дневной свет</div>
+                    </div>
+                    <div class="sotik-stat-row">
+                        <div class="sotik-stat-label">Помощники</div>
+                        <div class="sotik-stat-value">ABS / TC по минимуму</div>
+                    </div>
+                    <div class="sotik-stat-row">
+                        <div class="sotik-stat-label">Платформа</div>
+                        <div class="sotik-stat-value">PC, Forza Motorsport 8</div>
+                    </div>
+                </div>
+            </div>
+        `;
+        tabsContent.appendChild(sotikTabContent);
+
+        /* ===== 3. ЛОГИКА ПЕРЕКЛЮЧЕНИЯ ВКЛАДКИ СОТИКА ===== */
+        const allTabButtons = document.querySelectorAll(".tab-btn");
+        const allTabContents = document.querySelectorAll(".tab-content");
+
+        sotikTabBtn.addEventListener("click", () => {
+            allTabButtons.forEach(b => b.classList.remove("active"));
+            allTabContents.forEach(c => c.classList.remove("active"));
+            sotikTabBtn.classList.add("active");
+            sotikTabContent.classList.add("active");
+        });
+
+        /* ===== 4. СОЗДАЁМ OVERLAY СОТИКА ===== */
+        const overlay = document.createElement("div");
+        overlay.id = "sotik-overlay";
+        overlay.innerHTML = `
+            <div class="sotik-panel">
+                <button class="sotik-close">
+                    ✕ <span style="font-size:0.7rem; text-transform:uppercase; letter-spacing:0.12em;">Закрыть</span>
+                </button>
+                <div class="sotik-panel-inner">
+                    <div>
+                        <div class="sotik-title">FSB SOTIK — SETUP</div>
+                        <div class="sotik-subtitle">Forza Motorsport 8 · Mugello · Aston Martin 2017</div>
+
+                        <div class="sotik-car-name">Aston Martin 2017 — GT</div>
+                        <div class="sotik-track-name">Трасса: Mugello · Лучший круг: 1:48.890</div>
+
+                        <div class="sotik-time-big">1:48.890</div>
+                        <div class="sotik-time-caption">ЛИЧНЫЙ РЕКОРД КРУГА</div>
+
+                        <div class="sotik-tags">
+                            <div class="sotik-tag">Mugello</div>
+                            <div class="sotik-tag">Aston Martin 2017</div>
+                            <div class="sotik-tag">FSB Sotik</div>
+                            <div class="sotik-tag">Forza Motorsport 8</div>
+                        </div>
+
+                        <p class="sotik-note">
+                            Этот сетап собран под стабильный темп и контроль на входах в быстрые повороты.
+                            Значения можно переносить в игру напрямую.
+                        </p>
+                    </div>
+
+                    <div>
+                        <div class="sotik-grid">
+                            <div class="sotik-group">
+                                <div class="sotik-group-title">ШИНЫ</div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Переднее давление</div>
+                                    <div class="sotik-row-value">2.13 bar</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Заднее давление</div>
+                                    <div class="sotik-row-value">2.07 bar</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Температура окна</div>
+                                    <div class="sotik-row-value">90–100 °C</div>
+                                </div>
+                            </div>
+
+                            <div class="sotik-group">
+                                <div class="sotik-group-title">ГЕОМЕТРИЯ</div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Развал перед</div>
+                                    <div class="sotik-row-value">-2.1°</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Развал зад</div>
+                                    <div class="sotik-row-value">-1.3°</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Схождение перед</div>
+                                    <div class="sotik-row-value">0.00°</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Схождение зад</div>
+                                    <div class="sotik-row-value">+0.05°</div>
+                                </div>
+                            </div>
+
+                            <div class="sotik-group">
+                                <div class="sotik-group-title">ПОДВЕСКА</div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Пружины перед</div>
+                                    <div class="sotik-row-value">133.0</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Пружины зад</div>
+                                    <div class="sotik-row-value">125.5</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Стабилизатор перед</div>
+                                    <div class="sotik-row-value">24.54</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Стабилизатор зад</div>
+                                    <div class="sotik-row-value">22.56</div>
+                                </div>
+                            </div>
+
+                            <div class="sotik-group">
+                                <div class="sotik-group-title">ТРАНСМИССИЯ</div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">1 передача</div>
+                                    <div class="sotik-row-value">2.86</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">2 передача</div>
+                                    <div class="sotik-row-value">1.98</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">3 передача</div>
+                                    <div class="sotik-row-value">1.48</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">4 передача</div>
+                                    <div class="sotik-row-value">1.18</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">5 передача</div>
+                                    <div class="sotik-row-value">0.98</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">6 передача</div>
+                                    <div class="sotik-row-value">0.90</div>
+                                </div>
+                                <div class="sotik-row">
+                                    <div class="sotik-row-label">Отсечка</div>
+                                    <div class="
+
+
+<!-- Продолжение файла после предыдущего фрагмента -->
+
+sotik-row-value">9000</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        /* ===== 5. ОТКРЫТИЕ OVERLAY ПО КЛИКУ НА КНОПКУ ===== */
+        sotikTabContent.querySelector(".sotik-open-setup-btn").addEventListener("click", () => {
+            overlay.classList.add("active");
+            document.body.style.overflow = "hidden";
+        });
+
+        /* ===== 6. ЗАКРЫТИЕ OVERLAY ===== */
+        const closeBtn = overlay.querySelector(".sotik-close");
+        closeBtn.addEventListener("click", () => {
+            overlay.classList.remove("active");
+            document.body.style.overflow = "";
+        });
+
+        // Закрытие по клику вне панели
+        overlay.addEventListener("click", (e) => {
+            if (e.target === overlay) {
+                overlay.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+        });
+    });
+</script>
+
 </body>
+
 </html>
+
