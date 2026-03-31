@@ -191,6 +191,7 @@
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             padding-bottom: 8px;
+            user-select: none;
         }
 
         .track-slider::-webkit-scrollbar {
@@ -205,10 +206,39 @@
             color: #fff;
             flex-shrink: 0;
             transition: transform 0.3s ease;
+            cursor: pointer;
+            touch-action: manipulation;
         }
 
         .track-card:hover {
             transform: scale(1.02);
+        }
+
+        .track-card.swiping {
+            transition: none;
+        }
+
+        /* Мобильная версия - полноберная карточек */
+        @media (max-width: 720px) {
+            .track-slider {
+                gap: 12px;
+                padding-bottom: 4px;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .track-card {
+                min-width: calc(100% - 32px);
+                margin: 0;
+            }
+
+            .track-card:hover {
+                transform: scale(1);
+            }
+
+            .track-card:active {
+                transform: scale(0.98);
+            }
         }
 
         .car-table {
@@ -268,6 +298,23 @@
 
         .scroll-indicator.active {
             background: #2563eb;
+        }
+
+        /* Track slider navigation buttons */
+        #prevTrack, #nextTrack {
+            display: flex !important;
+            transition: all 0.2s ease;
+        }
+
+        #prevTrack:active, #nextTrack:active {
+            transform: scale(0.95);
+        }
+
+        /* Мобильная версия - скрыть кнопки навигации на мобилке */
+        @media (max-width: 720px) {
+            #prevTrack, #nextTrack {
+                display: none !important;
+            }
         }
 
         /* Responsive */
@@ -511,6 +558,7 @@
             <div id="tracks" class="tab-content">
                 <h2 class="text-2xl font-bold text-slate-800 mb-2">Трассы</h2>
                 <p class="text-slate-600 mb-6">Полный каталог трасс, лазерно отсканированных для максимальной точности.</p>
+                <p class="text-sm text-slate-500 mb-4 block md:hidden">💡 Подсказка: можно свайпать влево/вправо или использовать стрелки клавиатуры</p>
 
                 <div class="track-slider" id="trackSlider"></div>
 
@@ -724,7 +772,7 @@
         });
     }
 
-    // ===== TRACK SLIDER =====
+    // ===== TRACK SLIDER WITH SWIPE SUPPORT =====
     function initTrackSlider() {
         const tracks = [
             { name: 'Maple Valley', slug: 'maple_valley', location: 'США', turns: 11, length: '3.2 км', type: 'Оригинальная' },
@@ -740,12 +788,17 @@
         const slider = document.getElementById('trackSlider');
         const indicators = document.getElementById('trackIndicators');
         let currentSlide = 0;
+        let isDesktop = window.innerWidth > 720;
+
+        // Touch tracking for swipe
+        let touchStartX = 0;
+        let touchEndX = 0;
+        let isDragging = false;
 
         // Populate tracks
         tracks.forEach((track, i) => {
             const card = document.createElement('div');
             card.className = 'track-card';
-            card.style.cursor = 'pointer';
             card.innerHTML = `
                 <h3 class="text-lg font-bold mb-1">${track.name}</h3>
                 <p class="text-sm text-slate-300 mb-3">${track.location}</p>
@@ -758,9 +811,34 @@
             
             // Click handler
             card.addEventListener('click', () => {
-                window.location.href = `/pages/games/forza/motorsport8/tracks/${track.slug}/`;
+                if (!isDragging) {
+                    window.location.href = `/pages/games/forza/motorsport8/tracks/${track.slug}/`;
+                }
             });
-            
+
+            // Swipe handlers for touch devices
+            card.addEventListener('touchstart', (e) => {
+                if (!isDesktop) {
+                    touchStartX = e.changedTouches[0].screenX;
+                    isDragging = false;
+                    card.style.cursor = 'grabbing';
+                }
+            }, { passive: true });
+
+            card.addEventListener('touchmove', () => {
+                isDragging = true;
+                card.classList.add('swiping');
+            }, { passive: true });
+
+            card.addEventListener('touchend', (e) => {
+                if (!isDesktop) {
+                    touchEndX = e.changedTouches[0].screenX;
+                    card.classList.remove('swiping');
+                    card.style.cursor = 'pointer';
+                    handleSwipe();
+                }
+            }, { passive: true });
+
             slider.appendChild(card);
 
             const indicator = document.createElement('div');
@@ -775,15 +853,86 @@
             currentSlide = idx;
 
             const card = cards[idx];
-            slider.scrollTo({ left: card.offsetLeft - slider.offsetLeft, behavior: 'smooth' });
+            const scrollPosition = card.offsetLeft - slider.offsetLeft - (slider.clientWidth / 2) + (card.clientWidth / 2);
+            
+            slider.scrollTo({ 
+                left: scrollPosition >= 0 ? scrollPosition : 0, 
+                behavior: 'smooth' 
+            });
 
             document.querySelectorAll('.scroll-indicator').forEach((dot, i) => {
                 dot.classList.toggle('active', i === idx);
             });
         }
 
-        document.getElementById('prevTrack').addEventListener('click', () => goToSlide(currentSlide - 1));
-        document.getElementById('nextTrack').addEventListener('click', () => goToSlide(currentSlide + 1));
+        function handleSwipe() {
+            const diffX = touchStartX - touchEndX;
+            const minSwipeDistance = 50; // минимальное расстояние свайпа в пиксель
+
+            if (Math.abs(diffX) > minSwipeDistance) {
+                // Reset dragging flag when actual swipe detected
+                if (diffX > 0) {
+                    // Свайп влево - следующая трасса
+                    goToSlide(currentSlide + 1);
+                } else {
+                    // Свайп вправо - предыдущая трасса
+                    goToSlide(currentSlide - 1);
+                }
+            }
+            // Reset dragging flag for next interaction
+            setTimeout(() => {
+                isDragging = false;
+            }, 100);
+        }
+
+        // Desktop button handlers
+        if (document.getElementById('prevTrack')) {
+            document.getElementById('prevTrack').addEventListener('click', () => {
+                if (isDesktop) {
+                    goToSlide(currentSlide - 1);
+                }
+            });
+        }
+
+        if (document.getElementById('nextTrack')) {
+            document.getElementById('nextTrack').addEventListener('click', () => {
+                if (isDesktop) {
+                    goToSlide(currentSlide + 1);
+                }
+            });
+        }
+
+        // Update isDesktop on resize
+        window.addEventListener('resize', () => {
+            isDesktop = window.innerWidth > 720;
+        });
+
+        // Keyboard navigation support (arrow keys)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                goToSlide(currentSlide - 1);
+            } else if (e.key === 'ArrowRight') {
+                goToSlide(currentSlide + 1);
+            }
+        });
+
+        // Handle scroll for indicator updates (desktop)
+        slider.addEventListener('scroll', () => {
+            if (isDesktop) {
+                const cards = slider.querySelectorAll('.track-card');
+                const sliderCenter = slider.scrollLeft + slider.clientWidth / 2;
+                
+                cards.forEach((card, idx) => {
+                    const cardCenter = card.offsetLeft + card.clientWidth / 2;
+                    if (Math.abs(cardCenter - sliderCenter) < card.clientWidth) {
+                        currentSlide = idx;
+                        document.querySelectorAll('.scroll-indicator').forEach((dot, i) => {
+                            dot.classList.toggle('active', i === idx);
+                        });
+                    }
+                });
+            }
+        });
     }
 
     // Initialize on load
