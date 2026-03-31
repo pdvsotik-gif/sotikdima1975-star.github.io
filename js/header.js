@@ -1,8 +1,21 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Защита от двойного выполнения скрипта
+    if (window.__headerScriptLoaded) {
+        return;
+    }
+    window.__headerScriptLoaded = true;
+
     const header = document.getElementById("main-header");
     const mainNav = document.getElementById("main-nav");
     const logo = header.querySelector(".logo");
-    const mobilePanel = document.getElementById("mobile-panel");
+    let mobilePanel = document.getElementById("mobile-panel");
+
+    // Если мобильная панель не существует, создаем её
+    if (!mobilePanel) {
+        mobilePanel = document.createElement("div");
+        mobilePanel.id = "mobile-panel";
+        header.appendChild(mobilePanel);
+    }
 
     // СОСТОЯНИЕ ПРИЛОЖЕНИЯ - управление стеком меню
     const menuStack = [];
@@ -64,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     applyPrefixToNavLinks();
 
     function getInitialMenuState() {
+        if (path.includes("/pages/games/forza/motorsport8/tracks/")) return MENU_STATES.FORZA;
         if (path.includes("/pages/games/forza/")) return MENU_STATES.FORZA;
         if (path.includes("/pages/games/ac/")) return MENU_STATES.AC;
         if (path.includes("/pages/games/pc/")) return MENU_STATES.PC;
@@ -325,15 +339,19 @@ document.addEventListener("DOMContentLoaded", function () {
     // МОБИЛЬНОЕ МЕНЮ
     // ========================================================
 
-    const mobileBtn = document.createElement("button");
-    mobileBtn.id = "mobile-menu-btn";
-    mobileBtn.className = "mobile-menu-btn";
-    mobileBtn.innerHTML = `
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-        <span class="hamburger-line"></span>
-    `;
-    header.appendChild(mobileBtn);
+    // Проверяем, не существует ли уже кнопка мобильного меню
+    let mobileBtn = document.getElementById("mobile-menu-btn");
+    if (!mobileBtn) {
+        mobileBtn = document.createElement("button");
+        mobileBtn.id = "mobile-menu-btn";
+        mobileBtn.className = "mobile-menu-btn";
+        mobileBtn.innerHTML = `
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        `;
+        header.appendChild(mobileBtn);
+    }
 
     // Мобильное меню - стек состояний
     const mobileMenuStack = [];
@@ -493,6 +511,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Если пользователь сразу попал на вложенную игровую страницу, восстановим входной путь
     const initialState = getInitialMenuState();
     if ([MENU_STATES.FORZA, MENU_STATES.AC, MENU_STATES.PC].includes(initialState)) {
+        menuStack.push(MENU_STATES.MAIN);
         menuStack.push(MENU_STATES.GAMES);
     } else if (initialState === MENU_STATES.GAMES) {
         menuStack.push(MENU_STATES.MAIN);

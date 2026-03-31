@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
     <script src="/_sdk/element_sdk.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../../../../css/header.css">
+    <link rel="stylesheet" href="/css/header.css">
     <style>
         /* ===== CONTENT STYLES (без header стилей - они в header.css) ===== */
         .hero-bg {
@@ -269,7 +269,7 @@
             background: #2563eb;
         }
 
-        /* Responsive */
+        /* Responsive - только для контента, стили хэдера в header.css */
         @media (max-width: 768px) {
             .tab-btn {
                 padding: 10px 14px;
@@ -280,14 +280,7 @@
             }
         }
 
-        @media (max-width: 480px) {
-            body {
-                padding-top: 56px;
-            }
-            #main-header {
-                height: 56px;
-                padding: 0 12px;
-            }
+        @media (max-width: 720px) {
             .tab-btn {
                 padding: 8px 10px;
                 font-size: 0.72rem;
@@ -567,6 +560,6 @@
 </script>
 
 <!-- HEADER NAVIGATION SCRIPT -->
-<script src="../../../../../js/header.js"></script>
+<script src="/js/header.js"></script>
 </body>
 </html>
